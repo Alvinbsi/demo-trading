@@ -1,0 +1,25 @@
+.add_user_form .form_input_field.radio {
+  display: block;
+}
+.add_user_form .form_input_field.radio {
+  display: block;
+}
+.add_user_form .form_input_field.radio p {
+  margin: 0 0 15px;
+}
+.add_user_form .form_input_field.radio .first_child {
+  margin-left: 0;
+}
+.add_user_form mat-card {
+  margin: 0 0 30px;
+  background: #f7fbfe;
+}
+.add_user_form mat-card h3 {
+  font-size: 0.9em;
+  color: #838d8e;
+}
+.add_user_form mat-card p {
+  font-size: 1.3em;
+  font-family: 'robotomedium';
+  text-transform: uppercase;
+}

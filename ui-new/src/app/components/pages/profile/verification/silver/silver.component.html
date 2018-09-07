@@ -1,0 +1,178 @@
+
+<div *ngIf="!isSilver;else silverUpgraded" class="verification_lvl_wrap">
+  <form [formGroup]="silverFormRegister" class="verify_lvl_frm verify_silver_frm" action="">
+    <h3>Upgrade Silver Level</h3>
+
+    <div class="legal_info">
+      <p class="legal_p">For the time being,there will be no acceptance of any other legal entities other than individuals for trading on the HYBSE</p>
+    </div>
+
+  
+    <div class="form_input radio_input">
+        <label class="formlabel">Gender</label>
+      <ul class="row no-gutters">
+        <li class="col-md-6">
+          <span>
+            <label class="custom_radio">Male
+              <input formControlName="gender" type="radio" checked="checked" name="gender" id="male" value="Male">
+              <span class="checkmark"></span>
+            </label>
+          </span>
+        </li>
+        <li class="col-md-6">
+          <span>
+            <label class="custom_radio">Female
+              <input formControlName="gender" type="radio" name="gender" id="female" value="Female">
+              <span class="checkmark"></span>
+            </label>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form_input split_input_two">
+        <label class="formlabel">Legal Name*</label>
+      <div class="row namebox no-gutters">
+        <div class="col-md-6"><input formControlName="firstName" class="form-control" id="firstname" type="text" placeholder="First Name">
+            <span class="falseclass" *ngIf="silverFormRegister.get('firstName').hasError('required') && silverFormRegister.get('firstName').touched">Please enter first Name</span></div>
+        <div class="col-md-6"><input formControlName="lastName" class="form-control" id="lastname" type="text" placeholder="Last Name">
+            <span class="falseclass" *ngIf="silverFormRegister.get('lastName').hasError('required') && silverFormRegister.get('lastName').touched">Please enter last Name</span></div>
+    </div>
+    </div>
+
+
+    <!-- <div class="form_input">
+        <label class="formlabel">User Name*</label>
+      <input formControlName="userName" type="text" name="Username" placeholder="Username" maxlength="50">
+      <span class="falseclass" *ngIf="silverFormRegister.get('userName').hasError('required') && silverFormRegister.get('userName').touched">Please enter User Name</span>
+    </div> -->
+
+    <div class="form_input form_space">
+        <label class="formlabel">Date of Birth*</label>
+      <div class="input-group">
+        <div [formGroup]="silverFormRegister.get('dobDate')" class="row daterow no-gutters">
+          <div class="col-md-4">
+            <i class="fas fa-angle-down material_drpdwn"></i>
+        <select formControlName="dobYear" class="form-control" id="year"  placeholder="Year" maxlength="4">
+        <option value="" disabled selected>Year</option>
+        <option value="{{ yr.val }}" *ngFor="let yr of year">{{ yr.name }}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+      <i class="fas fa-angle-down material_drpdwn"></i>
+      <select formControlName="dobMonth" class="form-control" id="month"  placeholder="Month">
+  <option value="" disabled selected>Month</option>
+  <option value="{{ mnth.val }}" *ngFor="let mnth of month">{{ mnth.name }}</option>
+</select>
+</div>
+<div class="col-md-4">
+  <i class="fas fa-angle-down material_drpdwn"></i>
+  <select formControlName="dobDay" class="form-control" id="day"  placeholder="Day">
+<option value="" disabled selected>Day</option>
+<option value="{{ dy.val }}" *ngFor="let dy of day">{{ dy.name }}</option>
+</select>
+</div>
+<div class=cod-md-12>
+  <span class="falseclass" *ngIf="silverFormRegister.get('dobDate').get('dobYear').hasError('required') && silverFormRegister.get('dobDate').get('dobYear').touched">Please select Your DOB Year</span>
+    <span class="falseclass" *ngIf="silverFormRegister.get('dobDate').get('dobMonth').hasError('required') && silverFormRegister.get('dobDate').get('dobMonth').touched">Please select Your DOB Month</span>
+    <span class="falseclass" *ngIf="silverFormRegister.get('dobDate').get('dobDay').hasError('required') && silverFormRegister.get('dobDate').get('dobDay').touched">Please select Your DOB Day</span>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-input form_space">
+      <label class="formlabel">Address*</label>
+      <div class="input-group">
+        <i class="fas fa-angle-down material_drpdwn"></i>
+              <select formControlName="country"  id="country" type="text" class="form-control" name="country" placeholder="Select Country" >
+              <option value="" disabled selected>Select Country</option>
+              <option value="{{ country.code }}" *ngFor="let country of isoCountries">{{ country.name }}</option>
+              </select>
+     </div>
+     <span class="falseclass" *ngIf="silverFormRegister.get('country').hasError('required') && silverFormRegister.get('country').touched">Please select your country</span>
+     <div class="input-group">
+      <input formControlName="address1" id="street" type="text" class="form-control" name="street" placeholder="Street" maxlength="255">
+      </div>
+      
+      <span class="falseclass" *ngIf="silverFormRegister.get('address1').hasError('required') && silverFormRegister.get('address1').touched">Please enter your street</span>
+      <div class="input-group">
+        <input formControlName="address2" id="street1" type="text" class="form-control" name="street1" placeholder="Street 1" maxlength="255">
+        </div>
+            <span class="falseclass" *ngIf="silverFormRegister.get('address2').hasError('required') && silverFormRegister.get('address2').touched">Please enter your street 1 </span>
+        <div class="input-group">
+        <div class="row company-row no-gutters">
+        <div class="col-md-6"><input formControlName="zipcode" class="form-control" id="zipcode" type="text" placeholder="Postal Code" maxlength="15">
+            <span class="falseclass" *ngIf="silverFormRegister.get('zipcode').hasError('required') && silverFormRegister.get('zipcode').touched">Please enter your zipcode</span>
+            <span class="falseclass" *ngIf="silverFormRegister.get('zipcode').hasError('numberInvalid')&& silverFormRegister.get('zipcode').touched">Please enter a valid zipcode</span>
+        </div>
+        <div class="col-md-6"><input formControlName="city" class="form-control" id="city" type="text" placeholder="City">
+            <span class="falseclass" *ngIf="silverFormRegister.get('city').hasError('required') && silverFormRegister.get('city').touched" maxlength="255">Please enter your city</span>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+   
+
+
+    <!-- <div class="form-input form_space">
+      <label class="formlabel" for="email">Email*:</label>
+      <input formControlName="email" type="email" class="form-control" id="email" placeholder="Your Email Address">
+      <span class="falseclass" *ngIf="silverFormRegister.get('email').hasError('required') && silverFormRegister.get('email').touched">Please enter Email</span>
+      <span class="falseclass" *ngIf="silverFormRegister.get('email').hasError('emailInvalid')&& silverFormRegister.get('email').touched ">Enter a valid email address</span>
+  </div> -->
+
+    <div class="form_input form_space">
+        <label class="formlabel" for="email">Mobile Number*:</label>
+      <div class="row company-row no-gutters">
+        <div class="col-md-4">
+                <i class="fas fa-angle-down material_drpdwn"></i>
+            <select formControlName="countrycode" class="form-control" id="countrycode1" type="text" placeholder="Country">
+                <option value="" disabled selected>Select Country</option>
+                <option value="{{ country.code }}" *ngFor="let country of countryCode">{{ country.name }}</option>
+            </select>
+            <span class="falseclass" *ngIf="silverFormRegister.get('countrycode').hasError('required') && silverFormRegister.get('countrycode').touched">Please select your country</span>
+        </div>
+        <div class="col-md-8"><input formControlName="phone" class="form-control " id="number" type="text" placeholder="Phone Number"  maxlength="15">
+            <div class="col-md-12">
+                    <span class="falseclass" *ngIf="silverFormRegister.get('phone').hasError('required') && silverFormRegister.get('phone').touched">Please enter your phone number</span>
+                    <span class="falseclass" *ngIf="silverFormRegister.get('phone').hasError('numberInvalid')&& silverFormRegister.get('phone').touched"> Please enter a valid phone number</span>
+                    <span class="falseclass" *ngIf="silverFormRegister.get('phone').hasError('numberMinimum')&& silverFormRegister.get('phone').touched && !silverFormRegister.get('phone').hasError('numberInvalid')"> Please enter a valid phone number</span>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+      
+    <div class="form-input form_space">
+        <label class="formlabel" for="email">Do you aldready have an IDnow verification number?</label>
+        <input formControlName="idNownumber" type="email" class="form-control" id="email" placeholder="Your IDnow verification number">
+    </div>
+    <span class="falseclass" *ngIf="silverFormRegister.get('idNownumber').hasError('required') && silverFormRegister.get('idNownumber').touched">Please enter your IDnowNumber</span>
+
+
+    <div class="legal_info form_space">
+        <p class="legal_p">If you don't have an IDnow verification number connect to IDnow to complete your verification</p>
+               <a (click)="idNowConnect()" type="submit" class="btn btn-info connect_now">Connect Now</a>
+                 </div>
+       
+    <div class="form-group btn_grp">
+        <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+    <button (click)="silverFormRegistersubmit()" [disabled]="silverFormRegister.invalid || disableButton" type="submit" class="btn btn-info upgrade">Apply for Silver Level</button>
+</div>
+          </form>
+</div>
+
+<ng-template #silverUpgraded>
+<div class="verification_lvl_wrap">
+      <h3>Confirmation</h3>
+  
+      <div class="legal_info1">
+        <p class="legal_p1">Thank you for your registration.we will review your details and contact you within the next 24 hours.</p>
+            <p class="legal_p2">Please save your IDNow verification number for further registration process into the DIM Ecosystem</p>
+                <!-- <p class="legal_p2">Your IDnow verification number : {{ idNowNumber }} </p> -->
+      </div>
+
+   </div>
+  </ng-template>

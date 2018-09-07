@@ -1,0 +1,33 @@
+<mat-dialog-content>
+<div class="admin_table">
+  <table>
+    <thead>
+      <th>Activity Code</th>
+      <th>Activity Title</th>
+      <th>Activity Description</th>
+      <th>Activity On</th>
+    </thead>
+
+    <tbody>
+
+      <!-- <tr class="row_loader" *ngIf="showLoader">
+        <td colspan="8">
+            <hybse-admin-loader></hybse-admin-loader>
+        </td>
+      </tr> -->
+
+      <tr>
+        <td>{{ data.activityDetail.activityCode }}</td>
+        <td>{{ data.activityDetail.activityTitle }}</td>
+        <td>{{ data.activityDetail.activityDetail }}</td>
+        <td>{{ data.activityDetail.activityOn | date:'medium' }}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+
+ <nav class="navbar navbar-light flex-row navbar-expand-md" style="background-color: #232323;" >
+  <a class="navbar-brand" href="#"> <h1 class="logo"><a routerLink="/" title="HYBSE">HYBSE</a></h1></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">        
+   
+    
+  </div>  
+</nav>
+
+<br> 
+
+<!-- <header class="header_class"  *ngIf="!issuerregisterHeader">
+    
+  <div class="container-fluid">
+     <div class="wrapper_117x">
+       <div class="d-flex justify-content-between">
+           <div class="d-flex align-items-center">
+               <h1 class="logo"><a routerLink="/" title="HYBSE">HYBSE</a></h1>
+               <nav class=" site_navbar">
+                   <ul class="d-flex">
+                        <li *ngIf="allMenuList.length > 0"><a routerLink="/">Home</a></li>
+                        <li *ngFor="let menu of primaryMenu"><a title="{{menu.menuTitle}}" (click)="navToContent(menu)" href="javascript:void(0)">{{menu.menuTitle}}</a></li> 
+                   </ul>
+               </nav>
+           </div>
+ 
+           <nav class=" site_navbar">
+           <div class="d-flex">
+                 <div *ngIf="profileHeader" class="d-flex header_icons">
+                     <form class="search-container" action="">
+                         <div class="header_icons_search">
+                         <a *ngIf="exchange;else exchangeIcon"><i class="header-text" routerLink="/companylist"><i class="fas fa-arrow-left"></i>Exchange</i></a>
+                         <ng-template #exchangeIcon>
+                             <a ><i routerLink="/companylist" class="fal fa-exchange header-icon"></i></a>
+                         </ng-template>
+  
+                          <a *ngIf="profile;else profileIcon"><i  class="header-text" id="profile" data-toggle="tooltip" data-placement="bottom" title="{{userEmail}}">Profile</i></a>
+
+                         <ng-template #profileIcon>
+                             <a *ngIf="isNoPic;else photoSection" ><i routerLink="/profile" id="profile" class="fal fa-user header-icon" data-toggle="tooltip" data-placement="bottom" title="{{userEmail}}"></i></a>
+                             <ng-template #photoSection>
+                                   <a ><i routerLink="/profile" id="profile" class="header-icon" data-toggle="tooltip" data-placement="bottom" title="{{userEmail}}"> <img src= {{responseAvatar}} class="mini_photo"/> </i></a>
+                                  </ng-template>
+                         </ng-template>  
+                       
+ 
+                         <a *ngIf="wallet;else walletIcon"><i  class="header-text">Wallet</i></a>
+                         
+                         <ng-template #walletIcon>
+                         <a><i routerLink="/wallet" class="fal fa-blanket header-icon"></i></a>
+                     </ng-template> 
+ 
+                         <a><i (click) = "toggleTheme()" [ngClass]="{'fa-sun': dayThemeEnabled,'fa-moon':!dayThemeEnabled }"  class="fal header-icon"></i></a> 
+
+                          <a><i (click)="logOut()" class="fal fa-power-off header-icon"></i></a>
+                      
+                       </div>
+                     </form>
+                 </div>
+ 
+                 <form class="search-container" action="">
+                  <label for="search-box"><i *ngIf="landingCheck" class="fal fa-search search-icon"></i></label> 
+                 </form>
+               <div *ngIf="!profileHeader" class="login_register button">
+                 <div *ngIf = "HeaderBtn" class="login_register_sec">
+                   <a *ngIf="loginBtn" class="header_login" href="javascript:void(0)" routerLink="/login">Login <span *ngIf="SymbolBtn">|</span></a>  <a *ngIf="registerBtn" routerLink="/registration" class="header_register" >Register</a>
+               </div>
+               </div>
+               <div class="time button">
+                   <button type="Submit"> {{ showTime }} CET</button>                  
+               </div>                                          
+           </div>   
+           </nav>        
+       </div>        
+   </div>
+</div>
+</header> -->
+
+
+
+

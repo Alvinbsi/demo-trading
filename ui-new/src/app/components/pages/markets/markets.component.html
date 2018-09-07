@@ -1,0 +1,411 @@
+<section class="header_banner">
+  <div class="banner_section">
+      <ul id="bannerSlider">
+          <li>
+              <div class="banner_img" style="background-image: url('assets/images/Inner_Pages_background.jpg')">
+                  <div class="banner_content">
+                      <div class="banner_content_title">
+                          <h4 class="markets_banner">Markets</h4>
+                      </div>
+
+                      <div class="d-flex justify-content-center">
+
+                          <div class="switch_demo button">
+                              <button type="Submit">Select Market</button>
+                          </div>
+
+                          <div class="watch_video button">
+                              <button type="Submit">View Info PDF</button>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </li>    
+
+      </ul>
+  </div>
+</section>
+
+
+<section class="top_flop_sec market_space">
+  <div class="wrapper_117x">
+
+
+     <div class="row"> 
+    <div class="top_flop_bg col-md-8">
+      <div class="top_flop_market_table row justify-content-between">
+        <h2>Top/Flop</h2>          
+      </div>
+
+      <nav class="top_flop_navbar_sec">
+          <ul>
+              <li><a href="">Stock Exchange</a></li>
+              <li class="withdraw_history"><a href="">OTC Market</a></li>
+              <li class="withdraw_history"><a href="">Pirate Market</a></li>
+          </ul>
+        </nav>
+
+      <!-- <div class="hybse_table top_list_table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name <i class="fas fa-caret-down"></i></th>
+              <th>Price <i class="fas fa-caret-down"></i></th>
+              <th>Change/% <i class="fas fa-caret-down"></i></th>
+              <th>View</th>
+              <th>Favourites</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Company A</td>
+              <td>2.07</td>
+              <td>
+                  <span>-9.81</span>
+                  <small><i class="fal fa-arrow-right"></i></small>
+              </td>
+              <td>
+                 <i class="fal fa-eye"></i>
+              </td>
+              <td class="fav_plus">
+                  <i class="fal fa-plus-circle"></i>
+              </td>
+              
+             </tr>
+            <tr>
+                <td>Company B</td>
+                <td>39.54</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company C</td>
+                <td>0.28</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company D</td>
+                <td>13.12</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up">
+                      <i class="fal fa-arrow-right"></i>
+                  </small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company E</td>
+                <td>+0.12</td>
+                <td>
+                  <span>-9.81</span>
+                  <small>
+                      <i class="fal fa-arrow-right"></i>
+                  </small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            
+          </tbody>
+        </table>
+      </div> -->
+
+      <div class="hybse_table top_list_table">
+        <table id="marketTable" >
+          <thead>
+            <tr>
+              <th>Name <i (click) = "sortAlphabet(0)" [ngClass]="{'fa-caret-down': sortAlphabetical,'fa-caret-up':!sortAlphabetical }" class="fal fa-caret-down"></i></th>
+              <th>Price <i (click) = "sortNumberTmp(0)" [ngClass]="{'fa-caret-down': sortprice,'fa-caret-up':!sortprice }" class="fal fa-caret-down"></i></th>
+              <th>Gain/Loss% <i (click) = "sortNumericGlp()" [ngClass]="{'fa-caret-down': sortglp,'fa-caret-up':!sortglp }" class="fal fa-caret-down"></i></th>
+              <th>View</th>
+              <th>Favourites</th>
+              
+            </tr>
+          </thead>
+          <tbody *ngFor="let stock of stockList" i="index" >
+                  <tr *ngIf="stock.stockName" [ngClass]="{'even': i % 2 ==0 }" >
+                          <td>{{stock.stockName == '' ? ' ' : stock.stockName}}</td>
+                          <td>{{stock.priceCurrent == '' ? ' ' : stock.priceCurrent}}</td>
+                          <td [ngClass]="{ 'positiveInteger':positiveInteger ,'negativeInteger': !positiveInteger , 'nuetralInteger': nuetralInteger }" > <i class="fal" [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger , 'fa-minus' : nuetralInteger }" ></i> {{getGainLossPercent(stock)}}</td>
+
+                          <td>
+                              <i routerLink="/login" class="fal fa-eye"></i>
+                          </td>
+                          <td class="fav_plus">
+                              <i routerLink="/login" class="fal fa-plus-circle"></i>
+                          </td>
+                          
+                         </tr>
+          </tbody>
+
+                  <!-- <tbody>
+            <tr>
+              <td>Company A</td>
+              <td>2.07</td>
+              <td>
+                  <span>-9.81</span>
+                  <small><i class="fal fa-arrow-right"></i></small>
+              </td>
+              <td>
+                  <i class="fal fa-eye"></i>
+              </td>
+              <td class="fav_plus">
+                  <i class="fal fa-plus-circle"></i>
+              </td>
+              
+             </tr>
+            <tr>
+                <td>Company B</td>
+                <td>39.54</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company C</td>
+                <td>0.28</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company D</td>
+                <td>13.12</td>
+                <td>
+                  <span>-9.81</span>
+                  <small class="change_up">
+                      <i class="fal fa-arrow-right"></i>
+                  </small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            <tr>
+                <td>Company E</td>
+                <td>+0.12</td>
+                <td>
+                  <span>-9.81</span>
+                  <small>
+                      <i class="fal fa-arrow-right"></i>
+                  </small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                  </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                  </td>
+                
+            </tr>
+            
+          </tbody> -->
+        </table>
+      </div>
+      
+
+    </div>
+
+    <div class="col-md-4">
+         
+      <ul class="company_directory">
+
+              <li class="">
+                      <div class="directory_sec">
+                          <h2>Company Directory</h2>
+                        </div>
+                          <form class="directory_search_frm" action="">
+                            <input placeholder="Search Company" type="text">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                          </form>
+            
+                          <ul class="company_selector">
+                            <li class="upgrade_silver">
+                              <div class="">
+                                <p>Market</p>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                              </div>
+                            </li>
+            
+                            <li>
+                              <div class="">
+                                <p>Country</p>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                              </div>
+                            </li>
+            
+                            <li>
+                              <div class="">
+                                <p>Volume</p>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                              </div>
+                            </li>
+            
+                            <li>
+                              <div class="">
+                                <p>Price</p>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                              </div>
+                            </li>
+            
+                            <li>
+                              <div class="">
+                                <p>Branch of business</p>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                              </div>
+                            </li> 
+                          </ul>
+                          <div class="filter button d-flex row justify-content-center">
+                                  <button type="Submit">Filter  </button>
+                          </div>
+                         
+                      
+            
+                  </li>
+      </ul>    
+    </div>
+  </div>
+
+    
+  </div>
+</section>
+
+<section class="download_center_section">
+  <div class="stock_sections">
+      <div class="wrapper_152x">
+        <div>
+        <h2>Download Center</h2>
+      </div>
+
+        <ul class="d-flex row justify-content-center">
+          <li class="col-md-3">
+            <a class="" href="#" title=""><img class="rules_logo" src="assets/images/rules_and_regulations_button.png"></a>
+            <h4>Rules and Regulations</h4>
+          </li>
+
+          <li class="col-md-3">
+            <a class="" href="#" title=""><img class="rules_logo" src="assets/images/terms_and_conditions_button.png"></a>
+            <h4>Terms and Conditions</h4>
+          </li>
+
+          <li class="col-md-3">
+            <a class="" href="#" title=""><img class="rules_logo" src="assets/images/rules_and_regulations_button.png"></a>
+            <h4>Requirements</h4>
+          </li>
+
+          <li class="col-md-3">
+            <a class="" href="#" title=""><img class="rules_logo" src="assets/images/pirce_list_button.png"></a>
+            <h4>Price List</h4>
+          </li>
+        </ul>
+
+        
+      </div>
+   </div>
+</section>
+
+<section class="newsroom_sec">
+  <div class="wrapper_10x">
+
+         <ul class="row justify-content-between faq">
+          <li class="col-md-12">
+                  <div class="identity_sec">
+                      <h2>FAQ</h2>
+                    </div>
+                      
+        <nav class="faq_navbar_sec">
+          <ul>
+              <li><a href="">Stock Exchange</a></li>
+              <li class="withdraw_history"><a href="">OTC Market</a></li>
+              <li class="withdraw_history"><a href="">Pirate Market</a></li>
+          </ul>
+        </nav>
+        
+                      <ul class="news_selector">
+                        <li class="stock_faq d-flex flex-row">
+                          <p class="col-md-10">What is HYBSE orem ipsum dolor sit amet, consectetuer adipiscing elit?</p>
+                          <a class="col-md-2" href=""><i _ngcontent-c3="" class="fal fa-plus"></i></a>
+                        </li>
+
+                      <li class="d-flex flex-row">
+                              <p class="col-md-10">What is HYBSE lorem ipsum dolor sit amet, consectetuer adipiscing elit lorem ipsum?</p>
+                              <a class="col-md-2" href=""><i class="fal fa-plus"></i></a>
+                            </li>
+
+                            <li class="d-flex flex-row">
+                                  <p class="col-md-10">What is HYBSE lorem ipsum dolor sit amet elit?
+                                  </p>
+                                  <a class="col-md-2" href=""><i class="fal fa-plus"></i></a>
+                            </li>
+
+                                <li class="d-flex flex-row">
+                                      <p class="col-md-10">What is HYBSE lorem ipsum dolor sit amet, consectetuer adipiscing?
+                                      </p>
+                                      <a class="col-md-2" href=""><i class="fal fa-plus"></i></a>
+                                    </li>
+
+                                    <li class="d-flex flex-row">
+                                          <p class="col-md-10">What is HYBSE lorem ipsum?</p>
+                                          <a class="col-md-2" href=""><i class="fal fa-plus"></i></a>
+                                        </li>
+
+                      </ul>
+                      <div class="view_all_faq button d-flex flex-row justify-content-center">
+                          <button type="Submit">View all</button>
+                      </div>
+          </li>
+         </ul>
+  </div>
+</section> 

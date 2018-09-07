@@ -1,0 +1,17 @@
+<div *ngIf="upgradeLevel" class="sec_header">
+    <div   class="wrapper_117x">
+        <div   class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                <nav class="site_navbar_sec">
+                    <ul   class="d-flex">
+                        <li><a routerLink="security" routerLinkActive="active">Security</a></li>
+                        <li><a routerLink="settings" routerLinkActive="active">Settings</a></li>
+                        <li><a routerLink="verification-level" routerLinkActive="active">Verification Level</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!upgradeLevel" class="upgradeSpace"></div>
+<router-outlet></router-outlet>

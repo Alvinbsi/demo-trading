@@ -1,0 +1,47 @@
+<section class="admin_login_page">
+  <div class="admin_login_wrap">
+    <h1 class="admin_logo">
+      <a href="javascript:void(0)">HYBSE</a>
+    </h1>
+    <div *ngIf="loginErrMsg" class="admin_error_msg bg-danger">
+      {{ errMsg }}
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" novalidate>
+      <div class="admin_input">
+          <i class="fas fa-user"></i>
+          <mat-form-field>
+            <input [errorStateMatcher]="matcher" formControlName="username" matInput placeholder="Useremail">
+            <mat-error *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">
+              Please enter your username
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls['username'].hasError('emailInvalid') && loginForm.controls['username'].touched">
+              Please enter a valid username
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+      <div class="admin_input">
+          <i class="fas fa-unlock"></i>
+          <mat-form-field>
+            <input [errorStateMatcher]="matcher" formControlName="userpass" matInput placeholder="Password" type="password">
+            <mat-error *ngIf="!loginForm.hasError('required') && loginForm.controls['userpass'].touched">
+              Please enter your Password
+            </mat-error>
+          </mat-form-field>
+      </div>
+
+      <p class="remember_me">
+        <mat-checkbox>Remember Me</mat-checkbox>
+      </p>
+
+      <div class="admin_login_btn">
+        <button type="submit" [disabled]="!loginForm.valid">Login</button>
+      </div>
+
+      <div *ngIf="showLoader" class="loader_wrap">
+        <hybse-admin-loader></hybse-admin-loader>
+      </div>
+
+    </form>
+  </div>
+</section>

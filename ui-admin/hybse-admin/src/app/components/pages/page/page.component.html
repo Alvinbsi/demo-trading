@@ -1,0 +1,44 @@
+
+<section class="admin_user_list admin_inner_block"  [@fadeInDown]="fadeInDown">
+  <h2>Page Lists</h2>
+  <div class="admin_table admin_user_list">
+    <table>
+      <thead>
+        <th>S.No</th>
+        <th>Page Title</th>
+        <th>Page Alias</th>
+        <th>Created On</th>
+        <th>Action</th>
+      </thead>
+
+      <tbody [@fadeInDown]="fadeInDown">
+
+        <tr class="row_loader" *ngIf="showLoader">
+          <td colspan="8">
+              <hybse-admin-loader></hybse-admin-loader>
+          </td>
+        </tr>
+
+        <tr *ngFor="let page of pageList; let i = index">
+          <td>{{getSerialNum(i)}}</td>
+          <td>{{page.title}}</td>
+          <td>{{page.alias}}</td>
+          <td>{{page.createdAt | date:'medium' }}</td>
+          <td class="user_actions">
+            <a class="user_edit" [routerLink]="['/page/update', page.alias ]" href="javascript:void(0)"><i class="fas fa-edit"></i> Edit</a>
+            <a class="user_preview" href="javascript:void(0)"><i class="fas fa-eye"></i> Preview</a>
+            <a class="user_delete" (click)="confirmDelete(page.id)" href="javascript:void(0)"><i class="far fa-trash-alt"></i> Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hybse-admin-pagination *ngIf="pageListOriginal.length > pageSize" [listLength]="pageListOriginal.length"
+  [paginateArr] = "pageListOriginal"
+  [pageSize]="pageSize"
+  [paginateEvent] = "paginateEvent"
+  (paginateItem) = "getPaginateItem($event)"></hybse-admin-pagination>
+
+
+</section>

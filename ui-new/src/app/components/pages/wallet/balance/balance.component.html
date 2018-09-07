@@ -1,0 +1,447 @@
+<!-- <section class="news-section">
+    <div class="wrapper_117x">
+            <div class="hybse_bg_news">
+                <div class="col-md-12 news-expansion">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>{{primaryAccount}} {{primarySymbol}}/ {{secondaryAccount }} {{secondarySymbol }}</p>
+                            <p class=grey-news>Estimated Value of Your Holdings</p>
+                        </div>
+                        <div class="col-md-5">
+                            <p></p>
+                       
+                        </div>
+                        <div class="col-md-1">
+                            <div class="dropdown submenu_dd" >
+                                <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                  <i class="fal fa-ellipsis-h"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="#">Show total Value</a>
+                                  <a class="dropdown-item" href="#">Show Currency Value</a>
+                                  <a class="dropdown-item" href="#">Show Share Value</a>
+                                </div>
+                                
+                              </div>
+                          </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="coin_balance_sec">
+  <div class="wrapper_117x">
+
+    <div class="hybse_bg balance_bg">
+      <div class="wallet_balance d-flex justify-content-between">
+        <h2 style="margin-bottom: 10px">Coin Balances, deposits and withdrawals</h2>
+      </div>
+      <div>
+        <ul class="col-md-12 hide_button d-flex">
+            <li class="hide_zero">
+              <span>
+                <input name="coin_hide_balance" type="radio" id="coin_balance">
+                <!-- <label for="coin_balance">Hide zero balances</label> -->
+              </span>
+            </li>
+            <li class="hide_delisted">
+              <span>
+                <input name="coin_hide_delisted" type="radio" id="coin_delisted">
+                <!-- <label for="coin_delisted">Hide delisted</label> -->
+              </span>
+            </li>
+          </ul>
+      </div>
+
+      <div class="progress_wrap">
+        <div class="progress_bar"><span style="width:100%;"></span></div>
+        <!-- <p>€0,00 remaining of €0,00 EUR daily limit</p> -->
+      </div>
+
+      <div class="hybse_table">
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Pair</th>
+                <th>Total Balance</th>
+                <th>Value</th>
+                <th>On Orders</th>
+                <th>Deposit</th>
+                <th>withdraw</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr [ngClass]="{'even': (i+1) % 2 == 0 }" *ngFor="let primary of primaryDetail; let i = index;">
+                  <td>{{primary.symbol}}</td>
+                  <td>{{primary.assetName}}</td>
+                  <td>{{primary.totalAmount}}</td>
+                  <td>{{primary.availableAmount}}</td>
+                  <td>{{primary.reserveAmount}}</td>
+                  <td><a href=""><i class="fal fa-arrow-to-bottom" data-toggle="collapse" data-target="#deposit"></i></a></td>
+                  
+                  <td><a href="" (click)="getAssetName(primary.idCompanyStock,primary.availableAmount)"><i class="fal fa-arrow-to-bottom withdraw_icon" data-toggle="collapse" data-target="#withdraw"></i></a></td>
+              </tr>
+             
+              <tr [formGroup]="depositForm" id="deposit" class="collapse hidden_content" >
+                 
+                <td colspan="7">
+
+                  <div class="hidden_cont_wrp">
+                      <div class="d-flex align-items-center">
+                          <div class="deposit_input col-md-6">
+                            <label for="Message">Wallet Address</label>
+                            <div>
+                              <input #walletAddress  formControlName="walletAddress" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="deposit_input col-md-6 copy">
+                            <button (click)="copyAddress(walletAddress)">{{copyText}}</button>
+                            <button data-toggle="collapse" data-target="#qrDiv">QR-Code</button>
+                          </div>
+                        </div>
+
+                    <div class="d-flex align-items-center">
+                      <div class="col-md-6">
+                        <label for="Message">Message</label>
+                        <div>
+                          <input formControlName="message" type="text" placeholder="" readonly>
+                          <p class="col-md-12">You have to enter the exact message in Depot Wallet !</p>
+
+                        </div>
+                      </div>
+                      <div class="col-md-6 copy">
+                        <!-- <button>Copy</button> -->
+                        <div id="qrDiv" class="collapse">
+                            <img src='https://chart.googleapis.com/chart?cht=qr&chl=TCYKBOKL3OHIFODC7IYG3ZT6YBYMBO64FOZSVSPM&chs=180x180&choe=UTF-8&chld=L|2' alt='qr code'>
+                        </div>
+                        <!-- <button (click)="depositFormSubmit()">Create New</button> -->
+                      </div>
+                    </div>
+
+                   
+                  </div>
+                </td>
+                </tr>
+
+                   <tr [formGroup]="withdrawalForm" class="withdraw_content collapse" id="withdraw">
+                  <td colspan="7">
+                    <div class="withdraw_cont_wrp">
+                      <div class="d-flex align-items-center">
+                        <div class="col-md-6">
+                          <div>
+                            <input formControlName="walletAddress" type="text" placeholder="{{responsenemAddress}}" readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div>
+                            <input formControlName="message" type="text" placeholder="Message(Optional)">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex align-items-center">
+                          <div class="col-md-6">
+                            <div>
+                                <label for="Message"></label>
+                              <input formControlName="amount" type="text" placeholder="Amount*">
+                              <span class="falseclass" *ngIf="withdrawalForm.controls['amount'].hasError('required') && withdrawalForm.controls['amount'].touched">Please enter the amount to be withdrawed</span>
+                              <span class="falseclass" *ngIf="withdrawalForm.controls['amount'].hasError('numberInvalid')&& withdrawalForm.controls['amount'].touched"> Amount has to be in number or decimal </span>
+
+                            </div>
+
+                          </div>
+                         
+                          <div class="col-md-3">
+                            <label for="Message">Flat fee:</label>
+                            <div class="withdraw_input">
+                              <input type="text" placeholder="-8.357 DIM" readonly>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="Message">You will receive</label>
+                            <div class="withdraw_input">
+                              <input type="text" placeholder="XXX DIM" readonly>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center withdraw">
+                            <button class="wallet_withdraw" [disabled]="!withdrawalForm.valid || disableButton"  (click)="withdrawalFormSubmit()"  >Withdraw</button>
+
+                        </div>
+                        <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+
+                        <div *ngIf="Mesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                          {{ Mesg}}
+                      </div>
+                      
+                         </div>
+                    
+                  </td>
+                  </tr> 
+
+
+
+
+
+
+              <tr class="no_records_found" *ngIf="primaryDetail.length == 0">
+                <td colspan="7">No Records Found</td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="share balance_sec">
+    <div class="wrapper_117x">
+      <div class="hybse_bg balance_bg">
+        <div class="wallet_balance d-flex justify-content-between">
+          <h2 style="margin-bottom: 10px">Share Balances, deposits and withdrawals</h2>
+        </div>
+        <!-- <div class="d-flex justify-content-between">
+          <ul class="col-md-8 hide_button d-flex">
+              <li class="hide_zero">
+                <span>
+                  <input name="share_hide_balance" type="radio" id="share_balance"> -->
+                  <!-- <label for="share_balance">Hide zero balances</label> -->
+                <!-- </span>
+              </li>
+              <li class="hide_delisted">
+                <span>
+                  <input name="share_hide_delisted" type="radio" id="share_delisted">
+                  <label for="share_delisted">Hide delisted</label>
+                </span>
+              </li>
+          </ul>
+
+          <div class="col-md-4">
+              <form class="share_search_frm" action="">
+                  <input placeholder="Search" type="text">
+                  <button type="submit"><i class="fal fa-search"></i></button>
+              </form>      
+          </div>
+            
+        </div> -->
+  
+        <div class="progress_wrap">
+          <div class="progress_bar"><span style="width:100%;"></span></div>
+          <!-- <p>€0,00 remaining of €0,00 EUR daily limit</p> -->
+        </div>
+  
+        <div class="hybse_table balance_table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Pair</th>
+                  <th>Total Balance</th>
+                  <th>Value</th>
+                  <th>On Orders</th>
+                  <th>Deposit</th>
+                  <th>withdraw</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [ngClass]="{'even': (i+1) % 2 == 0 }" *ngFor="let secondary of secondaryDetail; let i = index;">
+                    <td><a href="javascript:void(0)" (click)="navToCompany(secondary)"> {{secondary.symbol == '' ? ' ' : secondary.symbol}}</a></td>
+                    <!-- <td>{{secondary.symbol}}</td> -->
+                    <td>{{secondary.assetName}}</td>
+                    <td>{{secondary.totalAmount}}</td>
+                    <td>{{secondary.availableAmount}}</td>
+                    <td>{{secondary.reserveAmount}}</td>
+                    <td><a href=""><i class="fal fa-arrow-to-bottom" data-toggle="collapse" data-target="#secondary_deposit"></i></a></td>
+                    <td><a (click)="getsecondaryAssetName(secondary.idCompanyStock,secondary.availableAmount)" href=""><i class="fal fa-arrow-to-bottom withdraw_icon" data-toggle="collapse" data-target="#secondary_withdraw"></i></a></td>
+                </tr>
+
+                <tr [formGroup]="secondaryDepositForm" id="secondary_deposit" class="collapse hidden_content" >
+                  <td colspan="7">
+
+                    <div class="hidden_cont_wrp">
+                        <div class="d-flex align-items-center">
+                            <div class="col-md-6">
+                              <label for="Message">Wallet Address</label>
+                              <div>
+                                <input #walletAddress1 formControlName="walletAddress" type="text" placeholder="" readonly>
+                              </div>
+                            </div>
+                            <div class="col-md-6 copy">
+                              <button (click)="copyAddress1(walletAddress1)">{{copyText}}</button>
+                              <button data-toggle="collapse" data-target="#qrDiv1">QR-Code</button>
+                            </div>
+                          </div>
+  
+                      <div class="d-flex align-items-center">
+                        <div class="col-md-6">
+                          <label for="Message">Message</label>
+                          <div>
+                            <input formControlName="message" type="text" placeholder="" readonly>
+                            <p class="col-md-12">You have to enter the exact message in Depot Wallet !</p>
+  
+                          </div>
+                        </div>
+                        <div class="col-md-6 copy">
+                          <!-- <button>Copy</button> -->
+                          <div id="qrDiv1" class="collapse">
+                              <img src='https://chart.googleapis.com/chart?cht=qr&chl=TCYKBOKL3OHIFODC7IYG3ZT6YBYMBO64FOZSVSPM&chs=180x180&choe=UTF-8&chld=L|2' alt='qr code'>
+                          </div>
+                          <!-- <button (click)="depositFormSubmit()">Create New</button> -->
+                        </div>
+                      </div>
+  
+                     
+                    </div>
+                  </td>
+                  </tr>
+  
+                     <tr  [formGroup]="secondaryWithdrawalForm" id="secondary_withdraw" class="withdraw_content collapse" >
+                      <td colspan="7">
+                        <div class="withdraw_cont_wrp">
+                          <div class="d-flex align-items-center">
+                            <div class="col-md-6">
+                              <div>
+                                <input formControlName="walletAddress" type="text" placeholder="{{responsenemAddress}}" readonly>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div>
+                                <input formControlName="message" type="text" placeholder="Message (Optional)">
+                              </div>
+                            </div>
+                          </div>
+    
+                          <div class="d-flex align-items-center">
+                              <div class="col-md-6">
+                                <div>
+                                    <label for="Message"></label>
+                                  <input formControlName="amount" type="text" placeholder="Amount">
+                                  <span class="falseclass" *ngIf="secondaryWithdrawalForm.controls['amount'].hasError('required') && secondaryWithdrawalForm.controls['amount'].touched">Please enter the amount to be withdrawed</span>
+                                  <span class="falseclass" *ngIf="secondaryWithdrawalForm.controls['amount'].hasError('numberInvalid')&& secondaryWithdrawalForm.controls['amount'].touched"> Amount has to be in number or decimal </span>
+
+                                </div>
+                              </div>
+                             
+                              <div class="col-md-3">
+                                <label for="Message">Flat fee:</label>
+                                <div class="withdraw_input">
+                                  <input type="text" placeholder="-8.357 DIM" readonly>
+                                </div>
+                              </div>
+                              <div class="col-md-3">
+                                <label for="Message">You will receive</label>
+                                <div class="withdraw_input">
+                                  <input type="text" placeholder="XXX DIM" readonly>
+                                </div>
+                              </div>
+    
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-center withdraw">
+                                <button class="wallet_withdraw" [disabled]="!secondaryWithdrawalForm.valid || secondarydisableButton"  (click)="secondaryWithdrawalFormSubmit()"  >Withdraw</button>
+                            </div>
+                            <hybse-apploader *ngIf="secondaryShowLoader"></hybse-apploader>
+
+                            <div *ngIf="secondaryMesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':secondaryResponseSuccess ,'alert-danger': !secondaryResponseSuccess }" >
+                              {{ secondaryMesg }}
+                          </div>
+
+                             </div>
+                        
+                      </td>
+                    </tr> 
+
+                <tr class="no_records_found" *ngIf="secondaryDetail.length == 0">
+                    <td colspan="7">No Records Found</td>
+                  </tr>
+                
+
+              
+                
+              
+              </tbody>
+            </table>
+          </div>
+  
+  
+      </div>
+    </div>
+  </section>
+
+  <section class="share balance_sec">
+    <div class="wrapper_117x">
+      <div class="hybse_bg balance_bg">
+        <div class="wallet_balance d-flex justify-content-between">
+          <h2 style="margin-bottom: 10px">Ledger</h2>
+        </div>
+        <!-- <div class="d-flex justify-content-between">
+          <ul class="col-md-8 hide_button d-flex">
+              <li class="hide_zero">
+                <span>
+                  <input name="share_hide_balance" type="radio" id="share_balance">
+                  <label for="share_balance">Hide zero balances</label>
+                </span>
+              </li>
+              <li class="hide_delisted">
+                <span>
+                  <input name="share_hide_delisted" type="radio" id="share_delisted">
+                  <label for="share_delisted">Hide delisted</label>
+                </span>
+              </li>
+          </ul>
+
+          <div class="col-md-4">
+              <form class="share_search_frm" action="">
+                  <input placeholder="Search" type="text">
+                  <button type="submit"><i class="fal fa-search"></i></button>
+              </form>      
+          </div>
+            
+        </div> -->
+  
+        <div class="progress_wrap">
+          <div class="progress_bar"><span style="width:100%;"></span></div>
+          <!-- <p>€0,00 remaining of €0,00 EUR daily limit</p> -->
+        </div>
+  
+        <div class="hybse_table balance_table">
+            <table>
+              <thead>
+                <tr>
+                    <th>Transcation Date</th>
+                  <th>Stock Name</th>
+                  <th>Transaction Type</th>
+                  <th>Amount</th>
+                  <th>Balance</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+
+                  <tr [ngClass]="{'even': (i+1) % 2 == 0 }" *ngFor="let ledger of ledgerDetail; let i = index;">
+                      <td>{{ledger.txnDate}}</td>
+                      <td>{{ledger.stockName}}</td>
+                      <td>{{ledger.txnType}}</td>
+                      <td>{{ledger.amount}}</td>
+                      <td>{{ledger.balance}}</td>         
+                      
+                  </tr>
+
+                <tr class="no_records_found" *ngIf="secondaryDetail.length == 0">
+                  <td colspan="7">No Records Found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+  
+      </div>
+    </div>
+  </section>

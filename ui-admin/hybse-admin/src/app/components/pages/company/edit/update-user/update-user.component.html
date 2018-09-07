@@ -1,0 +1,76 @@
+
+<hybse-admin-loader *ngIf="showLoader"></hybse-admin-loader>
+
+<h3>User Details</h3>
+<form [formGroup]="userUpdateForm" (ngSubmit)="updateUserData()" class="update_user_detail admin_form">
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username" readonly>
+        <mat-error></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="Password">
+        <mat-error></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="confirmPassword" type="password" placeholder="Retype Password">
+        <mat-error *ngIf="userUpdateForm.controls['confirmPassword'].hasError('pwInvalid')">
+          Entered Password doesn't match the original password
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="useremail" placeholder="Email">
+        <mat-error *ngIf="userUpdateForm.controls['useremail'].hasError('required')">
+          Please enter your email
+        </mat-error>
+        <mat-error *ngIf="userUpdateForm.controls['useremail'].hasError('emailInvalid')">
+          Please enter a valid email
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="firstName" placeholder="First Name">
+        <mat-error></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field">
+      <mat-form-field>
+        <input matInput formControlName="lastName" placeholder="Last Name">
+        <mat-error></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form_input_field radio">
+        <p class="radio_label">Gender</p>
+        <mat-radio-group formControlName="usergender">
+          <mat-radio-button class="first_child" checked value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div class="form_input_field radio">
+      <p class="radio_label">Enable</p>
+      <mat-radio-group formControlName="userenable">
+        <mat-radio-button class="first_child" checked value="1">Active</mat-radio-button>
+        <mat-radio-button value="0">Inactive</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+
+    <div class="form_button_field">
+      <button mat-raised-button class="form_btn_submit" color="primary">Update</button>
+    </div>
+
+</form>

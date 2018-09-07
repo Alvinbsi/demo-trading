@@ -1,0 +1,466 @@
+
+
+<section class="setting_section">
+
+  <div  class="wrapper_152x">
+
+    <ul class="row setting_list d-flex flex-row justify-content-center">
+      <li class="col-md-4">
+        <div class="identity_sec_new">
+          <h4>Identity</h4>
+          <strong class="identity_icon">
+             <i *ngIf="isNoPic;else photoSection" (click)="fsFileUpload()" class="fal fa-user"></i>
+             <ng-template #photoSection>
+             <i><img (click)="fsFileUpload()"  src= {{responseAvatar}} class="profile_photo"/></i>
+            </ng-template>
+          </strong>
+          <p *ngIf="profilePic" (click)="fsFileUpload()" class="profile_image">Upload new profile photo</p>
+          <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+         
+
+        </div>
+        <div class="settings_content">
+        <ul class="identity_content d-flex">
+          <li class="col-md-6"><p><b>Legal Name</b><br>{{responsefirstName}} {{responselastName}}</p></li>
+          <li class="col-md-6"><p><b>Username</b><br>{{responseuserName}}</p></li>
+          <li class="col-md-6"><p><b>Email</b><br>{{responseEmail}}</p></li>
+          <li class="col-md-6"><p><b>Date of birth</b><br>{{responseDob}}</p></li>
+          <li class="col-md-6"><p><b>Telephone</b><br>{{responsemobile}}</p></li>
+          <li class="col-md-6"><p><b>Customer ID</b><br>{{responseuserName}}</p></li>
+          <li class="col-md-6"><p><b>Country</b><br>{{responsecountry}}</p></li>
+          <li class="col-md-6"><p><b>Address</b><br>{{responsecity}},{{responseaddress1}},{{responseaddress2}}</p></li>
+          <li class="col-md-12"><p><b>Nem Address</b><br>{{responsenemAddress}}</p></li>
+
+          
+        </ul>
+        <div class="d-flex justify-content-center row">
+
+          <div class="update_profile button">
+              <button (click)="userUpdateProfile()" type="Submit">Update Profile</button>
+          </div>
+
+          <div class="update_profile button">
+              <button (click)="userUpdateDocuments()" type="Submit">Update Documents</button>
+          </div>
+      </div>
+    </div>
+      </li>
+
+        <li  *ngIf="!userUpdatePage; else userUpdatePageForm" class="col-md-4 ">
+            <form [formGroup]="updatePreferenceForm" class="verify_lvl_frm verify__frm" action="">
+          <div   class="identity_sec ">
+              <h4>Theme</h4>
+              <div class="form_input radio_input">
+              <ul class="theme_selector d-flex box_padding">
+                <li class="col-md-6 night_view">
+                  <span>
+                    <input (click)="selectedNightTheme()" formControlName="theme_switcher" type="radio"  name="theme_switcher"  id="night_theme" value="0">
+                    <label for="night_theme">Night View</label>
+                  </span>
+                </li>
+                <li class="col-md-6 day_view">
+                  <span>
+                    <input (click)="selectedDayTheme()" formControlName="theme_switcher"  type="radio"  name="theme_switcher"  id="day_theme" value="1">
+                    <label for="day_theme">Day View</label>
+                  </span>
+                </li>
+              </ul>
+            </div>
+              <div>  
+              <ul class="site_settings_selector">
+                <li>
+                    <label class="formlabel">Language</label>
+                  <div class="form-input lang_selector">                    
+                    <i class="fal fa-check"></i>
+                    <select formControlName="language" class="form-control" type="text">
+                        <option value="" disabled selected>{{responseLanguage}}</option>
+                        <option value="{{ language.id }}" *ngFor="let language of localeName">{{ language.languageName }}</option>
+                    </select>
+                    <i class="fal fa-angle-down"></i>
+                  </div>
+                </li>
+
+                <!-- <li>
+                    <div class="lang_selector">
+                      <i class="fal fa-check"></i>
+                      <select>
+                        <option value="English">Timezone (CET)</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                      <i class="fal fa-angle-down"></i>
+                    </div>
+                  </li> -->
+
+                  <!-- <li>
+                      <div class="lang_selector">
+                        <i class="fal fa-check"></i>
+                        <select>
+                          <option value="English">Currency (EUR)</option>
+                          <option value="saab">Saab</option>
+                          <option value="opel">Opel</option>
+                          <option value="audi">Audi</option>
+                        </select>
+                        <i class="fal fa-angle-down"></i>
+                      </div>
+                    </li> -->
+
+                    <li>
+                        <label class="formlabel">Chart Type</label>
+
+                        <div class="form-input lang_selector">
+                          <i class="fal fa-check"></i>
+                          <select formControlName="chartType" class="form-control chart_type" type="text" >
+                            <option value="" disabled selected>{{responseChartType}}</option>
+                            <option value="Candlestick" >Candle Stick</option>
+                            <option value="Line" >Line</option>
+                            <option value="Bar" >Bar</option>                                                     
+                          </select>
+                          <i class="fal fa-angle-down"></i>
+                        </div>
+                      </li>
+              </ul>
+
+              <hybse-apploader *ngIf="updatePreferenceFormshowLoader"></hybse-apploader>
+              <div *ngIf="updatePreferenceFormMesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':updatePreferenceFormresponseSuccess ,'alert-danger': !updatePreferenceFormresponseSuccess }" >
+                  {{ updatePreferenceFormMesg }}
+              </div>
+
+                
+
+              <div class="d-flex justify-content-center row">
+                  <div class="reset_all button">
+                    <button (click)="userPreferenceFormSubmit()" type="Submit">Save changes</button>
+                </div>
+      
+                <div class="reset_all button">
+                    <button (click)="userPreferenceFormReset()" type="Submit">Reset all</button>
+                </div>
+            </div>
+            </div>
+          </div>
+          </form>
+      </li>
+
+
+      <li *ngIf="!userUpdatePage; else userUpdatePageFormspace" class="col-md-4">
+          <div class="identity_sec box_paddingMsg">
+              <h4 class="notify_icon">Messages<span>1</span></h4>
+              <form class="site_search_frm" action="">
+                <input placeholder="Search" type="text">
+                <button type="submit"><i class="fal fa-search"></i></button>
+              </form>
+
+              <ul class="message_selector">
+                <li class="upgrade_silver">
+                  <div class="Accord_selector">
+                    <p><strong>Your Upgrade to Silver was Succesful</strong></p>
+                    <i class="fal fa-plus"></i>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="Accord_selector">
+                    <p><strong>Thank you for your registration</strong></p>
+                    <i class="fal fa-plus"></i>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="Accord_selector">
+                    <p>News 3</p>
+                    <i class="fal fa-plus"></i>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="Accord_selector">
+                    <p>News 2</p>
+                    <i class="fal fa-plus"></i>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="Accord_selector">
+                    <p>News 1</p>
+                    <i class="fal fa-plus"></i>
+                  </div>
+                </li> 
+              </ul>
+              <div class="pagination d-flex justify-content-center row">
+                <a href="#">&laquo;</a>
+                <a href="#">1,</a>
+                <a class="active" href="#">2,</a>
+                <a href="#">3,</a>
+                <a href="#">4,</a>
+                <a href="#">5,</a>
+                <a href="#">6</a>
+                <a href="#">&raquo;</a>
+              </div>
+          </div>
+
+      </li>
+   </ul>
+
+   <ng-template #userUpdatePageFormspace>
+    <li *ngIf="!userUpdateDocument; else userUpdateDocumentSpace" class="col-md-4">
+      <div class="verification_lvl_wrap_update">
+        <form [formGroup]="updateUserFinancialForm" class="verify_lvl_frm verify_silver_frm" action="">
+        <h4>Update Financial Details</h4>
+        <div class="form-input form_space">
+                <label class="formlabel" for="email">DEPOT Wallet Address</label>
+                <input formControlName="nemAddress"  type="email" class="form-control" id="email" placeholder="Nem Wallet Address">
+            </div> 
+            <hybse-apploader *ngIf="updateUserFinancialshowLoader"></hybse-apploader>
+            <div *ngIf="updateUserFinancialMesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':updateUserFinancialresponseSuccess ,'alert-danger': !updateUserFinancialresponseSuccess }" >
+                {{ updateUserFinancialMesg }}
+            </div>
+
+            <div class="d-flex justify-content-center row">
+
+                <div class="reset_new button">
+                  <button (click)="updateFinancialDetailFormSubmit()"  type="submit" class="btn btn-info issuer-signup">Update Details</button>  
+                </div>
+      
+                <div class="reset_new button">
+                   <button (click)="cancelUserDetail()"  type="submit" class="btn btn-info issuer-signup">Go Back</button>
+                </div>
+            </div>
+         </form>
+      </div>
+    </li>
+
+   </ng-template>
+
+  </div>
+
+  <ng-template #userUpdatePageForm>
+
+      <div *ngIf="!userUpdateDocument; else userUpdateDocumentForm" class="verification_lvl_wrap_update">
+          <form [formGroup]="updateUserDetailForm" class="verify_lvl_frm verify_silver_frm" action="">
+            <h3>Update Profile</h3>
+                
+                  
+        
+            <div class="form_input split_input_two">
+                <label class="formlabel">Legal Name*</label>
+              <div class="row namebox no-gutters">
+                <div class="col-md-6"><input formControlName="firstName" class="form-control" id="firstname" type="text" placeholder="First Name" value="{{responsefirstName}}">
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('firstName').hasError('required') && updateUserDetailForm.get('firstName').touched">Please enter first Name</span> -->
+                  </div>
+                <div class="col-md-6"><input formControlName="lastName" class="form-control" id="lastname" type="text" placeholder="Last Name" value="{{responselastName}}">
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('lastName').hasError('required') && updateUserDetailForm.get('lastName').touched">Please enter last Name</span> -->
+                  </div>
+            </div>
+            </div>
+
+            <div class="form_input radio_input">
+              <label class="formlabel">Gender</label>
+            <ul class="row no-gutters">
+              <li class="col-md-6">
+                <span>
+                  <label class="custom_radio">Male
+                    <input formControlName="gender" type="radio" checked="checked" name="gender" id="male" value="Male">
+                    <span class="checkmark"></span>
+                  </label>
+                </span>
+              </li>
+              <li class="col-md-6">
+                <span>
+                  <label class="custom_radio">Female
+                    <input formControlName="gender" type="radio" name="gender" id="female" value="Female">
+                    <span class="checkmark"></span>
+                  </label>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          
+        
+        
+           
+            <div class="form_input form_space">
+                <label class="formlabel">Date of Birth*</label>
+              <div class="input-group">
+                <div [formGroup]="updateUserDetailForm.get('dobDate')" class="row daterow no-gutters">
+                  <div class="col-md-4">
+                    <i class="fal fa-angle-down material_drpdwn"></i>
+                <select formControlName="dobYear" class="form-control" id="year"  placeholder="Year" maxlength="4">
+                <option value="" disabled selected>Year</option>
+                <option value="{{ yr.val }}" *ngFor="let yr of year">{{ yr.name }}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+              <i class="fal fa-angle-down material_drpdwn"></i>
+              <select formControlName="dobMonth" class="form-control" id="month"  placeholder="Month">
+          <option value="" disabled selected>Month</option>
+          <option value="{{ mnth.val }}" *ngFor="let mnth of month">{{ mnth.name }}</option>
+        </select>
+        </div>
+        <div class="col-md-4">
+          <i class="fal fa-angle-down material_drpdwn"></i>
+          <select formControlName="dobDay" class="form-control" id="day"  placeholder="Day">
+        <option value="" disabled selected>Day</option>
+        <option value="{{ dy.val }}" *ngFor="let dy of day">{{ dy.name }}</option>
+        </select>
+        </div>
+        <div class=cod-md-12>
+          <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('dobDate').get('dobYear').hasError('required') && updateUserDetailForm.get('dobDate').get('dobYear').touched">Please select Your DOB Year</span> -->
+            <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('dobDate').get('dobMonth').hasError('required') && updateUserDetailForm.get('dobDate').get('dobMonth').touched">Please select Your DOB Month</span> -->
+            <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('dobDate').get('dobDay').hasError('required') && updateUserDetailForm.get('dobDate').get('dobDay').touched">Please select Your DOB Day</span> -->
+        </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-input form_space">
+              <label class="formlabel">Address*</label>
+              <div class="input-group">
+                <i class="fal fa-angle-down material_drpdwn"></i>
+                      <select formControlName="country"  id="country" type="text" class="form-control" name="country" placeholder="Select Country" >
+                      <option value="" disabled selected>Select Country</option>
+                      <option value="{{ country.code }}" *ngFor="let country of isoCountries">{{ country.name }}</option>
+                      </select>
+             </div>
+             <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('country').hasError('required') && updateUserDetailForm.get('country').touched">Please select your country</span> -->
+             <div class="input-group">
+              <input formControlName="address1" id="street" type="text" class="form-control" name="street" placeholder="Street" maxlength="255">
+              </div>
+              
+              <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('address1').hasError('required') && updateUserDetailForm.get('address1').touched">Please enter your street</span> -->
+              <div class="input-group">
+                <input formControlName="address2" id="street1" type="text" class="form-control" name="street1" placeholder="Street 1" maxlength="255">
+                </div>
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('address2').hasError('required') && updateUserDetailForm.get('address2').touched">Please enter your street 1 </span> -->
+                <div class="input-group">
+                <div class="row company-row no-gutters">
+                <div class="col-md-6"><input formControlName="zipCode" class="form-control" id="zipcode" type="text" placeholder="Postal Code" maxlength="15">
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('zipcode').hasError('required') && updateUserDetailForm.get('zipcode').touched">Please enter your zipcode</span> -->
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('zipcode').hasError('numberInvalid')&& updateUserDetailForm.get('zipcode').touched">Please enter a valid zipcode</span> -->
+                </div>
+                <div class="col-md-6"><input formControlName="city" class="form-control" id="city" type="text" placeholder="City">
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('city').hasError('required') && updateUserDetailForm.get('city').touched" maxlength="255">Please enter your city</span> -->
+                </div>
+            </div>
+            </div>
+            </div>
+                     
+        
+       
+        
+            <div class="form_input form_space">
+                <label class="formlabel" for="email">Mobile Number*:</label>
+              <div class="row company-row no-gutters">
+                <div class="col-md-4">
+                        <i class="fal fa-angle-down material_drpdwn"></i>
+                    <select formControlName="countryCode" class="form-control" id="countrycode1" type="text" placeholder="Country">
+                        <option value="" disabled selected>Select Country</option>
+                        <option value="{{ country.code }}" *ngFor="let country of countryCode">{{ country.name }}</option>
+                    </select>
+                    <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('countrycode').hasError('required') && updateUserDetailForm.get('countrycode').touched">Please select your country</span> -->
+                </div>
+                <div class="col-md-8"><input formControlName="phone" class="form-control " id="number" type="text" placeholder="Phone Number"  maxlength="15">
+                    <div class="col-md-12">
+                            <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('phone').hasError('required') && updateUserDetailForm.get('phone').touched">Please enter your phone number</span> -->
+                            <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('phone').hasError('numberInvalid')&& updateUserDetailForm.get('phone').touched"> Please enter a valid phone number</span> -->
+                            <!-- <span class="falseclass" *ngIf="updateUserDetailForm.get('phone').hasError('numberMinimum')&& updateUserDetailForm.get('phone').touched && !silverFormRegister.get('phone').hasError('numberInvalid')"> Please enter a valid phone number</span> -->
+                    </div>
+                </div>
+           
+                </div>
+               
+            </div>
+
+          
+             
+         
+            
+              
+           <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+            <div *ngIf="Mesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                {{ Mesg}}
+            </div>
+
+            <div class="d-flex justify-content-center row">
+
+              <div class="reset_new button">
+                <button (click)="updateUserDetailSubmit()"  type="submit" class="btn btn-info issuer-signup">Update Details</button></div>
+    
+              <div class="reset_new button">
+                 <button (click)="cancelUserDetail()"  type="submit" class="btn btn-info issuer-signup">Go Back</button>
+              </div>
+          </div>
+                    
+        </form>
+        </div>
+                
+    </ng-template>
+
+    <ng-template #userUpdateDocumentForm>
+      <li class="col-md-4">
+          <div class="verification_lvl_wrap_update">
+              <form [formGroup]="updateUserDocumentForm" class="verify_lvl_frm verify__frm" action="">
+                  <h3>Update Documents</h3>
+
+                  <div class="form_input personal">
+                      <label for="">1.Download 'Proof of sources of fund's form*</label>
+                     
+                     <button type="button" class="btn funds_btn"><i class="fal fa-arrow-to-bottom proof_icon"></i>Proof of sources of funds</button> 
+                  </div>
+
+
+          <div class="form_input personal">
+              <label for="">2.Upload 'Proof of sources of funds'form*</label>
+              <button (click)="fsFileUpgrade()" type="button" class="btn funds_btn"><i class="fal fa-arrow-from-bottom proof_icon"></i>Proof of sources of funds</button>
+              <p class="file_name">{{fileName}}</p>
+   
+               </div>
+
+               <div class="form-input form_space">
+                  <label class="formlabel">3.Upload further documents supporting sources of funds*</label>
+                  <div class="input-group">
+                    <i class="fas fa-angle-down material_drpdwn"></i>
+                          <select formControlName="supportDocType" id="docType" type="text" class="form-control" name="country" placeholder="Select Country" >
+                          <option value="" disabled selected>Select support document Type</option>
+                          <option value="POFS1" >Custody statements of investments</option>
+                          <option value="POFS2" >Certificate of real estate ownership</option>
+                          <option value="POFS3" >Bank account statement</option>
+            
+                          </select>
+                 </div>
+                 <span class="falseclass" *ngIf="updateUserDocumentForm.get('supportDocType').hasError('required') && updateUserDocumentForm.get('supportDocType').touched">Please select support document type</span>
+                </div>
+
+                <button (click)="fsFileUpgrade1()"  type="button" class="btn funds_btn"><i class="fal fa-arrow-from-bottom proof_icon"></i>Support documents</button> 
+                <p class="file_name">{{fileSupportName}}</p>
+
+                <hybse-apploader *ngIf="updateUserDocumentFormshowLoader"></hybse-apploader>
+                <div *ngIf="updateUserDocumentMesg != ''" class="alert login_error_msg new_msg" [ngClass]="{ 'alert-success':updateUserDocumentFormresponseSuccess ,'alert-danger': !updateUserDocumentFormresponseSuccess }" >
+                {{ updateUserDocumentMesg }}
+                </div>
+
+
+                <div class="d-flex justify-content-center row">
+
+                    <div class="reset_new button">
+                      <button (click)="updateUserDocumentSubmit()"  type="submit" class="btn btn-info issuer-signup">Update Details</button></div>
+          
+                    <div class="reset_new button">
+                       <button (click)="cancelUserDetail()"  type="submit" class="btn btn-info issuer-signup">Go Back</button>
+                    </div>
+                </div>
+      
+
+              </form>
+          </div>
+      </li>
+    </ng-template>
+    <ng-template #userUpdateDocumentSpace>
+      <li class="col-md-4">
+        
+      </li>
+
+    </ng-template>
+</section>

@@ -1,0 +1,40 @@
+
+<section class="admin_user_list admin_inner_block"  [@fadeInDown]="fadeInDown">
+    <div class="title_sec d-flex justify-content-between align-items-center">
+      <h2>Markets</h2>
+      <a class="link_btn" routerLink="/markets/add">Add New</a>
+    </div>
+
+    <div class="admin_table admin_user_list">
+      <table>
+        <thead>
+          <th>S.No</th>
+          <th>Source Symbol</th>
+          <th>Target Symbol</th>
+          <th>Company</th>
+          <th>Initial Value</th>
+          <th>Action</th>
+        </thead>
+
+        <tbody>
+
+          <tr class="row_loader" *ngIf="showLoader">
+            <td colspan="8">
+                <hybse-admin-loader></hybse-admin-loader>
+            </td>
+          </tr>
+          <tr [@fadeInDown]="fadeInDown" *ngFor="let market of marketList;let i = index;">
+            <td>{{i + 1}}</td>
+            <td>{{market.pairSource}}</td>
+            <td>{{market.pairTarget}}</td>
+            <td>{{market.idCompany}}</td>
+            <td>{{market.initialValue}}</td>
+            <td class="user_actions">
+              <a class="user_edit" [routerLink]="['/markets/update', market.id]" href="javascript:void(0)"><i class="fas fa-edit"></i> Edit</a>
+              <a class="user_delete" (click)="confirmDelete(market.id)" href="javascript:void(0)"><i class="far fa-trash-alt"></i> Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>

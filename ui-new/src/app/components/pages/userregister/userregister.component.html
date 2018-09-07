@@ -1,0 +1,84 @@
+
+
+<section class="userregister_section">
+    <div class="signup_wrapper">
+        <div class="signup_sec">
+            <p class="signup_header">Sign Up </p>
+
+            <div class="row socialResponsive">
+                   
+                <div class="col-md-4">
+                    <button type="button" (click)="loginWithGoogle()" class="btn btn-primary google-btn social_btn" ><i class="fab fa-google-plus-g social-logo"></i><span class="vl"></span>Sign up with Google</button>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4" >
+                    <button type="button" (click)="loginWithFacebook()" class="btn btn-primary facebook-btn social_btn" ><i class="fab fa-facebook-f social-logo"></i><span class="vl"></span>Sign up with facebook</button>
+                </div>
+            </div>
+            <div class="row socialResponsive">
+                   
+                <div class="col-md-4">
+                    <button type="button" (click)="loginWithlinkedIn()" class="btn btn-primary linkedin-btn social_btn" ><i class="fab fa-linkedin-in social-logo"></i><span class="vl"></span>Sign up with LinkedIn</button>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4" >
+                    <button type="button" disabled (click)="loginWithOutlook()" class="btn btn-primary outlook-btn social_btn" ><i class="fas fa-envelope social-logo"></i><span class="vl"></span>Sign up with outlook</button>
+                </div>
+            </div>
+            <hr class="hr-text" data-content="OR">
+            <form [formGroup]="userRegisterForm">
+
+
+
+                <div class="form-group">
+                    <label class="formlabel" for="email">Email*:</label>
+                    <input formControlName="email" type="email" class="form-control" id="email" placeholder="Your Email Address" >
+                    <span class="falseclass" *ngIf="userRegisterForm.controls['email'].hasError('emailInvalid') && userRegisterForm.controls['email'].touched">Enter a valid email address</span>
+                    <span class="falseclass" *ngIf="userRegisterForm.controls['email'].hasError('required') && userRegisterForm.controls['email'].touched">Please enter your email</span>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="formlabel" for="password">Password*:</label>
+                    <input formControlName="password"  type="password" class="form-control" id="password" placeholder="Your Password">
+                </div>
+                    <span class="falseclass" *ngIf="userRegisterForm.controls['password'].hasError('required') && userRegisterForm.controls['password'].touched">Please enter your Password</span>
+                    <span class="falseclass" *ngIf="userRegisterForm.controls['password'].hasError('passwordInvalid') && userRegisterForm.controls['password'].touched">Password must have length 8 to 18 with one Upper Case and one Special Chracter </span>
+
+
+                
+
+                <div class="form-group">
+                    <label class="formlabel" for="email">Confirm Password*:</label>
+                    <input formControlName="confirmpassword"  type="password" class="form-control" id="confirmpassword" placeholder="Your Password">
+                    <span class="falseclass" *ngIf="userRegisterForm.hasError('passInvalid')&& userRegisterForm.controls['confirmpassword'].touched">Entered password doesn't match the original</span>
+                    <span class="falseclass" *ngIf="userRegisterForm.controls['confirmpassword'].hasError('required') && userRegisterForm.controls['confirmpassword'].touched">Please Re-enter your Password</span>
+                </div>
+                <!-- <span class="falseclass" *ngIf="userRegisterForm.controls['confirmpassword'].hasError('passwordInvalid') && userRegisterForm.controls['confirmpassword'].touched">Password must have length 8 to 18 with one Upper Case and one Special Chracter</span> -->
+
+
+
+                <div class="checkbox">
+                        <input formControlName="confirmbox" type="checkbox">  <label class="check-txt">I have read and agree with the <a routerLink="/terms" class="dotted_link" target="_blank">Terms of Use</a>  and <span > <a routerLink="/privacy" class="dotted_link" target="_blank">Privacy Policy</a></span></label>
+                     <span class="falseclass" *ngIf="userRegisterForm.controls['confirmbox'].hasError('required') && userRegisterForm.controls['confirmbox'].touched">Please Accept Our Terms and Conditions</span>
+                     </div>
+                     <input type="hidden" formControlName="captchField">
+                     <div id="html_element"></div>
+
+                <div *ngIf="Mesg" class="alert userregister_error_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                    {{ Mesg }}
+                </div>
+
+                
+
+                <div class="form-group btn_grp">
+                        <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+                    <button (click)="userRegisterFormSubmit()"  [disabled]="!userRegisterForm.valid || disableButton" type="submit" class="btn btn-info issuer-signup">Sign Up</button>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</section>

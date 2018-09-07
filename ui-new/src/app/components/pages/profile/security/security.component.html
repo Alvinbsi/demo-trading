@@ -1,0 +1,138 @@
+
+<section  class="security_section">
+   
+        <div class="wrapper_152x">
+
+            <ul class="security_lists d-flex row justify-content-center">
+
+                <li class="col-md-4">
+
+                    <div class="security_sec password_sec">
+
+                        <h4>Change Password</h4>
+                        
+                            <p class="imp_box">Important<br><br>Do not use the same password as for your email, Facebook, etc.</p>
+                        
+
+                        <form [formGroup]="updatePasswordForm"  class="security_form_sec change_password" action="">
+                            <div>
+                                    <span class="falseclass" *ngIf="updatePasswordForm.controls['oldPassword'].hasError('required') && updatePasswordForm.controls['oldPassword'].touched">Please enter your Old Password</span>
+                                <input formControlName="oldPassword" type="password" id="" name="" placeholder="Old Password">
+                            </div>
+                            <div>
+                                    <span class="falseclass" *ngIf="updatePasswordForm.hasError('passwordSame')&& updatePasswordForm.controls['password'].touched">Current and new password should not be same </span>                                 
+                                    <span class="falseclass" *ngIf="updatePasswordForm.controls['password'].hasError('required') && updatePasswordForm.controls['password'].touched">Please enter your Password</span>
+                                    <span class="falseclass" *ngIf="updatePasswordForm.controls['password'].hasError('passwordInvalid') && updatePasswordForm.controls['password'].touched">Password must have length 8 to 18 with one Upper Case and one Special Chracter </span>
+
+                                <input formControlName="password" type="password" id="password" name="" placeholder="New Password">
+                                
+                            </div>
+                            <div class="repeat_new">
+                                
+                                <span class="falseclass" *ngIf="updatePasswordForm.controls['confirmpassword'].hasError('required') && updatePasswordForm.controls['confirmpassword'].touched">Please Re-enter your Password</span>
+                                <span class="falseclass" *ngIf="updatePasswordForm.controls['confirmpassword'].hasError('passwordInvalid') && updatePasswordForm.controls['confirmpassword'].touched">Password must have length 8 to 18 with one Upper Case and one Special Chracter </span>
+                                <span class="falseclass" *ngIf="updatePasswordForm.hasError('passInvalid')&& updatePasswordForm.controls['confirmpassword'].touched">Entered password doesn't match the original</span>
+
+                                <input formControlName="confirmpassword" type="password" id="confirmpassword" name="" placeholder="Repeat New Password">
+                            </div>
+
+                            <div *ngIf="Mesg != ''" class="alert login_error_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                                    {{ Mesg}}
+                                </div>
+                            <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+                                <div class="change_pwd button d-flex flex-row justify-content-center">
+                                <button (click)="updatePasswordFormSubmit()" [disabled]="!updatePasswordForm.valid || disableButton"  type="Submit">Change now</button>
+                            </div>  
+                        </form>
+                        
+                    </div>
+
+                </li>
+
+                <li class="col-md-4">
+                    <div class="security_sec password_sec">
+
+                        <h4>Change E-mail</h4>
+                        <p class="imp_box">Important<br><br>Please note, Your notifications will now be directed to the New email address supplied.</p>
+
+                        <form [formGroup]="updateEmailForm" class="security_form_sec email_address">
+                           <div>
+                                <span class="falseclass" *ngIf="updateEmailForm.get('oldEmail').hasError('required') && updateEmailForm.get('oldEmail').touched">Please enter the current email address</span>
+                                <span class="falseclass" *ngIf="updateEmailForm.get('oldEmail').hasError('emailInvalid') && updateEmailForm.get('oldEmail').touched">Enter a valid email address</span>
+
+                                <input formControlName="oldEmail" type="text" id="" name="" placeholder="Current email address">
+
+                            </div>
+
+                            <div>
+                                    <span class="falseclass" *ngIf="updateEmailForm.get('password').hasError('required') && updateEmailForm.get('password').touched">Please enter the current Password</span>
+                                <input formControlName="password" type="password" id="" name="" placeholder="Current Password">
+                            </div>
+
+                             <div class="new_email_address">
+                                    <span class="falseclass" *ngIf="updateEmailForm.get('newEmail').hasError('emailInvalid') && updateEmailForm.get('newEmail').touched">Enter a valid email address</span>
+                                    <span class="falseclass" *ngIf="updateEmailForm.hasError('EmailSame')&& updateEmailForm.controls['newEmail'].touched">Current and new mail address should not be same </span>                                 
+                                    <span class="falseclass" *ngIf="updateEmailForm.get('newEmail').hasError('required') && updateEmailForm.get('newEmail').touched">Please enter the new email address </span>
+                                   <input formControlName="newEmail" type="text" id="" name="" placeholder="New email address">
+                            </div>
+
+                            <div *ngIf="secondaryMesg != ''" class="alert login_error_msg" [ngClass]="{ 'alert-success':secondaryresponseSuccess ,'alert-danger': !secondaryresponseSuccess }" >
+                                    {{ secondaryMesg }}
+                                </div>
+                                
+                            <hybse-apploader *ngIf="secondaryshowLoader"></hybse-apploader>
+                            <div class="email_address button d-flex flex-row justify-content-center">
+                                <button (click)="updateEmailFormSubmit()" [disabled]="!updateEmailForm.valid || secondarydisableButton" type="Submit">Change now</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+
+                </li>
+
+
+                <li class="col-md-4">
+                    <div class="security_sec password_sec">
+
+                        <h4>2-Factor Authentification </h4>
+                           <p class="imp_box">Important<br><br>Always write down your Authentication Key! You will not be able to sign in if you lose your mobile device and authentification key. Read more</p>
+                        
+                        <form class="security_form_sec two_factor_verify">
+                            <div> 
+                                <input type="text" id="" name="" placeholder="Authentification Key">
+                            </div>
+                            <div>
+                                <input type="text" id="" name="" placeholder="Verification Code (6 digit PIN)">
+                            </div>
+                            <strong>
+                                    <h1 class="bar_code"><a href="#" title="qr_code"></a></h1>
+                                </strong>
+                            <!-- <div class="change_pwd button d-flex flex-row justify-content-center">
+                                <button type="Submit">Enable Google 2 FA</button>
+                                
+                                    <button   type="submit" class="btn btn-info fa_btn ">Google 2 FA</button>                                                  
+                                     <button  type="submit" class="btn btn-info fa_btn ">Paper 2 FA</button>
+                            </div> -->
+
+                            <div class="d-flex justify-content-center row">
+
+                                <div class="reset_new button">
+                                  <button   type="submit" class="btn btn-info issuer-signup">Enable Google 2 FA</button></div>
+                      
+                                <div class="reset_new button">
+                                   <button type="submit" class="btn btn-info issuer-signup">Enable Paper 2 FA</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                       
+                    </div>
+
+                </li>
+
+               
+
+            </ul>
+        </div>
+   
+</section>

@@ -1,0 +1,120 @@
+<section class="add_user_sec admin_inner_block" [@fadeInDown]="fadeInDown">
+
+    <div class="form_loader" *ngIf="showLoader">
+      <div class="data_loader"></div>
+    </div>
+
+    <h2>{{formTitle}}</h2>
+
+    <div *ngIf="formResponseMsg != ''" class="alert alert-dismissible fade show" [ngClass]="{'alert-success': alertStatusMessage,'alert-danger': !alertStatusMessage}" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>{{formResponseMsg}}</strong>
+    </div>
+
+
+
+    <form [formGroup]="createUserForm" (ngSubmit)="createUpdateUser()" novalidate class="add_user_form admin_form">
+
+
+      <!-- <div class="form_input_field">
+          <i class="fas fa-user"></i>
+        <mat-form-field>
+            <input formControlName="uname" [readonly]="(actionType == 'edit') ? true : false"  matInput placeholder="UserName*">
+            <mat-error *ngIf="createUserForm.controls['uname'].hasError('required') && formSubmitted">
+              Please enter your username
+            </mat-error>
+          </mat-form-field>
+      </div> -->
+
+      <mat-card *ngIf="actionType == 'edit'">
+          <h3>UserName</h3>
+          <p>{{userName}}</p>
+      </mat-card>
+
+      <div class="form_input_field">
+        <i class="fas fa-envelope"></i>
+        <mat-form-field>
+          <input [errorStateMatcher]="blurMatcher" formControlName="useremail" matInput placeholder="Email Address*">
+          <mat-error *ngIf="createUserForm.controls['useremail'].hasError('required') && createUserForm.controls['useremail'].touched">
+            Please enter your email
+          </mat-error>
+          <mat-error *ngIf="createUserForm.controls['useremail'].hasError('emailInvalid') && createUserForm.controls['useremail'].touched">
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form_input_field">
+        <i class="fas fa-unlock"></i>
+        <mat-form-field>
+          <input [errorStateMatcher]="blurMatcher" formControlName="upass" type="password" matInput placeholder="Password">
+          <mat-error *ngIf="createUserForm.controls['upass'].hasError('required') && createUserForm.controls['upass'].touched">
+            Please enter your password
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form_input_field">
+        <i class="fas fa-unlock"></i>
+        <mat-form-field>
+          <input formControlName="confirmpass" type="password" matInput placeholder="Confirm Password">
+          <mat-error *ngIf="createUserForm.controls['confirmpass'].hasError('pwInvalid') && createUserForm.controls['confirmpass'].touched">
+              Entered Password doesn't match with the original
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="form_input_field" *ngIf="userType == 'Admin' ">
+        <i class="fas fa-users"></i>
+        <mat-form-field>
+          <mat-select [errorStateMatcher]="blurMatcher" formControlName="userrole" placeholder="User Role*">
+            <mat-option>User Role</mat-option>
+            <mat-option value="SuperAdmin">Super Admin</mat-option>
+            <mat-option value="Admin">Admin</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createUserForm.controls['userrole'].hasError('required') && createUserForm.controls['userrole'].touched">
+            Please select a user role
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form_input_field">
+        <i class="fas fa-user"></i>
+        <mat-form-field>
+          <input [errorStateMatcher]="blurMatcher" formControlName="firstname" matInput placeholder="First Name">
+        </mat-form-field>
+      </div>
+
+      <div class="form_input_field">
+        <i class="fas fa-user"></i>
+        <mat-form-field>
+          <input [errorStateMatcher]="blurMatcher" formControlName="lastname" matInput placeholder="Last Name">
+        </mat-form-field>
+      </div>
+
+      <div class="form_input_field radio">
+          <p class="radio_label">Gender</p>
+          <mat-radio-group [errorStateMatcher]="blurMatcher" formControlName="usergender">
+            <mat-radio-button class="first_child"  value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+          </mat-radio-group>
+      </div>
+
+      <div class="form_input_field radio">
+          <p class="radio_label">Enabled</p>
+          <mat-radio-group [errorStateMatcher]="blurMatcher" formControlName="userenabled">
+            <mat-radio-button class="first_child"  value="1">Active</mat-radio-button>
+            <mat-radio-button value="0">Inactive</mat-radio-button>
+          </mat-radio-group>
+      </div>
+      <div class="form_button_field">
+        <button mat-raised-button [disabled]="!createUserForm.valid" class="form_btn_submit" color="primary">Submit</button>
+        <button mat-raised-button (click)="cancelUserCreate()" class="form_btn_cancel" color="warn">Cancel</button>
+      </div>
+
+
+    </form>
+  </section>

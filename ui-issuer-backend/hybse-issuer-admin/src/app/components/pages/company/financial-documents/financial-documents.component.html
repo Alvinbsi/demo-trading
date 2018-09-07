@@ -1,0 +1,97 @@
+<section class="content_section financial_docs">
+  <div class="content_wrap">
+
+    <hybse-issueradmin-loaders [position]="'center'" *ngIf="loaderToggle"></hybse-issueradmin-loaders>
+
+    <ng-template ngFor let-docs [ngForOf]="financialDocs" let-i="index">
+        <div class="content_row" *ngIf="docs.docTitle != 'logo'">
+          <div class="col-md-12">
+            <div class="content_box financial_doc_box">
+              <div class="doc_title">
+                <!-- <h3>Contract form the company register</h3> -->
+                <h3>{{docs.docTitle}}</h3>
+                <!-- <p>PDF, 136 KB</p> -->
+              </div>
+              <div  class="doc_action">
+                <a href="{{docs.docName}}" target="_blank" title="View">
+                  <i class="fal fa-eye"></i>
+                </a>
+                <a href="{{docs.docName | getfilehandle: true:false }}" download title="Download">
+                  <i class="fal fa-download"></i>
+                </a>
+                <!-- <a href="javascript:void(0)" title="Print">
+                  <i class="fal fa-print"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </ng-template>
+
+
+    <!-- <div class="content_row">
+      <div class="col-md-12">
+        <div class="content_box financial_doc_box">
+          <div class="doc_title">
+            <h3>Contract form the company register</h3>
+            <p>PDF, 136 KB</p>
+          </div>
+          <div  class="doc_action">
+            <a href="javascript:void(0)" title="View">
+              <i class="fal fa-eye"></i>
+            </a>
+            <a href="javascript:void(0)" title="Download">
+              <i class="fal fa-download"></i>
+            </a>
+            <a href="javascript:void(0)" title="Print">
+              <i class="fal fa-print"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content_row">
+      <div class="col-md-12">
+        <div class="content_box financial_doc_box">
+          <div class="doc_title">
+            <h3>Contract form the company register</h3>
+            <p>PDF, 136 KB</p>
+          </div>
+          <div  class="doc_action">
+            <a href="javascript:void(0)" title="View">
+              <i class="fal fa-eye"></i>
+            </a>
+            <a href="javascript:void(0)" title="Download">
+              <i class="fal fa-download"></i>
+            </a>
+            <a href="javascript:void(0)" title="Print">
+              <i class="fal fa-print"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class="content_row">
+      <div class="col-md-12">
+        <div class="content_box financial_doc_uplaod">
+          <h3>Upload Further Financial Documents</h3>
+          <div class="upload_doc_sec">
+            <div class="content_input content_input_select width_30">
+              <select name="" id="">
+                <option value="">Select</option>
+              </select>
+              <i class="fal fa-angle-down"></i>
+            </div>
+            <div class="upload_doc_btn">
+              <button class="content_btn">Upload Documents</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

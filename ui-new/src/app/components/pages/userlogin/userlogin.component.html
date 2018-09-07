@@ -1,0 +1,102 @@
+
+
+<section class="user_login_body">
+    <div class="signup_wrapper">
+            <p class="login_header">Login </p>
+        <div class="signup_sec login_sec">
+
+               
+               
+        <div class="row socialResponsive">
+                              
+                <div class="col-md-4">
+                       
+                      <button type="button" class="btn btn-primary google-btn social_btn" (click)="loginWithGoogle()"> <i class="fab fa-google-plus-g social-logo" > </i><span class="vl"></span> Sign in with Google</button>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4" >
+                     
+                        <button  type="button" class="btn btn-primary facebook-btn social_btn" (click)="loginWithFacebook()"><i class="fab fa-facebook-f social-logo" ></i><span class="vl"></span>Sign in with facebook</button>
+                </div>
+            </div>
+
+       
+            <div class="row socialResponsive">
+                    
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary linkedin-btn social_btn" (click)="loginWithlinkedIn()"><i class="fab fa-linkedin-in social-logo" ></i><span class="vl"></span>Sign in with LinkedIn</button>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <button type="button" disabled class="btn btn-primary outlook-btn social_btn"><i class="fas fa-envelope social-logo"></i><span class="vl"></span>Sign in with outlook</button>
+                </div>
+            </div> 
+
+
+            
+            <hr class="hr-text" data-content="OR">
+            <form [formGroup]="loginForm" novalidate action="">
+
+
+
+                <div class="form-group">
+                       
+                    <!-- <label class="formlabel" for="email">Email*:</label> -->
+                    <i class="fal fa-user material_usr"></i>
+                    <input formControlName="email" type="email" class="form-control lined_input" id="email" placeholder="Your Email">
+                    <span class="falseclass" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched"> Please enter Email</span>
+                    <span class="falseclass" *ngIf="loginForm.controls['email'].hasError('emailInvalid')&& loginForm.controls['email'].touched ">Enter a valid email address</span>
+
+                </div>
+
+                <div class="form-group">
+                        <i class="fal fa-lock material_pwd"></i>
+                    <!-- <label class="formlabel" for="password">Password*:</label> -->
+                    
+                    <input formControlName="password"  type="password" class="form-control lined_input" id="password" placeholder="Your Password">
+                    <span class="falseclass" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Please enter your password</span>
+                </div>
+
+                <input type="hidden" formControlName="captchField">
+                <div id="html_element"></div>
+
+                <div *ngIf="Mesg != ''" class="alert login_error_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                    {{ Mesg}}
+                </div>
+
+                <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+                <div class="form-group btn_grp">
+                      <button (click)="loginFormSubmit()" [disabled]="!loginForm.valid || disableButton" type="submit" class="btn btn-info issuer-signup">Sign In</button>
+                     
+                    </div> 
+                    <a routerLink="/forgotPassword" class="reset_text">Forgot Password?</a> 
+               <hr class="login_ender">
+               </form>
+            <a class="Login_register">Don't have an account.<span routerLink="/registration" class="dotted_link">Register Now!</span></a>
+        </div>
+
+    </div>
+
+
+
+    <div *ngIf="modalPopUpToggle" class="modal_pop_up">
+        <div class="modal_content animated" [ngClass]="modalAnimateClass">
+          <h3>Confirm</h3>
+          <p>User aldready logged in .Do you want to end all Session?</p>
+          <div class="modal_btn">
+            <button  (click)="modalClose()">Cancel</button>
+            <button  (click)="endSession()">End Session</button>
+          </div>
+          <hybse-apploader *ngIf="deleteOrdershowLoader"></hybse-apploader>
+    
+          <a (click)="modalClose()" class="modal_close" href="javascript:void(0)">
+            <i class="fal fa-times-circle"></i>
+          </a>
+        </div>
+      </div>
+
+</section>
+
+<!-- </section> -->
+
+

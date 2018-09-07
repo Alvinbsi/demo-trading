@@ -1,0 +1,75 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "hybse-admin"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "hybse-admin",
+      "styles": [
+        "assets/material-icon/material-icons.css",
+        "assets/css/bootstrap.css",
+        "assets/fonts/fonts.css",
+        "assets/css/fontawesome.css",
+        "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+        "assets/css/loader.css",
+        "styles.css",
+        "styles-kavya.css",
+        "custom-theme.scss",
+        "assets/css/responsive.css"
+      ],
+      "scripts": [
+        "assets/js/jquery-3.3.1.js",
+        "assets/js/tether.min.js",
+        "assets/js/bootstrap.js",
+        "assets/js/ua-parser.pack.js",
+        "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

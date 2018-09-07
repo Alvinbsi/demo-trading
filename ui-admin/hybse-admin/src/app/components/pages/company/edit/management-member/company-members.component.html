@@ -1,0 +1,26 @@
+<section>
+  <div class="admin_table comp_member_list">
+    <table>
+      <thead>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Position</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Stake (%)</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of memberDetail;let i = index;">
+          <td>{{ i + 1 }}</td>
+          <td>{{ member.ofcrfirstname }}</td>
+          <td>{{ member.ofcrlastname }}</td>
+          <td>{{ member.position }}</td>
+          <td>{{ member.ofcrphone }}</td>
+          <td>{{ member.ofcremail }}</td>
+          <td>{{ member.ofcrshares }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<!-- <section class="admin_menu_pagesec admin_inner_block"  [@fadeInDown]="fadeInDown">
+  <h2>Menu Manager</h2>
+  <div class="d-flex menu_sec_wrap">
+    <div class="col-md-4 menu_page_list">
+      <mat-card>
+          <div class="text-right chck_all_menu">
+            <mat-checkbox [checked]="toggleAllChecked" (change)="toggleAllMenu($event)">
+              {{toggleAllChecked ? 'UnCheck All' : 'Check All'}}
+            </mat-checkbox>
+          </div>
+          <ul verticalscrollbar>
+            <li *ngFor="let page of pageList; let i = index">
+              <mat-checkbox [value]="page.id" [checked]="page.isEnabled" (change)="pageCheckToggle($event)">{{page.title}}</mat-checkbox>
+            </li>
+          </ul>
+
+          <div class="menu_add_btn">
+            <button (click)="addMenuItem()" mat-raised-button color="primary">Add Menu</button>
+          </div>
+      </mat-card>
+    </div>
+
+    <div class="col-md-8">
+        <mat-card>
+
+          <div class="menu_listings">
+            <hybse-admin-loader *ngIf="showLoader"></hybse-admin-loader>
+            <ul>
+              <li *ngFor="let menu of allMenuList; let i = index">
+                <h5 (click)="toggleEdit(i)">{{menu.menuName}} <i class="fas fa-angle-down" [ngClass]="{'fa-angle-down':!menu.collapseEdit, 'fa-angle-up':menu.collapseEdit }" ></i></h5>
+                <div *ngIf="menu.collapseEdit" class="menu_list_action">
+                    <hybse-admin-loader *ngIf="menu.showLoader"></hybse-admin-loader>
+                    <mat-form-field>
+                      <input matInput placeholder="Menu Name" [(ngModel)]="menu.menuName">
+                    </mat-form-field>
+                    <div class="menu_action_btn">
+                      <button mat-raised-button (click)="updateMenu(i,menu.id,menu.menuName)" color="primary">Save</button>
+                      <button mat-raised-button (click)="confirmDelete(menu.id)" color="warn">Delete</button>
+                    </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </mat-card>
+    </div>
+  </div>
+
+</section> -->

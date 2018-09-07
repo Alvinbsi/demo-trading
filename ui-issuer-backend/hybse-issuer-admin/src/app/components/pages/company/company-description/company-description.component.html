@@ -1,0 +1,169 @@
+<section class="content_section">
+  <div class="content_wrap">
+
+    <hybse-issueradmin-loaders [position]="'top'" [topVal]="'150px'" *ngIf="loaderToggle"></hybse-issueradmin-loaders>
+
+    <form class="content_form comp_desc_form" [formGroup]="createCompDescForm" (ngSubmit)="saveCompDescForm()">
+      <div *ngIf="editMode" class="save_btn_wrap col-md-12">
+          <button type="submit" class="save_btn">Save Changes</button>
+        </div>
+        <div class="content_row">
+          <div class="col-md-12">
+            <div class="content_box">
+              <h3>Description of the company activities</h3>
+              <div *ngIf="!editMode">
+                <p>
+                  {{companyDetails?.companyProfile?.companyActivity}}
+                </p>
+              </div>
+              <div *ngIf="editMode" class="content_input animated fadeInDown">
+                <textarea formControlName="comp_description" id="" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="content_row">
+          <div class="col-md-6">
+            <div class="content_box no_margin full_height">
+              <h3>Incorporation</h3>
+              <ul class="margin_space">
+                <li>{{companyDetails?.companyProfile?.incorporationCountry | getname: countries:'alpha-3':'name' }}</li>
+                <li>{{companyDetails?.companyProfile?.incorporationCity}}</li>
+                <li>{{companyDetails?.companyProfile?.incorporationYear}}</li>
+              </ul>
+              <h3>Company Register Number</h3>
+              <ul>
+                <li>{{companyDetails?.companyProfile?.incorporationNumber}}</li>
+              </ul>
+              <span class="content_icon">
+                <i class="fal fa-badge-check"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="content_box no_margin comp_share_box">
+              <h3>Outstanding Shares to be listed</h3>
+              <p *ngIf="!editMode">{{companyDetails?.companyFinancial?.outstandingShares}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input formControlName="outstanding_shares" type="text">
+              </div>
+              <h3>Number of Shareholders over 5%</h3>
+              <p *ngIf="!editMode">{{companyDetails?.companyFinancial?.shareValue}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input formControlName="high_shareholders" type="text">
+              </div>
+              <h3>Shareholders with less than 5%</h3>
+              <p *ngIf="!editMode" class="no_margin">{{companyDetails?.companyFinancial?.authorizedShares}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input formControlName="low_shareholders" type="text">
+              </div>
+              <span class="content_icon">
+                <i class="fal fa-chart-line"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content_row">
+          <div class="col-md-6">
+            <div class="content_box comp_ibin_box">
+              <h3>IBIN</h3>
+              <p>{{companyDetails?.companyIbs?.ibin}}</p>
+
+              <h3>ISIN</h3>
+              <p>{{companyDetails?.companyIbs?.isin}}</p>
+
+              <h3>Totalnumber of issuing shares</h3>
+              <p class="no_margin">{{companyDetails?.companyFinancial?.shareholders}}</p>
+
+              <span class="content_icon">
+                <i class="fal fa-file"></i>
+              </span>
+
+            </div>
+
+            <div class="content_box">
+              <h3>Symbol</h3>
+              <p class="no_margin">Trading Symbol</p>
+
+              <span class="content_icon">
+                <i class="fal fa-globe"></i>
+              </span>
+            </div>
+
+            <div class="content_box">
+              <h3>Desired Listing Date</h3>
+              <p class="no_margin">DD/MM/YYYY</p>
+
+              <span class="content_icon">
+                <i class="fal fa-calendar-alt"></i>
+              </span>
+
+            </div>
+
+            <div class="content_box no_margin">
+              <h3>Market</h3>
+              <p class="no_margin">{{companyDetails?.companyProfile?.businessActivities | getname: markets:'val':'name' }}</p>
+
+              <span class="content_icon">
+                <i class="fal fa-chart-bar"></i>
+              </span>
+            </div>
+
+
+          </div>
+          <div class="col-md-6">
+            <div class="content_box no_margin full_height">
+              <h3>Add all Shareholders with more than 5%</h3>
+
+              <!-- <div class="add_member_sec">
+                <div class="group_input">
+                  <div class="input_text">
+                    <input type="text" placeholder="Company Name">
+                  </div>
+                  <div class="input_text">
+                    <input type="text" placeholder="Country">
+                  </div>
+                  <div class="input_text last_text">
+                    <input type="text" placeholder="Number in percent">
+                  </div>
+                </div>
+                <div class="add_btn_sec">
+                  <button class="btn_blk">Add Member</button>
+                </div>
+              </div> -->
+
+              <ul class="member_list">
+                <li *ngFor="let management of companyDetails.companyManagement">
+                  <h3>{{management.ofcrfirstname + ' ' + management.ofcrlastname}}</h3>
+                  <p>{{management.ofcrphone}}</p>
+                  <p>{{management.ofcrshares}}</p>
+                  <!-- <a class="member_edit" href="javascript:void(0)"><i class="fal fa-edit"></i></a> -->
+                </li>
+                <!-- <li>
+                  <h3>Manfred Mustermann</h3>
+                  <p>Country</p>
+                  <p>10%</p>
+                  <a class="member_edit" href="javascript:void(0)"><i class="fal fa-edit"></i></a>
+                </li>
+                <li>
+                  <h3>Manfred Mustermann</h3>
+                  <p>Country</p>
+                  <p>10%</p>
+                  <a class="member_edit" href="javascript:void(0)"><i class="fal fa-edit"></i></a>
+                </li> -->
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="editMode" class="save_btn_wrap col-md-12">
+          <button type="submit" class="save_btn">Save Changes</button>
+        </div>
+    </form>
+
+  </div>
+</section>

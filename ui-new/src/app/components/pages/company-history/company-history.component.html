@@ -1,0 +1,101 @@
+<section id="theme_change" class="comp_list_sec" >
+  <div class="wrapper_117x">
+    <div class="hybse_bg">
+      <div class="market-search d-flex justify-content-between">
+        <h2>Transcation History</h2>
+       <!-- <div class="d-flex">
+        <form class="company_filter">
+          <input type="text" id="filter" name="" placeholder="Filter">
+          <button type="submit"><i class="fal fa-search"></i></button>
+        </form>
+        <div class="dropdown submenu_dd" >
+          <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+            <i class="fal fa-ellipsis-v"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 2</a>
+            <a class="dropdown-item" href="#">Link 3</a>
+          </div>
+        </div>
+       </div> -->
+
+      </div>
+      <div class="hybse_table comp_list_table">
+        <!-- <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Stock Name</th>
+              <th>Price</th>
+              <th>Volume <i class="fas fa-caret-down"></i></th>
+              <th>Last Price</th>
+              <th>24hr High</th>
+              <th>24hr Low</th>
+              <th>24hr Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stock of stockList;let i = index;">
+              <td>
+                <a routerLink="/userlanding"><i class="far fa-star"></i> {{stock.companyName}}</a>
+              </td>
+              <td>{{stock.stockName}}</td>
+              <td>{{stock.price}}</td>
+              <td>{{stock.volume}}</td>
+              <td>{{stock.lastClose}}</td>
+              <td>{{stock[24hrHigh]}}</td>
+              <td>{{stock[24hrLow]}}</td>
+              <td>{{stock[24hrVolume]}}</td>
+            </tr>
+          </tbody>
+        </table> -->
+
+        <table id="marketTable">
+          <thead>
+            <tr>
+              <th>Market  <i (click) = "sortAlphabet(0)" [ngClass]="{'fa-caret-down': sortAlphabetical,'fa-caret-up':!sortAlphabetical }"  class="fal"></i> </th>
+              <th>IBIN</th>
+              <th>Price  <i (click) = "sortNumberTmp(0)" [ngClass]="{'fa-caret-down': sortprice,'fa-caret-up':!sortprice }"  class="fal"></i></th>
+              <th>Last Price  <i (click) = "sortNumericLastprice()" [ngClass]="{'fa-caret-down': sortlastprice,'fa-caret-up':!sortlastprice }"  class="fal"></i></th>
+              <th>Open Price  <i (click) = "sortNumericOpenprice()" [ngClass]="{'fa-caret-down': sortopenprice,'fa-caret-up':!sortopenprice }"  class="fal"></i></th>
+              <th>High  <i (click) = "sortNumericHigh()" [ngClass]="{'fa-caret-down': sorthigh,'fa-caret-up':!sorthigh }"  class="fal"></i></th>
+              <th>Low  <i (click) = "sortNumericLow()" [ngClass]="{'fa-caret-down': sortlow,'fa-caret-up':!sortlow }"  class="fal"></i></th>
+              <th>Volume  <i (click) = "sortNumericVolume()" [ngClass]="{'fa-caret-down': sortvolume,'fa-caret-up':!sortvolume }"  class="fal"></i></th>
+              <th>Gain/Loss  <i (click) = "sortNumericGl()" [ngClass]="{'fa-caret-down': sortgl,'fa-caret-up':!sortgl }"  class="fal"></i></th>
+              <th>Gain/Loss %  <i (click) = "sortNumericGlp()" [ngClass]="{'fa-caret-down': sortglp,'fa-caret-up':!sortglp }"  class="fal"></i></th>
+             
+            </tr>
+           
+          </thead>
+
+          <tbody>
+                
+            
+              <ng-template ngFor let-stock [ngForOf]="stockList" let-i="index">
+                  <tr *ngIf="stock.stockName" [ngClass]="{'even': i % 2 ==0 }">
+                    <td>
+                      <a class="market_name" href="javascript:void(0)" (click)="navToCompany(stock)"> {{stock.stockName == '' ? ' ' : stock.stockName}}</a>
+                    </td>
+                    <td>{{stock.ibin == '' ? ' ' : stock.ibin}}</td> 
+                    <td>{{stock.price == '' ? ' ' : stock.price}}</td>
+                    <td>{{stock.lastPrice == '' ? ' ' : stock.lastPrice}}</td>
+                    <td>{{stock.priceOpen == '' ? ' ' : stock.priceOpen}}</td>
+                    <td>{{stock.priceHigh == '' ? ' ' : stock.priceHigh}}</td>
+                    <td>{{stock.priceLow == '' ? ' ' : stock.priceLow}}</td>
+                    <td>{{stock.volume == '' ? ' ' : stock.volume}}</td>
+                    <td [ngClass]="{ 'positiveInteger':positiveInteger ,'negativeInteger': !positiveInteger }" >{{getGainLoss(stock)}} <i class="fal fa-arrow-down" [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger }" ></i></td>
+                    <td [ngClass]="{ 'positiveInteger':positiveInteger ,'negativeInteger': !positiveInteger }" > <i class="fal fa-arrow-down" [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger }" ></i> {{getGainLossPercent(stock)}}</td>
+                    <!-- <td>{{stock.gl == '' ? ' ' : stock.gl}}</td>
+                    <td>{{stock.glp == '' ? ' ' : stock.glp}}</td> -->
+                  </tr>
+              </ng-template>
+            <tr class="no_records_found" *ngIf="stockListError != ''">
+              <td colspan="10">{{stockListError}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

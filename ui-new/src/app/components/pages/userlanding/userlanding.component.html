@@ -1,0 +1,729 @@
+<section class="login login_landing" id="theme_change">
+  <div class="wrapper_117x">
+      <!-- <div class="back_to_sec col-md-12">
+        <a routerLink="/companylist" class="btn btn-info stock_lstPage">Back to Stock List</a>
+      </div> -->
+      <div class="back_to_sec col-md-12">
+        <h6 class="type_user" id="font_word" >{{ userType }}</h6>
+        </div>
+
+      <section class="news-section">
+              <div class="col-md-12">
+                      <div class="hybse_bg_news">
+                        <div class="col-md-12 news-div" id="newsDiv">
+                            <div class="row">
+                            <h6 class="news-message">HYBSE News: DIMCOIN is listed now on hybse.com.</h6>
+                            <i (click)="closeNews()" class="fal fa-times close"></i>
+                          </div>
+
+                        </div>
+                        <div class="col-md-12 news-expansion">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>{{stockInfo.companyName}} | <span routerLink="/companyHistory">{{stockInfo.stockName}} </span></h4>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="row">
+                                    <div class="col-md-2">
+                                      <p>{{stockInfo.priceCurrent}}</p>
+                                      <p class=grey-news>Current Price</p>
+                                    </div>
+                                    <!-- <div class="col-md-2">
+                                          <p>{{stockInfo.companyName}}</p>
+                                          <p class=grey-news>24hr Change</p>
+                                    </div> -->
+                                    <div class="col-md-2">
+                                      <p>{{stockInfo.priceHigh}}</p>
+                                      <p class=grey-news>High</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>{{stockInfo.priceLow}}</p>
+                                      <p class=grey-news>Low</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <p>{{stockInfo.volume}}</p>
+                                      <p class=grey-news>Volume</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <!-- <p>{{change}}</p>
+                                      <p class=grey-news>Change</p> -->
+                                    </div>
+                                    <!-- <div>
+                                      <i class="fal fa-arrows-al news-arrow"></i>
+                                    </div> -->
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+              </div>
+      </section>
+      <section class="markets">
+              <div class="row_section d-flex market-row">
+                      <div class="col-md-8">
+                              <div class="hybse_bg graph">
+                                  <h2 class="margin_element">{{stockInfo.stockName}}</h2>
+                                  <!-- {{stockInfo.companyName}} |  -->
+                                <hybse-trading-charts [symbol]="symbol"></hybse-trading-charts>
+                                  <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                              </div>
+
+                      </div>
+                      <div class="col-md-4">
+                              <div class="hybse_bg mark order_section">
+                                      <div CLASS="d-flex justify-content-between">
+                                          <h2 class="margin_element">Markets</h2>
+                                          <div class="d-flex">
+                                              <form class="smallcompany_filter">
+                                                <input type="text" id="filter" (keyup)="searchTable()" name="" placeholder="Filter">
+                                                <button type="submit"></button>
+                                              </form>
+                                              <div class="dropdown submenu_dd" >
+                                                <!-- <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                                  <i class="fal fa-ellipsis-v"></i>
+                                                </a> -->
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="#">Link 1</a>
+                                                  <a class="dropdown-item" href="#">Link 2</a>
+                                                  <a class="dropdown-item" href="#">Link 3</a>
+                                                </div>
+                                                <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                                              </div>
+                                             </div>
+                                      </div>
+
+                                      <div class="hybse_table comp_list_table order_book">
+                                              <div class="scrollit">
+                                          <table id="miniMarketTable">
+                                            <thead>
+                                              <tr>
+                                                <th>NAME</th>
+                                                <th>PRICE</th>
+                                                <th>VOLUME</th>
+                                                <th>CHANGE</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- <tr *ngFor="let order of buyOrder;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                  <td>{{order.bidPrice}}</td>
+                                                  <td>{{order.bidSize}}</td>
+                                                  <td>{{order.total}}</td>
+                                                  <td>{{order.sum}}</td>
+                                                </tr> -->
+                                                <ng-template ngFor let-stock [ngForOf]="stockList" let-i="index">
+                                                    <tr *ngIf="stock.stockName" [ngClass]="{'even': i % 2 ==0 }">
+                                                      <td>
+                                                        <a href="javascript:void(0)" (click)="navToCompany(stock)"> {{stock.stockName == '' ? ' ' : stock.stockName}}</a>
+                                                      </td>
+                                                      <td>{{stock.priceCurrent == '' ? ' ' : stock.priceCurrent}}</td>
+                                                      <td>{{stock.volume == '' ? ' ' : stock.volume}}</td>
+                                                      <td>{{getGainLossPercent(stock)}}</td>
+
+                                                    </tr>
+                                                </ng-template>
+                                              <tr class="no_records_found" *ngIf="stockListError != ''">
+                                                <td colspan="4">{{stockListError}}</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                          </div>
+                                        </div>
+                                </div>
+                      </div>
+              </div>
+      </section>
+
+      <section class="buy-sell">
+          <div class="row_section d-flex">
+              <div class="col-md-6">
+                  <div class="hybse_bg">
+                      <h2 class="form-heading">BUY {{stockInfo.stockName}}</h2>
+                      <div>
+                          <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                    </div>
+                      <ul class="order_detail_list">
+                          <li class="row no-gutters">
+                              <span class="col-md-4">Wallet Balence:</span>
+                              <span class="col-md-8">{{ walletbalence }} {{ symbol }}</span>
+                          </li>
+                          <li   class="row no-gutters">
+                              <!-- <span class="col-md-4">Lowest Ask:</span>
+                              <span class="col-md-8">0.005465 DIM</span> -->
+                          </li>
+                      </ul>
+                      <!-- <div class="graph_sec">
+
+                      </div> -->
+                      <form [formGroup]="buyForm" (ngSubmit)="submitBuyOrder()"  action="">
+                          <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+                          <div *ngIf="buyOrderRes !=''" class="alert" [ngClass]="{ 'alert-success': buyResStatus, 'alert-danger': !buyResStatus }">
+                            {{ buyOrderRes }}
+                          </div>
+                          <div class="input_field_readonly">
+                              <label class="price_lbl">Price</label>
+                              <input formControlName="buyAmount" (keyup)="calculateTotal()" class="price" type="text" >
+                              <span class="falseclass" *ngIf="buyForm.controls['buyAmount'].hasError('required') && buyForm.controls['buyAmount'].touched">Please enter the Price you wish to buy</span>
+                              <span class="falseclass" *ngIf="buyForm.controls['buyAmount'].hasError('numberInvalid') && buyForm.controls['buyAmount'].touched">Feild type must be only number</span>
+
+                          </div>
+                          <div class="input_field">
+                              <input formControlName="buyTotal" (keyup)="calculateTotal()" class=line type="text" placeholder="Amount">
+                              <span class="falseclass" *ngIf="buyForm.controls['buyTotal'].hasError('required') && buyForm.controls['buyTotal'].touched">Please enter the amount you need to buy</span>
+                              <span class="falseclass" *ngIf="buyForm.controls['buyTotal'].hasError('numberInvalid') && buyForm.controls['buyTotal'].touched">Feild type must be only number</span>
+
+                          </div>
+                          <div class="input_field">
+                              <input  class=line type="text" [(ngModel)]="multipliedShares" formControlName="multipliedBuyShare" placeholder="Total" readonly>
+                              <!-- <span class="falseclass" *ngIf="buyForm.controls['buyTotal'].hasError('required') && buyForm.controls['buyTotal'].touched">Please enter the Total Amount</span> -->
+                          </div>
+                          <div>
+                              <p class="fee">Commision Fee:1%</p>
+                          </div>
+                          <div class="btn_field">
+                              <button [disabled]="!buyForm.valid" class="form-btn landing_btn" type="submit">Buy<i class="fal fa-chevron-right"></i></button>
+                          </div>
+                      </form>
+
+                  </div>
+              </div>
+              <!--<div class="col-md-4">
+                  <div class="hybse_bg">
+                      <h3 class="form-heading">STOP-LIMIT</h3>
+                      <div>
+                          <i class="fal fa-arrows buy-arrow"></i>
+                    </div>
+                      <ul>
+                          <li class="row no-gutters">
+                              <span class="col-md-4">You Have:</span>
+                              <span class="col-md-8">0.355564 DIM</span>
+                          </li>
+                          <li class="row no-gutters">
+                              <span class="col-md-4">Lowest Ask:</span>
+                              <span class="col-md-8">0.005465 DIM</span>
+                          </li>
+                      </ul>
+                      <div class="graph_sec">
+
+                      </div>
+                      <form [formGroup]="limitForm" action="">
+
+
+                          <div class="input_field">
+                             <input formControlName="limit" class=line type="text" placeholder="Limit">
+                             <span class="falseclass" *ngIf="limitForm.controls['limit'].hasError('required') && limitForm.controls['limit'].touched">Please enter the Limit</span>
+                          </div>
+                          <div class="input_field">
+                              <input formControlName="limitAmount" class=line type="text" placeholder="Amount">
+                              <span class="falseclass" *ngIf="limitForm.controls['limitAmount'].hasError('required') && limitForm.controls['limitAmount'].touched">Please enter the Amount</span>
+
+                           </div>
+                           <div class="input_field">
+                              <input formControlName="limitTotal" class=line type="text" placeholder="Total">
+                              <span class="falseclass" *ngIf="limitForm.controls['limitTotal'].hasError('required') && limitForm.controls['limitTotal'].touched">Please enter the Total</span>
+
+                           </div>
+                           <div>
+                              <p class="fee">Fee: 0,15/0,25%</p>
+                          </div>
+                          <div class="row slice_btn btn_field">
+                              <button (click)="limitFormsubmit()" [disabled]="!limitForm.valid || disableButton" class="slice-left" type="submit">Buy<i class="fal fa-chevron-right"></i></button>
+                              <button (click)="limitFormsubmit()" [disabled]="!limitForm.valid || disableButton" class="slice-right" type="submit">Sell<i class="fal fa-chevron-right"></i></button>
+
+
+
+                          </div>
+                      </form>
+                  </div>
+              </div>-->
+              <div class="col-md-6">
+                  <div class="hybse_bg">
+                      <h2 class="form-heading">SELL {{stockInfo.stockName}}</h2>
+
+                          <!-- <i class="fal fa-arrows drag_icon"></i> -->
+
+                      <ul class="order_detail_list">
+                          <li class="row no-gutters">
+                              <span class="col-md-4">Available Share:</span>
+                              <span class="col-md-8">{{ shareValue }} {{ sharesymbol }}</span>
+                          </li>
+                          <li class="row no-gutters">
+                              <!-- <span class="col-md-4">Lowest Ask:</span>
+                              <span class="col-md-8">0.005465 DIM</span> -->
+                          </li>
+                      </ul>
+                   <!-- <div class="graph_sec">
+
+                      </div> -->
+                      <form [formGroup]="sellForm" (ngSubmit)="submitSellorder()" >
+                              <hybse-apploader *ngIf="showLoadersell"></hybse-apploader>
+                          <div *ngIf="sellOrderRes != ''" class="alert" [ngClass]="{ 'alert-success': sellResStatus, 'alert-danger': !sellResStatus }">
+                            {{sellOrderRes}}
+                          </div>
+                          <div class="input_field_readonly">
+                              <label class="price_lbl">Price</label>
+                              <input formControlName="sellAmount" (keyup)="calculatesellTotal()"  class="price" type="text" value=" {{stockInfo.price}} ">
+                              <span class="falseclass" *ngIf="sellForm.controls['sellAmount'].hasError('required') && sellForm.controls['sellAmount'].touched">Please enter the Amount</span>
+                              <span class="falseclass" *ngIf="sellForm.controls['sellAmount'].hasError('numberInvalid') && sellForm.controls['sellAmount'].touched">Feild type must be only number</span>
+
+
+                          </div>
+                          <div class="input_field">
+                              <input formControlName="sellTotal" (keyup)="calculatesellTotal()"  class=line type="text" placeholder="Amount">
+                              <span class="falseclass" *ngIf="sellForm.controls['sellTotal'].hasError('required') && sellForm.controls['sellTotal'].touched">Please enter the Total</span>
+                              <span class="falseclass" *ngIf="sellForm.controls['sellTotal'].hasError('numberInvalid') && sellForm.controls['sellTotal'].touched">Feild type must be only number</span>
+
+                          </div>
+                          <div class="input_field">
+                              <input  class=line type="text" placeholder="Total" [(ngModel)]="sellmultipliedShares" formControlName="multipliedsellShare">
+                          </div>
+                          <div>
+                             <p class="fee">Commision Fee:1%</p> 
+                          </div>
+                          <div class="btn_field">
+                              <button [disabled]="!sellForm.valid" class="sell landing_btn" type="submit">Sell<i class="fal fa-chevron-right"></i></button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="orders">
+              <div class="row_section d-flex market-row">
+
+                      <div class="col-md-6">
+                              <div class="hybse_bg mark order_section">
+                                  <div CLASS="d-flex justify-content-between">
+                                      <h2 class="margin_element">Buy Orders</h2>
+                                      <div class="d-flex">
+                                          <!-- <form class="company_filter">
+                                            <input type="text" id="filter" name="" placeholder="Total:23.24535 DIM">
+                                            <button type="submit"></button>
+                                          </form> -->
+                                          <!-- <div class="dropdown submenu_dd" >
+                                            <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                              <i class="fal fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Link 1</a>
+                                              <a class="dropdown-item" href="#">Link 2</a>
+                                              <a class="dropdown-item" href="#">Link 3</a>
+                                            </div> -->
+                                            <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                                          <!-- </div> -->
+                                         </div>
+                                  </div>
+
+                                  <div class="hybse_table comp_list_table order_book">
+                                          <div class="scrollit">
+                                      <table>
+                                        <thead>
+                                          <tr>
+                                            <th>PRICE</th>
+                                            <th>DIM</th>
+                                            <th>TOTAL</th>
+                                            <th>SUM</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let order of buyOrder;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                              <td>{{order.bidPrice}}</td>
+                                              <td>{{order.bidSize}}</td>
+                                              <td>{{order.total}}</td>
+                                              <td>{{order.sum}}</td>
+                                            </tr>
+                                        </tbody>
+                                      </table>
+                                      </div>
+                                    </div>
+                            </div>
+                      </div>
+
+                      <div class="col-md-6">
+                              <div class="hybse_bg graph order_section">
+                                  <div class="d-flex justify-content-between">
+                                      <h2 class="margin_element">Sell Orders</h2>
+                                      <div class="d-flex">
+                                          <!-- <form class="company_filter">
+                                            <input type="text" id="filter" name="" placeholder="Total:23.24535 DIM">
+                                            <button type="submit"></button>
+                                          </form> -->
+                                          <!-- <div class="dropdown submenu_dd" >
+                                            <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                              <i class="fal fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Link 1</a>
+                                              <a class="dropdown-item" href="#">Link 2</a>
+                                              <a class="dropdown-item" href="#">Link 3</a>
+                                            </div> -->
+                                            <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                                          <!-- </div> -->
+                                         </div>
+                                  </div>
+
+                                  <div class="hybse_table comp_list_table order_book">
+                                          <div class="scrollit">
+                                      <table>
+                                        <thead>
+                                          <tr>
+                                            <th>Price</th>
+                                            <th>DIM</th>
+                                            <th>TOTAL</th>
+                                            <th>SUM </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let order of sellOrder;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                            <td>{{order.askPrice}}</td>
+                                            <td>{{order.askSize}}</td>
+                                            <td>{{order.total}}</td>
+                                            <td>{{order.sum}}</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      </div>
+                                    </div>
+                              </div>
+
+                      </div>
+              </div>
+      </section>
+
+   
+
+      <section class="orders">
+              <div class="row_section d-flex market-row">
+                      <div class="col-md-6">
+
+                          <div class="hybse_bg graph trading_history">
+                                  <div CLASS="d-flex justify-content-between">
+                                          <h2 class="margin_element">Trade History</h2>
+                                          <div class="d-flex">
+                                              <!-- <form class="company_filter">
+                                                <input type="text" id="filter" name="" placeholder="Total:23.24535 DIM">
+                                                <button type="submit"></button>
+                                              </form> -->
+                                              <!-- <div class="dropdown submenu_dd" >
+                                                <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                                  <i class="fal fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="#">Link 1</a>
+                                                  <a class="dropdown-item" href="#">Link 2</a>
+                                                  <a class="dropdown-item" href="#">Link 3</a>
+                                                </div> -->
+                                                <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                                              <!-- </div> -->
+                                             </div>
+                                      </div>
+
+                                      <!-- <nav class="card_navbar_sec">
+                                              <ul class="nav nav-tabs">
+                                                  <li class="active"><a data-toggle="tab" href="#myTrades">My Trades</a></li>
+                                                  <li class="withdraw_history"><a data-toggle="tab" href="#marketTrades">Market Trades</a></li>
+                                              </ul>
+
+                                      </nav>
+                                      <div class="tab-content">
+                                          <div id="myTrades" class="tab-pane fade in active">1</div>
+                                          <div id="marketTrades" class="tab-pane fade"> 2 </div>
+
+                                      </div> -->
+
+
+                                      <ul class="nav nav-tabs card_navbar_sec temp_tab" role="tablist">
+                                          <li class="nav-item">
+                                            <a class="nav-link active" href="#myTrades" role="tab" data-toggle="tab">My Trades</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" href="#marketTrades" role="tab" data-toggle="tab">Market Trades</a>
+                                          </li>
+
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                          <div role="tabpanel" class="tab-pane active" id="myTrades">
+                                              <div class="hybse_table comp_list_table Trade_history">
+                                                      <div class="scrollit">
+                                                  <table>
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Date</th>
+                                                        <th>Type</th>
+                                                        <th>Price</th>
+                                                        <th>Size</th>
+                                                        <th>Total</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let myhistory of myTrades;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                          <td>{{myhistory.date}}</td>
+                                                          <td>{{myhistory.type}}</td>
+                                                          <td>{{myhistory.price}}</td>
+                                                          <td>{{myhistory.size}}</td>
+                                                          <td>{{myhistory.total}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  </div>
+                                                </div>
+
+                                          </div>
+                                          <div role="tabpanel" class="tab-pane fade" id="marketTrades">
+                                              <div class="hybse_table comp_list_table Trade_history">
+                                                      <div class="scrollit">
+                                                  <table>
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Date</th>
+                                                        <th>Type</th>
+                                                        <th>Price</th>
+                                                        <th>Size</th>
+                                                        <th>Total</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let markethistory of marketTrades;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                          <td>{{markethistory.date}}</td>
+                                                          <td>{{markethistory.type}}</td>
+                                                          <td>{{markethistory.price}}</td>
+                                                          <td>{{markethistory.size}}</td>
+                                                          <td>{{markethistory.total}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  </div>
+                                                </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                      </div>
+                      <div class="col-md-6">
+                              <div class="hybse_bg graph trading_history">
+                                      <div CLASS="d-flex justify-content-between">
+                                              <h2 class="margin_element">Orders</h2>
+                                              <div class="d-flex">
+                                                  <!-- <form class="company_filter">
+                                                    <input type="text" id="filter" name="" placeholder="Total:23.24535 DIM">
+                                                    <button type="submit"></button>
+                                                  </form> -->
+                                                  <!-- <div class="dropdown submenu_dd" >
+                                                    <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                                                      <i class="fal fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                      <a class="dropdown-item" href="#">Link 1</a>
+                                                      <a class="dropdown-item" href="#">Link 2</a>
+                                                      <a class="dropdown-item" href="#">Link 3</a>
+                                                    </div> -->
+                                                    <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                                                  <!-- </div> -->
+                                                 </div>
+                                          </div>
+                                          <!-- <nav class="card_navbar_sec">
+                                                  <ul>
+                                                      <li><a href="javascript:void(0)">Open</a></li>
+                                                      <li class="withdraw_history"><a href="javascript:void(0)">Filled</a></li>
+                                                      <li class="withdraw_history"><a href="javascript:void(0)">All</a></li>
+                                                  </ul>
+                                          </nav> -->
+
+
+
+
+                                          <ul class="nav nav-tabs card_navbar_sec  temp_tab " role="tablist">
+                                                  <li class="nav-item">
+                                                          <a class="nav-link active" href="#All" role="tab" data-toggle="tab">All</a>
+                                                  </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link " href="#Open" role="tab" data-toggle="tab">Open-Buy</a>
+                                              </li>
+                                              <li class="nav-item">
+                                                <a class="nav-link" href="#Filled" role="tab" data-toggle="tab">Open-sell</a>
+                                              </li>
+
+                                          </ul>
+
+
+                                          <div class="tab-content">
+                                                  <div role="tabpanel" class="tab-pane active" id="All">
+                                                          <div class="hybse_table comp_list_table Trade_history">
+                                                              <div class="scrollit">
+                                                              <table>
+                                                                <thead>
+                                                                  <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Price</th>
+                                                                    <th>Size</th>
+                                                                    <th>Total</th>
+                                                                    <th>Type</th>
+                                                                  </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                  <tr *ngFor="let all of AllOrders;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                                      <td>{{all.date}}</td>
+                                                                      <td>{{all.price}}</td>
+                                                                      <td>{{all.size}}</td>
+                                                                      <td>{{all.total}}</td>
+                                                                      <td>{{all.type}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                              </table>
+                                                          </div>
+                                                            </div>
+                                                      </div>
+
+                                              <div role="tabpanel" class="tab-pane fade" id="Open">
+                                                  <div class="hybse_table comp_list_table Trade_history">
+                                                          <div class="scrollit">
+                                                      <table>
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Date</th>
+                                                            <th>Price</th>
+                                                            <th>Size</th>
+                                                            <th>Total</th>
+                                                            <!-- <th>Status</th> -->
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let open of openBuyOrder;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                              <td>{{open.date}}</td>
+                                                              <td>{{open.price}}</td>
+                                                              <td>{{open.size}}</td>
+                                                              <td>{{open.total}}</td>
+                                                              <!-- <td>{{open.status}}</td> -->
+                                                              <td><a (click)="confirmBuyModal(open.idCompanyStock,open.idBuyorder)" ><i  class="fal fa-times cancel_Order"></i></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                      </table>
+                                                      </div>
+                                                    </div>
+                                                 </div>
+                                              <div role="tabpanel" class="tab-pane fade" id="Filled">
+                                                  <div class="hybse_table comp_list_table Trade_history">
+                                                          <div class="scrollit">
+                                                      <table>
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Date</th>
+                                                            <th>Price</th>
+                                                            <th>Size</th>
+                                                            <th>Total</th>
+                                                            <!-- <th>Status</th> -->
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let filled of openSellOrder;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                                                              <td>{{filled.date}}</td>
+                                                              <td>{{filled.price}}</td>
+                                                              <td>{{filled.size}}</td>
+                                                              <td>{{filled.total}}</td>
+                                                              <td><i (click)="confirmSellModal(filled.idCompanyStock,filled.idSellorder)"  class="fal fa-times cancel_Order"></i></td>
+                                                              <!-- <td>{{filled.status}}</td> -->
+                                                            </tr>
+                                                        </tbody>
+                                                      </table>
+                                                      </div>
+                                                    </div>
+                                              </div>
+                                            </div>
+                                  </div>
+                      </div>
+              </div>
+      </section>
+
+         <section class="market-depth">
+              <div class="col-md-12">
+                      <div class="hybse_bg graph">
+                          <!-- <i class="fal fa-arrows drag_icon"></i> -->
+                          <h2 class="margin_element">Market Depth</h2>
+                          <hybse-trading-charts [symbol]="symbol"></hybse-trading-charts>
+                      </div>
+              </div>
+      </section>
+
+
+     <!-- <section class="add-market">
+              <div class="row_section d-flex market-row">
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+
+                      </div>
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+                      </div>
+                      <div class="col-md-3">
+
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+
+                      </div>
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+                      </div>
+              </div>
+
+              <div class="row_section d-flex market-row">
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+
+                      </div>
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+                      </div>
+                      <div class="col-md-3">
+
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+
+                      </div>
+                      <div class="col-md-3">
+                              <div class="hybse_bg market">
+                                  <i class="fal fa-arrows col-arrow"></i>
+                              </div>
+                      </div>
+              </div>
+      </section>
+  </div>
+</section>-->
+
+<!-- <div class="activation_wrap">
+
+  <h4 class="activatedMessage">Successfully Logged In</h4>
+</div> -->
+
+
+<div *ngIf="modalPopUpToggle" class="modal_pop_up">
+  <div class="modal_content animated" [ngClass]="modalAnimateClass">
+    <h3>Confirm</h3>
+    <p>Do you really want to cancel the order?</p>
+    <div class="modal_btn">
+      <button  (click)="modalClose()">Back</button>
+      <button *ngIf="OrderBtn;else sellOrder" (click)="deleteOpenBuyOrder()"  >Cancel Buy Order</button>
+
+      <ng-template #sellOrder>
+        <button (click)="deleteOpenSellOrder()">Cancel Sell Order</button>
+      </ng-template>
+    </div>
+    <hybse-apploader *ngIf="deleteOrdershowLoader"></hybse-apploader>
+
+    <a (click)="modalClose()" class="modal_close" href="javascript:void(0)">
+      <i class="fal fa-times-circle"></i>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<section class="verification_section">
+ 
+  <div class="wrapper_152x">
+    <ul class="row verification_list d-flex flex-row justify-content-center">
+      <li  class="col-md-4 active ">
+        <div class="bronze_sec">
+          
+          <strong>
+              <h2 class="bronze_icon_active"><a title="Bronze Level"><span class="bronze_text">Bronze succesfully verified</span></a></h2>
+          </strong>
+          <a class="hybse_btn small" ><i class="fal fa-check"></i></a>
+
+          
+        </div>
+        
+        <div class="verify_content">
+                        
+            <ul class="bronze_content d-flex">
+              <li class="col-md-12"><p><strong>Monthly Online Payments Limit</strong></p></li>
+              <li class="col-md-6"><p>Deposit</p><p>Withdraw</p></li>
+              <li class="col-md-6"><p>5.000 USD/EUR</p><p>1.000 USD/EUR</p></li>                
+            </ul>
+            <ul class="bronze_content_req d-flex">  
+              <li class="col-md-12 verify_space"><p><strong>Requirements</strong></p><p class="bronze_para ">Online registration</p></li> 
+            </ul>
+        </div>
+      </li>
+
+
+      <li *ngIf="!silverVerified;else silverComplete" class="col-md-4">
+          <div class="bronze_sec">
+            
+            <strong>
+                <h1 class="bronze_icon"><a href="javascript:void(0)" title="Silver Level">Silver</a></h1>
+            </strong>
+
+            
+          </div>
+          
+          <div class="verify_content">
+              <ul class="bronze_content d-flex">
+                  <li class="col-md-12"><p><strong>Monthly Online Payments Limit</strong></p></li>
+                  <li class="col-md-6"><p>Deposit</p><p>Withdraw</p></li>
+                  <li class="col-md-6"><p>100.000 USD/EUR</p><p>25.000 USD/EUR</p></li>  
+                </ul>
+  
+                
+                <ul class="bronze_content_req d-flex">  
+                  <li class="col-md-12"><p><strong>Requirements</strong></p><p>Online registration; verified email; verified mobile number; verified passport and address via IDnow</p></li> 
+                </ul>
+              <div class="d-flex justify-content-center verify button">
+                  <button  *ngIf="silverBtn"  routerLink="/profile/silver" type="Submit">Verify now <i class="fal fa-arrow-right"></i></button>
+            </div>
+              </div>
+        </li>
+
+        <ng-template #silverComplete>
+
+            <li  class="col-md-4 active">
+                <div class="bronze_sec">
+                  
+                  <strong>
+                      <h2 class="bronze_icon_active"><a href="#" title="Bronze Level"><span class="bronze_text verify_btn">Silver succesfully verified</span></a></h2>
+                  </strong>
+                  <a class="hybse_btn small" ><i class="fal fa-check"></i></a>
+        
+                  
+                </div>
+                
+                <div class="verify_content">
+                                
+                    <ul class="bronze_content d-flex">
+                      <li class="col-md-12"><p><strong>Monthly Online Payments Limit</strong></p></li>
+                      <li class="col-md-6"><p>Deposit</p><p>Withdraw</p></li>
+                      <li class="col-md-6"><p>100.000 USD/EUR</p><p>25.000 USD/EUR</p></li>                
+                    </ul>
+                    <ul class="bronze_content_req d-flex">  
+                      <li class="col-md-12"><p><strong>Requirements</strong></p><p class="bronze_para">Online registration; verified email; verified mobile number; verified passport and address via IDnow</p></li> 
+                    </ul>
+                </div>
+              </li>
+
+        </ng-template>
+        
+
+        <li *ngIf="!goldVerified;else goldComplete" class="col-md-4">
+            <div class="bronze_sec">
+              <strong>
+                  <h1 class="bronze_icon"><a href="javascript:void(0)" title="Gold Level">Gold</a></h1>
+              </strong>
+            </div>
+            
+            <div class="verify_content">
+                <ul class="bronze_content d-flex">
+                    <li class="col-md-12"><p><strong>Monthly Online Payments Limit</strong></p></li>
+                    <li class="col-md-6"><p>Deposit</p><p>Withdraw</p></li>
+                    <li class="col-md-6"><p>5,000.000 USD/EUR</p><p>100.000 USD/EUR</p></li> 
+                  </ul>
+    
+                  
+                  <ul class="bronze_content_req d-flex">  
+                    <li class="col-md-12"><p><strong>Requirements</strong></p><p>Online registration; verified email; verified mobile number; verified passport and address via IDnow; proof of sources of funds;</p></li> 
+                  </ul>
+                
+              <div class="d-flex justify-content-center verify button">
+                  <button *ngIf="goldBtn" routerLink="/profile/gold" type="Submit">Verify now <i class="fal fa-arrow-right"></i></button>
+            </div>
+              </div>
+          </li>
+
+          <ng-template #goldComplete>
+            <li  class="col-md-4 active">
+              <div class="bronze_sec">
+                
+                <strong>
+                    <h2 class="bronze_icon_active"><a href="#" title="Bronze Level"><span class="bronze_text verify_btn">Gold succesfully verified</span></a></h2>
+                </strong>
+                <a class="hybse_btn small" ><i class="fal fa-check"></i></a>
+      
+                
+              </div>
+              
+              <div class="verify_content">
+                              
+                  <ul class="bronze_content d-flex">
+                    <li class="col-md-12"><p><strong>Monthly Online Payments Limit</strong></p></li>
+                    <li class="col-md-6"><p>Deposit</p><p>Withdraw</p></li>
+                    <li class="col-md-6"><p>5,000.000 USD/EUR</p><p>100.000 USD/EUR</p></li>                
+                  </ul>
+                  <ul class="bronze_content_req d-flex">  
+                    <li class="col-md-12"><p><strong>Requirements</strong></p><p class="bronze_para">Online registration; verified email; verified mobile number; verified passport and address via IDnow; proof of sources of funds;</p></li> 
+                  </ul>
+              </div>
+            </li>
+          </ng-template>
+      </ul>
+      </div>
+
+      <div class="high_gold">
+        <div class="wrapper_152x align-items-center">
+        <strong class="higher_vol">Want to trade higher volumes than Gold Level?</strong>
+        <div class="d-flex justify-content-center verify button">
+            <button routerLink="/profile/gold" type="Submit">Contact us</button>
+      </div>
+      </div>
+      </div>
+      </section>
+  

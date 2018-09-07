@@ -1,0 +1,6 @@
+<div class="activation_wrap">
+    <div  *ngIf="showLoader" class="activatedloader"></div>
+    <h4 class="activatedMessage">{{activationMessage}}</h4>
+</div>
+<button *ngIf="activationStatus" (click)="goToLogin()"> {{ buttonText }} </button>
+

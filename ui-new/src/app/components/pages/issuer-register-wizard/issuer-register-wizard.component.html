@@ -1,0 +1,934 @@
+<section class="wizard_form_wrap">
+  <form [formGroup]="companyRegisterForm">
+    <ngx-stepper #stepper="stepper" [options]="options">
+        <ngx-step [label]="''">            
+            <ngx-step-body>
+                    <div class="progress">
+                            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                              0%
+                            </div>
+                          </div>
+                <section [formGroup]="companyRegisterForm.get('companyInformation')">
+                <div class="signup_wrapper signup_company">
+                <div class="signup_sec">
+                <p class="signup_header">Company Information</p>    
+                <div class="form-group">
+                <label class="formlabel">Company Contact*</label>
+                <div class="input-group">
+                    <input formControlName="companyName" id="companyName" type="text" class="form-control" name="companyName" placeholder="Company Name" maxlength="150">
+                    </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyName').hasError('required') && companyRegisterForm.get('companyInformation').get('companyName').touched ">Please enter your company name</span>
+
+                <div class="input-group">
+                <input formControlName="website" id="webpage" type="text" class="form-control" name="webpage" placeholder="Company Web Page" maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('website').hasError('required') && companyRegisterForm.get('companyInformation').get('website').touched ">Please enter your company webpage</span>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('website').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('website').touched">please enter a valid webpage address</span>
+                <div class="input-group">
+                <input formControlName="companyEmail" id="companyemail" type="text" class="form-control" name="companyemail" placeholder="Company Email"  maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyEmail').hasError('required') && companyRegisterForm.get('companyInformation').get('companyEmail').touched">Please enter your company e-mail</span>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyEmail').hasError('emailInvalid')&& companyRegisterForm.get('companyInformation').get('companyEmail').touched">Please enter a valid email address</span>
+
+                    <div class="input-group">
+                        <input formControlName="companyFax" id="companyfax" type="text" class="form-control" name="companyfax" placeholder="Company Fax" maxlength="150">
+                    </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyFax').hasError('required') && companyRegisterForm.get('companyInformation').get('companyFax').touched">Please enter your company fax number</span>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyFax').hasError('numberInvalid')&& companyRegisterForm.get('companyInformation').get('companyFax').touched"> Please enter a valid fax number </span>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('companyFax').hasError('numberMinimum')&& companyRegisterForm.get('companyInformation').get('companyFax').touched && !companyRegisterForm.get('companyInformation').get('companyFax').hasError('numberInvalid')"> Please enter a valid fax number</span>
+                <div class="input-group">
+                <div class="row company-row no-gutters">
+                <div class="col-md-4">
+                        <i class="fal fa-angle-down material_drpdwn"></i>
+                    <select formControlName="countrycode" class="form-control" id="countrycode" type="text" placeholder="Country">
+                        <option value="" disabled selected>Select Country</option>
+                        <option value="{{ country.code }}" *ngFor="let country of countryCode">{{ country.name }}</option>
+                    </select>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('countrycode').hasError('required') && companyRegisterForm.get('companyInformation').get('countrycode').touched">Please select your country</span>
+                </div>
+                <div class="col-md-8"><input formControlName="phone1" class="form-control" id="number" type="text" placeholder="Phone Number"  maxlength="15">
+                    <div class="col-md-12">
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('phone1').hasError('required') && companyRegisterForm.get('companyInformation').get('phone1').touched">Please enter your phone number</span>
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('phone1').hasError('numberInvalid')&& companyRegisterForm.get('companyInformation').get('phone1').touched"> Please enter a valid phone number</span>
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('phone1').hasError('numberMinimum')&& companyRegisterForm.get('companyInformation').get('phone1').touched && !companyRegisterForm.get('companyInformation').get('phone1').hasError('numberInvalid')"> Please enter a valid phone number</span>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label class="formlabel">Company Address*</label>
+                        <div class="input-group">
+                            <i class="fal fa-angle-down material_drpdwn"></i>
+                    <select   formControlName="country"  id="country" type="text" class="form-control" name="country" placeholder="Select Country" >
+                       <option value="" disabled selected>Select Country</option>
+                        <option value="{{ country.code }}" *ngFor="let country of isoCountries">{{ country.name }}</option>
+                    </select>
+                    </div>
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('country').hasError('required') &&companyRegisterForm.get('companyInformation').get('country').touched">Please select your country</span>
+                    <div class="input-group">
+                    <input formControlName="address1" id="street" type="text" class="form-control" name="street" placeholder="Street" maxlength="255">
+                    </div>
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('address1').hasError('required') && companyRegisterForm.get('companyInformation').get('address1').touched">Please enter your street</span>
+                    <div class="input-group">
+                    <input formControlName="address2" id="street1" type="text" class="form-control" name="street1" placeholder="Street 1" maxlength="255">
+                    </div>
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('address2').hasError('required') && companyRegisterForm.get('companyInformation').get('address2').touched">Please enter your street 1 </span>
+                    <div class="input-group">
+                    <div class="row company-row no-gutters">
+                    <div class="col-md-6"><input formControlName="zipcode" class="form-control" id="zipcode" type="text" placeholder="Postal Code" maxlength="15">
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('zipcode').hasError('required') && companyRegisterForm.get('companyInformation').get('zipcode').touched">Please enter your zipcode</span>
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('zipcode').hasError('numberInvalid')&& companyRegisterForm.get('companyInformation').get('zipcode').touched">Please enter a valid zipcode</span>
+                    </div>
+                    <div class="col-md-6"><input formControlName="city" class="form-control" id="city" type="text" placeholder="City">
+                        <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('city').hasError('required') && companyRegisterForm.get('companyInformation').get('city').touched" maxlength="255">Please enter your city</span>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <div class="form-group">
+                <label class="formlabel">Company Social Media</label>
+                <div class="input-group">
+                <input formControlName="linkedin" id="linkedin" type="text" class="form-control" name="linkedin" placeholder="LinkedIn"  maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('linkedin').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('linkedin').touched">Please enter a valid linkedIn webpage address</span>
+                <div class="input-group">
+                <input formControlName="twitter"  id="twitter" type="text" class="form-control" name="twitter" placeholder="Twitter Page"  maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('twitter').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('twitter').touched"> Please enter a valid twitter webpage address </span>
+                <div class="input-group">
+                <input formControlName="facebook" id="facebook" type="text" class="form-control" name="facebook" placeholder="Facebook Page"  maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('facebook').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('facebook').touched"> Please enter a valid facebook webpage address </span>
+                <div class="input-group">
+                <input formControlName="googleplus" id="googleplus" type="text" class="form-control" name="facebook" placeholder="Google+ Page"  maxlength="150">
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('googleplus').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('googleplus').touched"> Please enter a valid googleplus webpage address </span>
+
+                    <div class="input-group">
+                            <i class="fal fa-angle-down material_drpdwn"></i>
+
+                <select #otherMedia (change)="findMedia(otherMedia.value)" id="selectother"  class="form-control" name="selectother" placeholder="Other Social Media Channel"  maxlength="150">
+                    <option value="none">Other Social Media Channel</option>
+                    <option value="Pinterest">Pinterest</option>
+                    <!-- <option value="Twitter">Twitter</option> -->
+                    <option value="Tumblr">Tumblr</option>
+                    <option value="Wordpress">Wordpress</option>
+                </select>
+                </div>
+
+                <div class="input-group">
+                    <input formControlName="otherMedia" id="otherMedia" type="text" class="form-control" name="facebook" placeholder="Enter {{ SocialMedia }} Page Here"  maxlength="150">
+                   </div>
+                   <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('otherMedia').hasError('websiteInvalid')&& companyRegisterForm.get('companyInformation').get('otherMedia').touched"> Please enter a valid webpage address </span>
+
+
+                </div>
+
+                <div class="form-group">
+
+                <label class="formlabel">Employees*</label>
+
+                <div class="input-group">
+                <input formControlName="employee" id="employees" type="text" class="form-control" name="file" placeholder="Number of Employees" maxlength="5">
+
+                </div>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('employee').hasError('required') && companyRegisterForm.get('companyInformation').get('employee').touched">Please enter total number of employees in your company</span>
+                    <span class="falseclass" *ngIf="companyRegisterForm.get('companyInformation').get('employee').hasError('numberInvalid')&& companyRegisterForm.get('companyInformation').get('employee').touched"> Please enter a valid employee count of your company</span>
+                </div>
+
+                <div class="form-group">
+                  <div class="file_upload_wrap d-flex justify-content-between align-items-center">
+                    <label class="formlabel">Upload Company Logo</label>
+                    <button (click)="fsFileUpload('logo')">Select File</button>
+                  </div>
+                  <div class="upload_img_wrap" *ngIf="companyLogoData != ''">
+                    <img src="{{companyLogoData.url}}">
+                  </div>
+
+                </div>
+
+                <div class="form-group btn_grp">
+                  <button (click)="nextStep()" [disabled]="companyRegisterForm.controls['companyInformation'].invalid " type="button" class="wizard_next_btn">Next</button>
+                </div>
+                </div>
+                </div>
+
+                </section>
+
+            </ngx-step-body>
+
+        </ngx-step>
+
+        <ngx-step [label]="''">
+                <ngx-step-body>
+                        <div class="progress">
+                                <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:25%">
+                                  25%
+                                </div>
+                              </div>
+
+                        <section [formGroup]="companyRegisterForm.get('companydescription')">
+                                <div class="signup_wrapper signup_company">
+                                <div class="signup_sec">
+                                <p class="signup_header">Company Description</p>
+
+
+                                <div class="form-group">
+                                <label class="formlabel">Incorporation*</label>
+                                <div class="input-group">
+                                        <i class="fal fa-angle-down material_drpdwn"></i>
+                                <select formControlName="incorporationCountry" id="IncCntry" type="text" class="form-control" name="IncCity" placeholder="Select Country" >
+                                    <option value="" disabled selected>Select Country</option>
+                                    <option value="{{ country.code }}" *ngFor="let country of isoCountries">{{ country.name }}</option>
+                                </select>
+                                </div>
+                                <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationCountry').hasError('required') && companyRegisterForm.get('companydescription').get('incorporationCountry').touched">Please select your incorporated country</span>
+                                <div class="input-group">
+                                <input formControlName="incorporationCity" id="IncState" type="text" class="form-control" name="IncState" placeholder="Incorporation State or City"  maxlength="100">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationCity').hasError('required') && companyRegisterForm.get('companydescription').get('incorporationCity').touched">Please enter your incorporation city</span>
+                                <div class="input-group">
+                                <input formControlName="incorporationYear" id="IncYear"  type="text" class="form-control" name="IncYear" placeholder="Incorporation Year" maxlength="4">
+
+
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationYear').hasError('required') && companyRegisterForm.get('companydescription').get('incorporationYear').touched"  >Please enter the year which your company was incorporated</span>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationYear').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('incorporationYear').touched"> Please enter a valid year in which your company was incorprated </span>
+
+
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                <label class="formlabel">Company Register Number*</label>
+
+                                <div class="input-group">
+                                <input formControlName="incorporationNumber"  id="registernumber" type="text" class="form-control" name="registernumber" placeholder="Register Number" maxlength="45">
+                                </div>
+
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationNumber').hasError('required') && companyRegisterForm.get('companydescription').get('incorporationNumber').touched">Please enter your company registered number</span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('incorporationNumber').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('incorporationNumber').touched"> Invalid Field Type </span> -->
+
+                                </div>
+
+                                <div class="form-group">
+
+                                <label class="formlabel">Company Shares*</label>
+
+                                <div class="input-group">
+                                <input formControlName="authorizedShares" id="shareholder" type="text" class="form-control" name="shareholder" placeholder="Number of Shareholders with less than 5%" maxlength="13">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('authorizedShares').hasError('required') && companyRegisterForm.get('companydescription').get('authorizedShares').touched">Please enter your number of shareholders has less than 5% share</span>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('authorizedShares').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('authorizedShares').touched">Please enter a valid number of shareholders has less than 5% share</span>
+
+                                <div class="input-group">
+                                <input formControlName="shareValue" id="shareholders" type="text" class="form-control" name="shareholders" placeholder="Number of Shareholders over 5%" maxlength="11">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('shareValue').hasError('required') && companyRegisterForm.get('companydescription').get('shareValue').touched">Please enter your number of shareholders has over 5% share</span>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('shareValue').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('shareValue').touched">Please enter a valid number of shareholders has over 5% share</span>
+
+
+                                    <div class="input-group">
+                                <input formControlName="outstandingShares" id="outstandingshare" type="text" class="form-control" name="outstandingshare" placeholder="Number of Outstanding Share to be listed" max="99">
+                                </div>
+
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('outstandingShares').hasError('required') && companyRegisterForm.get('companydescription').get('outstandingShares').touched"> Please enter your company's outstanding shares to be listed</span>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('outstandingShares').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('outstandingShares').touched"> Please enter a valid company's outstanding shares to be listed </span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('outstandingShares').hasError('shareInvalid')&& companyRegisterForm.get('companydescription').get('outstandingShares').touched"> Please enter the value of  within 100%</span> -->
+
+
+
+                                </div>
+
+
+
+                                <div class="form-group">
+
+                                <label class="formlabel">Description of the Company*</label>
+
+
+                                <div class="input-group">
+                                <textarea formControlName="companyActivity" rows="5" id="description" type="text" class="form-control" name="description" placeholder="Enter Description here..." maxlength="255"></textarea>
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('companyActivity').hasError('required') && companyRegisterForm.get('companydescription').get('companyActivity').touched">Please enter description of your company</span>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                <label class="formlabel">DUNS Number</label>
+                                <div class="input-group">
+                                <input formControlName="duns" id="duns" type="text" class="form-control" name="duns" placeholder="Your DUNS number" maxlength="45">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('duns').hasError('required') && companyRegisterForm.get('companydescription').get('duns').touched">Please enter your DUNS number</span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('duns').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('duns').touched"> Invalid Field Type </span> -->
+
+
+                                </div>
+
+
+                                <div class="form-group">
+                                        <label class="formlabel">Desired listing Date*</label>
+                                        <div class="input-group">
+                                        <div [formGroup]="companyRegisterForm.get('companydescription').get('desiredDate')" class="row daterow no-gutters">
+
+                                        <div class="col-md-4">
+                                                <i class="fal fa-angle-down material_drpdwn"></i>
+                                            <select formControlName="year" class="form-control" id="year"  placeholder="Year" maxlength="4">
+                                            <option value="" disabled selected>Year</option>
+                                            <option value="{{ yr.val }}" *ngFor="let yr of year">{{ yr.name }}</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                                <i class="fal fa-angle-down material_drpdwn"></i>
+                                                <select formControlName="month" class="form-control" id="month"  placeholder="Month">
+                                            <option value="" disabled selected>Month</option>
+                                            <option value="{{ mnth.val }}" *ngFor="let mnth of month">{{ mnth.name }}</option>
+                                        </select>
+                                       </div>
+
+                                        <div class="col-md-4">
+                                                <i class="fal fa-angle-down material_drpdwn"></i>
+                                                <select formControlName="day" class="form-control" id="day"  placeholder="Day">
+                                            <option value="" disabled selected>Day</option>
+                                            <option value="{{ dy.val }}" *ngFor="let dy of day">{{ dy.name }}</option>
+
+                                        </select>
+                                        </div>
+                                         <div class=cod-md-12>
+                                                <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('desiredDate').hasError('isDateValid') && companyRegisterForm.get('companydescription').get('desiredDate').touched"> Desired listing date must be one month greater than current date</span>
+                                       </div>
+                                       <div class=cod-md-12>
+
+                                      <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('desiredDate').get('year').hasError('required') && companyRegisterForm.get('companydescription').get('desiredDate').get('year').touched">Please select your desired year of listing</span>
+                                        <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('desiredDate').get('month').hasError('required') && companyRegisterForm.get('companydescription').get('desiredDate').get('month').touched">Please select your desired month of listing</span>
+                                        <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('desiredDate').get('day').hasError('required') && companyRegisterForm.get('companydescription').get('desiredDate').get('day').touched">Please select your desired date of listing</span>
+
+                                    </div>
+                                        </div>
+                                        </div>
+                                        </div>
+
+
+
+
+                                <div class="form-group">
+
+                                <label class="formlabel">Stock Information*</label>
+
+                                <div class="input-group">
+                                <input formControlName="isin" id="isin" type="text" class="form-control" name="shareholder" placeholder="ISIN" maxlength="45">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('isin').hasError('required') && companyRegisterForm.get('companydescription').get('isin').touched">Please enter your ISIN number</span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('isin').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('isin').touched"> Invalid Field Type </span> -->
+                                <div class="input-group">
+                                <input formControlName="ibin" id="ibin" type="text" class="form-control" name="shareholders" placeholder="IBIN" maxlength="45">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('ibin').hasError('required') && companyRegisterForm.get('companydescription').get('ibin').touched">Please enter your IBIN number</span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('ibin').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('ibin').touched"> Invalid Field Type </span> -->
+
+                                    <div class="input-group">
+                                <input formControlName="shareholders" id="issuingshares" type="text" class="form-control" name="issuingshares" placeholder="Total number of issuing shares"  max="99">
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('shareholders').hasError('required') && companyRegisterForm.get('companydescription').get('shareholders').touched">Please enter your company issuing shares</span>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('shareholders').hasError('numberInvalid')&& companyRegisterForm.get('companydescription').get('shareholders').touched"> Please enter a valid number of your company's issuing shares</span>
+                                    <!-- <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('shareholders').hasError('shareInvalid')&& companyRegisterForm.get('companydescription').get('shareholders').touched"> Please enter the value of  share within 100%</span> -->
+
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                <label class="formlabel">Market*</label>
+                                <div class="input-group">
+                                        <i class="fal fa-angle-down material_drpdwn"></i>
+                                <select formControlName="businessActivities"  id="market" type="text" class="form-control" name="market" placeholder="Select Market">
+                                    <option value="" disabled selected>Select Market</option>
+                                    <option value="{{ market.val }}" *ngFor="let market of business">{{ market.name }}</option>
+
+                                  </select>
+                                </div>
+                                    <span class="falseclass" *ngIf="companyRegisterForm.get('companydescription').get('businessActivities').hasError('required') && companyRegisterForm.get('companydescription').get('businessActivities').touched">Please select your company's business activities</span>
+
+                                </div>
+
+
+                                <div class="form-group btn_grp">
+                                <button (click)="nextStepTwo()"  [disabled]="!companyRegisterForm.controls['companydescription'].valid" type="button" class="wizard_next_btn">Next</button>
+
+                                <p (click)="stepper.back()" class="prev">Go Back to Step One</p>
+                                </div>
+                                </div>
+                                </div>
+                                </section>
+                </ngx-step-body>
+
+
+        </ngx-step>
+
+        <ngx-step [label]="''">
+            <ngx-step-body>
+                    <div class="progress">
+                            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                              50%
+                            </div>
+                          </div>
+
+                <section [formGroup]="companyRegisterForm.get('management')">
+                    <div class="signup_wrapper signup_company">
+                    <div class="signup_sec">
+                    <p class="signup_header">Management Information</p>
+
+
+                    <section>
+
+                        <div class="form-group">
+                        <label class="formlabel">1. CEO / MD*</label>
+
+
+
+                        <div class="input-group">
+                        <div class="row company-row no-gutters">
+                        <div class="col-md-6">
+                            <input formControlName="fullfirstName"   class="form-control" id="ofcrfirstname" type="text" placeholder="First Name" maxlength="50">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input formControlName="fulllastName" class="form-control" id="ofcrlastname" type="text" placeholder="Last Name" maxlength="50">
+                        </div>
+
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('fullfirstName').hasError('required') && companyRegisterForm.get('management').get('fullfirstName').touched">Please enter your company's ceo/md first name</span>
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('fulllastName').hasError('required') && companyRegisterForm.get('management').get('fulllastName').touched">Please enter your company's ceo/md last name</span>
+
+                        </div>
+                        </div>
+
+                        <div class="input-group">
+                        <input formControlName="phone" id="telephone" type="text" class="form-control" name="country" placeholder="Telephone" maxlength="15">
+                        </div>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('phone').hasError('required') && companyRegisterForm.get('management').get('phone').touched">Please enter your company's ceo/md phone number</span>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('phone').hasError('numberInvalid')&& companyRegisterForm.get('management').get('phone').touched"> Please enter a valid phone number </span>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('phone').hasError('numberMinimum')&& companyRegisterForm.get('management').get('phone').hasError('numberInvalid') && !companyRegisterForm.get('companyInformation').get('phone').hasError('numberInvalid') "> Please enter a valid phone number</span>
+
+
+
+
+                            <div class="input-group">
+                        <input formControlName="managementEmail" id="emailer" type="text" class="form-control" name="street" placeholder="Email" maxlength="150">
+                        </div>
+
+                          <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('managementEmail').hasError('required') && companyRegisterForm.get('management').get('managementEmail').touched">Please enter your company's ceo/md email address</span>
+                            <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('managementEmail').hasError('emailInvalid') && companyRegisterForm.get('management').get('managementEmail').touched">Please enter your company's ceo/md valid email address</span>
+
+                            <div class="input-group">
+                        <input formControlName="shareholdingCapital" id="shares" type="text" class="form-control" name="street1" placeholder="% of company shares" >
+                        </div>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('shareholdingCapital').hasError('required') && companyRegisterForm.get('management').get('shareholdingCapital').touched">Please enter your company's ceo/md share details </span>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('shareholdingCapital').hasError('numberInvalid')&& companyRegisterForm.get('management').get('shareholdingCapital').touched"> Please enter a valid ceo/md share details of your company </span>
+                         <span class="falseclass" *ngIf="companyRegisterForm.get('management').get('shareholdingCapital').hasError('shareInvalid')&& companyRegisterForm.get('management').get('shareholdingCapital').touched"> Please enter the value of share within 100% </span>
+
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="file_upload_wrap d-flex justify-content-between align-items-center">
+                              <label class="formlabel">Upload profile image</label>
+                              <button (click)="fsFileUpload('ceo')">Select File</button>
+                            </div>
+                            <div class="upload_img_wrap" *ngIf="mgmtCeoProfData != ''">
+                              <img src="{{mgmtCeoProfData.url}}">
+                            </div>
+                        </div>
+                    </section>
+
+                     <section formArrayName="contact_info" *ngFor="let item of companyRegisterForm.get('management')?.get('contact_info')?.controls; let i = index;" class="management_ct_info" >
+
+                        <div formGroupName="{{i}}">
+                            <div class="form-group">
+                                <a class="remove_cloned" *ngIf="i != 0" (click)="removeContact(i)"  href="javascript:void(0)"><i class="fal fa-times"></i> </a>
+
+                                <label class="formlabel">{{ i + 2 }} .Management person{{ i==0 ? '*' : '' }} </label>
+
+                                <div class="input-group">
+                                    <div class="row company-row no-gutters">
+                                        <div class="col-md-6"><input formControlName="ofcrfirstname" class="form-control" id="ofcrfirstname" type="text" placeholder="First Name"></div>
+                                        <div class="col-md-6"><input formControlName="ofcrlastname" class="form-control" id="ofcrlastname" type="text" placeholder="Last Name"></div>
+                                       <span class="falseclass" *ngIf="item.get('ofcrfirstname').hasError('required') && item.get('ofcrfirstname').touched">Please enter your company's contact person first name</span>
+                                        <span class="falseclass" *ngIf="item.get('ofcrlastname').hasError('required') && item.get('ofcrlastname').touched">Please enter your company's contact person last name</span>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <input formControlName="ofcrphone"   id="telephone"  type="text" class="form-control" name="country" placeholder="Telephone">
+                                </div>
+                                <span class="falseclass" *ngIf="item.get('ofcrphone').hasError('required') && item.get('ofcrphone').touched">Please enter your company's contact person phone number</span>
+                                <span class="falseclass" *ngIf="item.get('ofcrphone').hasError('numberInvalid')&& item.get('ofcrphone').touched"> Please enter a valid phone number  </span>
+                                <span class="falseclass" *ngIf="item.get('ofcrphone').hasError('numberMinimum')&& item.get('ofcrphone').touched && !item.get('ofcrphone').hasError('numberInvalid')"> Please enter a valid phone number </span>
+
+
+                                <div class="input-group">
+                                    <input formControlName="ofcrmail"  id="emailer"  type="text" class="form-control" name="street" placeholder="Email">
+                                </div>
+                                 <span class="falseclass" *ngIf="item.get('ofcrmail').hasError('required') && item.get('ofcrmail').touched">Please enter your contact person's e-mail address</span>
+                                <span class="falseclass" *ngIf="item.get('ofcrmail').hasError('emailInvalid') && item.get('ofcrmail').touched">Please enter a valid e-mail address of your's company contact person</span>
+
+                                <div class="input-group">
+                                    <input formControlName="ofcrshares" id="shares"  type="text" class="form-control" name="street1" placeholder="% of company shares">
+                                </div>
+
+                                <span class="falseclass" *ngIf="item.get('ofcrshares').hasError('required') && item.get('ofcrshares').touched">Please enter your contact person's share value of your company</span>
+                                <span class="falseclass" *ngIf="item.get('ofcrshares').hasError('numberInvalid')&& item.get('ofcrshares').touched"> Please enter a valid contact person's share details of your company </span>
+                                <span class="falseclass" *ngIf="item.get('ofcrshares').hasError('shareInvalid')&& item.get('ofcrshares').touched"> Please enter the value of share within 100%</span>
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="file_upload_wrap d-flex justify-content-between align-items-center">
+                                  <label class="formlabel">Upload profile image</label>
+                                  <button (click)="fsFileUpload('officer',i )" >Select File</button>
+                                </div>
+                                <div class="upload_img_wrap" *ngIf="mgmtOfficerProfData[i] != undefined ">
+                                  <img src="{{mgmtOfficerProfData[i].url}}">
+                                </div>
+
+                            </div>
+                        </div>
+                     </section>
+                    
+                     <button (click)="addManagementMember()" [ngClass]="{'link_disable': disabledCloneBtn}" class="add_cloned_fields">
+                           
+                       <i class="fal fa-plus"></i>  Add another management person
+                     </button>
+
+                    <div class="form-group btn_grp">
+                      <button (click)="nextStepThree()" [disabled]="!companyRegisterForm.controls['management'].valid" type="button" class="wizard_next_btn">Next</button>
+                      <p (click)="stepper.back()" class="prev">Go Back to Step Two</p>
+                    </div>
+                    </div>
+                    </div>
+                    </section>
+
+            </ngx-step-body>
+
+        </ngx-step>
+
+        <ngx-step [label]="''">
+            <ngx-step-body>
+                    <div class="progress">
+                            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%">
+                              75%
+                            </div>
+                          </div>
+
+                <section>
+                <div class="signup_wrapper signup_company">
+                <div class="signup_sec">
+                <p class="signup_header">Financial Documents</p>
+                <div class="form-group">
+                <label class="formlabel">Extract from the commercial register*</label>
+                <div class="form-group">
+                  <div class="file_upload_wrap d-flex no-gutters justify-content-between align-items-center">
+                    <div class="col-md-7 select_control">
+                      <i class="fal fa-chevron-down"></i>
+                      <select class="form-control" name="" id="">
+                        <option value="" selected>Select File</option>
+                      </select>
+                    </div>
+                    <button class="col-md-4" (click)="fsFileUpload('financial',0)">Upload</button>
+                  </div>
+
+                  <div class="upload_img_wrap" *ngIf="compFinancialDoc[0] != undefined ">
+                    <img src="{{compFinancialDoc[0].url}}">
+                  </div>
+
+
+                </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+                <label class="formlabel">Bylaws*</label>
+                <div class="form-group">
+
+                  <div class="file_upload_wrap d-flex no-gutters justify-content-between align-items-center">
+                    <div class="col-md-7 select_control">
+                      <i class="fal fa-chevron-down"></i>
+                      <select class="form-control" name="" id="">
+                        <option value="" selected>Select File</option>
+                      </select>
+                    </div>
+                    <button class="col-md-4" (click)="fsFileUpload('financial',1)">Upload</button>
+                  </div>
+
+                  <div class="upload_img_wrap" *ngIf="compFinancialDoc[1] != undefined ">
+                    <img src="{{compFinancialDoc[1].url}}">
+                  </div>
+
+                </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+                <label class="formlabel">Another financial document</label>
+                <div class="form-group">
+
+                  <div class="file_upload_wrap d-flex no-gutters justify-content-between align-items-center">
+                    <div class="col-md-7 select_control">
+                      <i class="fal fa-chevron-down"></i>
+                      <select class="form-control" name="" id="">
+                        <option value="" selected>Select File</option>
+                      </select>
+                    </div>
+                    <button class="col-md-4" (click)="fsFileUpload('financial',2)">Upload</button>
+                  </div>
+
+                  <div class="upload_img_wrap" *ngIf="compFinancialDoc[2] != undefined ">
+                    <img src="{{compFinancialDoc[2].url}}">
+                  </div>
+
+
+                </div>
+
+                </div>
+
+
+                <div class="form-group btn_grp">
+                <button (click)="nextStepFour()" type="button" class="wizard_next_btn">Next</button>
+                <p (click)="stepper.back()" class="prev">Go Back to Step Three</p>
+                </div>
+
+                </div>
+                </div>
+                </section>
+            </ngx-step-body>
+
+        </ngx-step>
+
+        <ngx-step [label]="''">
+            <ngx-step-body>
+                    <div class="progress">
+                            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                              100%
+                            </div>
+                          </div>
+
+
+
+                <section>
+                    <div class="signup_wrapper signup_company">
+                    <div class="signup_sec">
+                    <p class="signup_header">Confirmation</p>
+
+                    <div class="confirm_line">
+                        <span id="span" class="outer-line"></span>
+                        <span id="span" class="far fa-check-circle confirm_right" aria-hidden="true"></span>
+                        <span id="span" class="outer-line"></span>
+                      </div>
+
+                        <div class="formgroup">
+                            <label class="formlabel main_label">Identity</label>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Name</label>
+                                    <h6>{{issuerDetail?.firstName}} {{ issuerDetail?.lastName}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">E-Mail Id</label>
+                                    <h6>{{issuerDetail?.email}}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="confirm_line">
+                            <span id="span" class="outer-line"></span>
+                            <span id="span" class="far fa-check-circle confirm_right" aria-hidden="true"></span>
+                            <span id="span" class="outer-line"></span>
+                          </div>
+
+
+
+                    <label class="formlabel main_label">Company Information</label>
+
+                        <div class="row social-row">
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Name of The Company</label>
+                                <p>{{companyRegisterForm.value.companyInformation.companyName}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Address</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.address1}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.address2}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.country}}</h6>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row social-row">
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Company Telephone</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.phone1}}</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Company Fax</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.companyFax}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row social-row">
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Company Webpage</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.website}}</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Company E-mail</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.companyEmail}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row social-row">
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Social Media</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.twitter}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.facebook}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.googleplus}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.linkedin}}</h6>
+                                <h6>{{companyRegisterForm.value.companyInformation.otherMedia}}</h6>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Employees</label>
+                                <h6>{{companyRegisterForm.value.companyInformation.employee}}</h6>
+                            </div>
+                        </div>
+
+
+                        <div class="row social-row">
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Company Description</label>
+                                <h6>{{companyRegisterForm.value.companydescription.companyActivity}}</h6>
+
+                           </div>
+                        </div>
+
+                        <div class="confirm_line">
+                            <span id="span" class="outer-line"></span>
+                            <span id="span" class="far fa-check-circle confirm_right" aria-hidden="true"></span>
+                            <span id="span" class="outer-line"></span>
+                          </div>
+
+
+
+
+
+
+                    <label class="formlabel main_label">Company Description</label>
+
+                        <div class="row social-row">
+                            <div class="col-md-6 side_label">
+                                <label class="formlabel">Incorporated Country</label>
+                                <h6>{{companyRegisterForm.value.companydescription.incorporationCountry}}</h6>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="formlabel side_label">Incorporated City</label>
+                                <h6>{{companyRegisterForm.value.companydescription.incorporationCity}}</h6>
+                            </div>
+                        </div>
+                        <div id ="Confirm_coll" class="collapse">
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Incorporated Year</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.incorporationYear}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Register Number</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.incorporationNumber}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">DUNS Number</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.duns}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">ISIN Number</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.isin}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">IBIN Number</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.ibin}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Share Holders less than 5% </label>
+                                    <h6>{{companyRegisterForm.value.companydescription.authorizedShares}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Share Holders Over 5% </label>
+                                    <h6>{{companyRegisterForm.value.companydescription.shareholders}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label"> Outstanding shares</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.outstandingShares}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Issuing shares</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.shareValue}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label"> Market</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.businessActivities}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label"> Desired Listing Date</label>
+                                    <h6>{{companyRegisterForm.value.companydescription.desiredDate.day}}/{{companyRegisterForm.value.companydescription.desiredDate.month}}/{{companyRegisterForm.value.companydescription.desiredDate.year}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="confirm_line">
+                                <span id="span" class="outer-line"></span>
+                                <span id="span" class="far fa-check-circle confirm_right" aria-hidden="true"></span>
+                                <span id="span" class="outer-line"></span>
+                              </div>
+
+                              <label class="formlabel main_label">Management Information</label>
+
+                              <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Ceo/Md Name</label>
+                                    <h6>{{companyRegisterForm.value.management.fullfirstName}} {{companyRegisterForm.value.management.fulllastName}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Telephone</label>
+                                    <h6>{{companyRegisterForm.value.management.phone}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row social-row">
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">E-mail</label>
+                                    <h6>{{companyRegisterForm.value.management.managementEmail}}</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="formlabel side_label">Shares</label>
+                                    <h6>{{companyRegisterForm.value.management.shareholdingCapital}}</h6>
+                                </div>
+                            </div>
+
+
+                            <div class="member_ct_info" *ngFor="let ct_info of companyRegisterForm.value.management.contact_info">
+                                <div class="row social-row">
+                                    <div class="col-md-6">
+                                        <label class="formlabel side_label">Contact person's Name</label>
+                                        <p>{{ct_info.ofcrfirstname}} {{ct_info.ofcrlastname}}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="formlabel side_label">Telephone</label>
+                                        <p>{{ct_info.ofcrphone}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row social-row">
+                                    <div class="col-md-6">
+                                        <label class="formlabel side_label">E-mail</label>
+                                        <p>{{ct_info.ofcrmail}}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="formlabel side_label">Shares</label>
+                                        <p>{{ct_info.ofcrshares}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <i data-toggle="collapse" data-target="#Confirm_coll" class="fal fa-ellipsis-v confirm_ellipse"></i>
+
+                    <div class="form-group btn_grp">
+                    <button (click) = " steppers.next();companyRegisterFormSubmit()" type="button" class="wizard_next_btn">Finish Registration</button>
+                    <p (click)="stepper.back()" class="prev">Go Back to Step Four</p>
+                    </div>
+
+                    </div>
+                    </div>
+                    </section>
+
+
+            </ngx-step-body>
+
+        </ngx-step>
+
+        <ngx-step [label]="''">
+            <ngx-step-body>
+                    <div class="progress">
+                            <div class="progress-bar progress-bar-success active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                              100%
+                            </div>
+                          </div>
+
+                <section>
+                    <div class="signup_wrapper signup_company">
+                        <div class="signup_sec">
+                                <p class="signup_header">Registration Completed</p>
+                                <p class="success_message">{{ Mesg }}</p>
+                                <div class="form-group btn_grp">
+                                <button routerLink="/" type="button" class="wizard_next_btn">Visit HYBSE.COM</button>
+                                <!-- <p (click)="stepper.back()" >go back</p> -->
+                            </div>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                    </section>
+
+            </ngx-step-body>
+        </ngx-step>
+
+    </ngx-stepper>
+    </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

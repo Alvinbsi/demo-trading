@@ -1,0 +1,136 @@
+<section class="content_section">
+  <div class="content_wrap">
+    <!-- <hybse-issueradmin-loaders [position]="'center'" *ngIf="loaderToggle"></hybse-issueradmin-loaders> -->
+    <div class="content_row" *ngFor="let info of managementInfo; let i = index;">
+      <div class="col-md-3">
+        <div class="member_image full_height">
+          <div class="member_img_wrap full_height">
+            <span *ngIf="info.memberImage == ''; else memberImg"  class="no_user">
+              <i class="fas fa-user"></i>
+            </span>
+
+            <ng-template #memberImg>
+              <span class="user_img">
+                <img src="{{info.memberImage}}" alt="">
+              </span>
+            </ng-template>
+            <!-- <span class="user_img">
+              <img src="https://cdn.filestackcontent.com/VEsrWBYhRfuRQgRMtryG" alt="">
+            </span> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="content_box no_margin">
+          <h3>{{info.ofcrfirstname + ' ' + info.ofcrlastname}}</h3>
+          <ul class="management_list">
+            <li>
+              <h3>Function</h3>
+              <p>{{info.position}}</p>
+            </li>
+            <li>
+              <h3>Telephone</h3>
+              <p>{{info.ofcrphone}}</p>
+            </li>
+            <li>
+              <h3>Company Shares</h3>
+              <p>{{info.ofcrshares}}</p>
+            </li>
+            <li>
+              <h3>Email</h3>
+              <p>{{info.ofcremail}}</p>
+            </li>
+          </ul>
+
+          <div *ngIf="editMode" class="member_action">
+            <a (click)="editManagement(info)" href="javascript:void(0)"><i class="fal fa-edit"></i></a>
+            <a (click)="deleteManagement(info)" href="javascript:void(0)"><i class="fal fa-trash-alt"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div #manageEdit class="content_row">
+      <div class="col-md-12">
+        <div class="content_box">
+          <h3>{{managementTitle}}</h3>
+
+          <form class="content_form management_info_form" [formGroup]="createManagementInfoForm" (ngSubmit)="saveManagementInfoForm()">
+            <div class="add_member_sec">
+              <div class="group_input">
+                <div class="split_input">
+                  <div class="split_input_text width_50 first_input">
+                    <input formControlName="first_name" type="text" placeholder="First Name">
+                  </div>
+                  <div class="split_input_text width_50">
+                    <input formControlName="second_name" type="text" placeholder="Last Name">
+                  </div>
+                </div>
+                <!-- <div class="split_input">
+                  <div class="split_input_text width_30 first_input">
+                    <select name="" id="">
+                      <option value="">Country</option>
+                    </select>
+                    <i class="fal fa-angle-down"></i>
+                  </div>
+                  <div class="split_input_text width_70">
+                    <input type="text" placeholder="Telephone">
+                  </div>
+                </div> -->
+                <div class="input_text">
+                  <input formControlName="position" type="text" placeholder="Position">
+                </div>
+                <div class="input_text">
+                  <input formControlName="telephone" type="text" placeholder="Telephone">
+                </div>
+
+                <div class="input_text">
+                  <input formControlName="email" type="text" placeholder="Email">
+                </div>
+                <div class="input_text last_text">
+                  <input formControlName="share_amt" type="text" placeholder="% of Company Shares">
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="manage_profile_img">
+              <h3>Upload Profile Image</h3>
+              <input formControlName="member_image" type="hidden">
+              <div *ngIf="memberImage != ''" class="memImgWrap">
+                <img src="{{memberImage}}" alt="">
+              </div>
+
+
+              <div class="upload_img">
+                <button type="button" (click)="fsFileUpload()" class="content_btn">Upload Image</button>
+              </div>
+            </div>
+
+            <div class="add_btn_sec">
+              <button type="submit" class="btn_blk">{{btnText}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="modalPopUpToggle" class="modal_pop_up">
+  <div class="modal_content animated" [ngClass]="modalAnimateClass">
+    <h3>Warning</h3>
+    <p>Please note that the removal of this person, all their data will be irrevocably deleted</p>
+    <div class="modal_btn">
+      <button (click)="modalClose()">Back</button>
+      <button (click)="confirmDeleteMgmt()">Delete</button>
+    </div>
+
+    <a (click)="modalClose()" class="modal_close" href="javascript:void(0)">
+      <i class="fal fa-times-circle"></i>
+    </a>
+  </div>
+</div>

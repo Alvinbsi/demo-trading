@@ -1,0 +1,389 @@
+<section class="edit_comp_sec admin_inner_block" [@fadeInDown]="fadeInDown">
+  <div class="comp_tab_wrap">
+
+
+    <div *ngIf="formResponseMsg != ''" class="alert_messages alert alert-dismissible fade show" [ngClass]="{'alert-success': alertStatusMessage,'alert-danger': !alertStatusMessage}" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>{{formResponseMsg}}</strong>
+    </div>
+
+
+
+
+    <mat-tab-group class="comp_tab_grp" dynamicHeight (selectedTabChange)="onTabSwitch($event)">
+      <mat-tab label="Company">
+        <div class="tab-content comp-tab-content">
+            <hybse-admin-loader *ngIf="showLoader"></hybse-admin-loader>
+            <form [formGroup]="compUpdateForm" (ngSubmit)="updateCompanyDetails()" class="update_comp_form admin_form">
+                <div class="form_input_field radio">
+                    <p class="radio_label">Is Platin</p>
+                    <mat-radio-group formControlName="isPlatin">
+                      <mat-radio-button checked value="yes">Yes</mat-radio-button>
+                      <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                      <input formControlName="companyName" matInput placeholder="Name Of Company">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                      <input formControlName="companyAddress" matInput placeholder="Address :">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="companyPostal" matInput placeholder="Postal :">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="city" matInput placeholder="City :">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="country" matInput placeholder="Country :">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="primaryOfficer" matInput placeholder="Primary Officer :">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div> -->
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="primaryOfficerTele" matInput placeholder="Telephone:">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="primaryOfficerFax" matInput placeholder="Fax:">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <mat-select formControlName="businessActivities" placeholder="Business Activities">
+                      <mat-option>Business Activities</mat-option>
+                      <mat-option value="1">Accommodation, Food Services & Drinking Places</mat-option>
+                      <mat-option value="2">Administration & Support and Waste Management and Remediation Services</mat-option>
+                      <mat-option value="3">Agriculture, Forestry, Hunting & Fishing</mat-option>
+                      <mat-option value="4">Arts, Entertainment & Recreation</mat-option>
+                      <mat-option value="5">Construction of Buildings</mat-option>
+                      <mat-option value="6">Educational Services</mat-option>
+                      <mat-option value="7">Finance & Insurance</mat-option>
+                      <mat-option value="8">Health Care & Social Assistance</mat-option>
+                      <mat-option value="9">Information</mat-option>
+                      <mat-option value="10">Manufacturing</mat-option>
+                      <mat-option value="11">Mining</mat-option>
+                      <mat-option value="12">Other Services</mat-option>
+                      <mat-option value="13">Professional, Scientific & Technical Services</mat-option>
+                      <mat-option value="14">Real Estate & Rental & Leasing</mat-option>
+                      <mat-option value="15">Religious, Grantmaking, Civic, Professional & Similar Organizations</mat-option>
+                      <mat-option value="16">Retail Trade</mat-option>
+                      <mat-option value="17">Transportation & Warehousing</mat-option>
+                      <mat-option value="18">Utilities</mat-option>
+                      <mat-option value="19">Wholesale Trade</mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="website" matInput placeholder="Website">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="incorporationCity" matInput placeholder="Incorporation State or City">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="incorportaionCountry" matInput placeholder="Incorporation Country">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="incorporationYear" matInput placeholder="Incorporationstate Year">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="registerCommerce" matInput placeholder="Incorporationstate or Register of Commerce N">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input formControlName="employees" matInput placeholder="Employee">
+                    <mat-error></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div [formGroup]="compUpdateForm.controls['companyDesc']" class="comp_description">
+                  <h3>Company Description</h3>
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="sharValue" matInput placeholder="Nominal value of the share (Per Share Value) in &#8364;">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="companyShare" matInput placeholder="Number of company shares total issued">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="shareListed" matInput placeholder="Number of shares in total to be listed">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="lowShareHolder" matInput placeholder="Number of shareholders with less than 5%">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="prevYearTurnOver" matInput placeholder="Total turnover of previous year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="prevYearProfit" matInput placeholder="Total net profit of previous year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="forecastTurnOver" matInput placeholder="Total forecasted turnover this year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="forecastNetProfit" matInput placeholder="Total forecasted net profit this year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="operativeCashFlow" matInput placeholder="Operative Cashflow in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="DividendLastYr" matInput placeholder="Dividend last year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="DividendThisYr" matInput placeholder="Dividend this year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="annualTurnOver" matInput placeholder="Annual turnover in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="totalAssetsThisYr" matInput placeholder="Total assets this year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="totalAssetsLastYr" matInput placeholder="Total assets last year in €">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <textarea formControlName="companyActivities" matInput placeholder="Description of the company activities (5 lines Max)"></textarea>
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="form_input_field">
+                    <mat-form-field>
+                      <mat-select formControlName="competitor" placeholder="Competitor">
+                        <mat-option>Competitor</mat-option>
+                        <mat-option value="Absolutely no Competitor">Absolutely no Competitor</mat-option>
+                        <mat-option value="Newly no Competitor">Newly no Competitor</mat-option>
+                        <mat-option value="A few Competitor">A few Competitor</mat-option>
+                        <mat-option value="Some Competitor">Some Competitor</mat-option>
+                      </mat-select>
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="dividendIssueDate" matInput [matDatepicker]="picker" (focus)="picker.open()" placeholder="Dividend Issue Date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="form_input_field">
+                    <mat-form-field>
+                      <input formControlName="dividentAmt" matInput placeholder="Dividend amount for this year">
+                      <mat-error></mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="form_button_field">
+                    <button mat-raised-button class="form_btn_submit" color="primary">Update</button>
+                    <button mat-raised-button (click)="cancelCompUpdate()" type="button" class="form_btn_cancel" color="warn">Cancel</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="User Account">
+        <div class="tab-content comp-tab-content">
+            <hybse-admin-update-user (formStatus)="getUserFormStat($event)"  [userDetails]="userDetails"></hybse-admin-update-user>
+        </div>
+      </mat-tab>
+
+      <!-- <mat-tab label="Passport">
+        <div class="tab-content comp-tab-content">
+          <form>
+
+          </form>
+        </div>
+      </mat-tab> -->
+
+      <!-- <mat-tab label="Bank">
+        <div class="comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab> -->
+
+      <!-- <mat-tab label="Documents">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab> -->
+
+
+
+      <mat-tab label="Management Members">
+        <div class="tab-content comp-tab-content">
+          <hybse-admin-company-members [memberDetail]="memberDetails"></hybse-admin-company-members>
+        </div>
+      </mat-tab>
+
+      <!-- <mat-tab label="Shareholders">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Orderbook">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Matched Orders">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="E-wallet">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="OTC Orders">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="OTC Request">
+        <div class="tab-content comp-tab-content">
+          <form>
+            No Content
+          </form>
+        </div>
+      </mat-tab> -->
+
+    </mat-tab-group>
+
+  </div>
+</section>

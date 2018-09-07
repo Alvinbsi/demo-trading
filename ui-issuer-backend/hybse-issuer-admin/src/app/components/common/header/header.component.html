@@ -1,0 +1,11 @@
+<header>
+  <div class="header_sec">
+    <h3>Company Information</h3>
+    <div class="header_admin_btns">
+      <button *ngIf="!editMode" (click)="updateCompProf()" class="update_prof">Update Profile</button>
+      <a href="#" class="log_out_link">
+        <i class="fal fa-power-off"></i>
+      </a>
+    </div>
+  </div>
+</header>

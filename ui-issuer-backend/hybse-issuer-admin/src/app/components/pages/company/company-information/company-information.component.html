@@ -1,0 +1,210 @@
+<section class="content_section">
+  <div class="content_wrap">
+
+    <hybse-issueradmin-loaders [position]="'center'" *ngIf="loaderToggle"></hybse-issueradmin-loaders>
+
+    <form class="content_form comp_info_form" [formGroup]="createCompInfoForm" (ngSubmit)="saveCompanyInfo()">
+
+        <div *ngIf="editMode" class="save_btn_wrap col-md-12">
+          <button type="submit" class="save_btn">Save Changes</button>
+        </div>
+        <div class="content_row">
+          <div class="col-md-6">
+            <div class="content_box">
+              <h3>Company Name</h3>
+              <p *ngIf="!editMode" class="no_margin">{{companyDetails?.company?.companyName}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input [class.errorInput]="createCompInfoForm.controls['comp_name'].hasError('required')" formControlName="comp_name" type="text" value="Business Software India">
+                <!-- <span *ngIf="createCompInfoForm.controls['comp_name'].hasError('required')" class="input_error">Please Enter Company Name</span> -->
+              </div>
+            </div>
+            <div class="content_box no_margin">
+                <h3>Contact</h3>
+                <ul *ngIf="!editMode">
+                  <li>
+                    <a href="#">{{companyDetails?.company?.website}}</a>
+                  </li>
+                  <li>
+                    <a href="#">{{companyDetails?.company?.companyEmail}}</a>
+                  </li>
+                </ul>
+
+                <ul *ngIf="editMode">
+                  <li>
+                    <div class="content_input">
+                      <input formControlName="comp_website" type="text" value="www.google.com">
+                    </div>
+                  </li>
+                  <li>
+                    <div class="content_input">
+                      <input formControlName="comp_mail" type="text" value="xyz@gmail.com">
+                    </div>
+                  </li>
+                </ul>
+
+                <span class="content_icon">
+                  <i class="fal fa-envelope"></i>
+                </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="content_box comp_img_sec full_height">
+              <h3>Upload New Logo</h3>
+
+              <div class="uploaded_img">
+
+                <div *ngIf="companyLogoUrl != ''; else noImage" [ngClass]="{'uploaded_img_edit':editMode}">
+                    <img src="{{companyLogoUrl}}" >
+                    <a *ngIf="editMode" class="delete_img" href="javascript:void(0)"><i class="fal fa-times"></i></a>
+                </div>
+                <ng-template #noImage>
+                  <span class="no_image"> <i class="fas fa-certificate"></i> </span>
+                </ng-template>
+
+
+                <!-- <img *ngIf="companyLogoUrl != ''; else noImage" src="{{companyLogoUrl}}" > -->
+
+                <!-- <ng-template #noImage>
+                  <span class="no_image"> <i class="fas fa-certificate"></i> </span>
+                </ng-template> -->
+
+              </div>
+
+              <!-- <div class="uploaded_img" [ngClass]="{'uploaded_img_edit':editMode}">
+                <img *ngIf="companyLogoUrl != ''; else noImage" src="{{companyLogoUrl}}" >
+                <ng-template #noImage>
+                  <span class="no_image"> <i class="fas fa-certificate"></i> </span>
+                </ng-template>
+                <a *ngIf="editMode" class="delete_img" href="javascript:void(0)"><i class="fal fa-times"></i></a>
+              </div> -->
+              <div *ngIf="editMode" class="upload_img">
+                <button (click)="fsFileUpload()" class="content_btn">Upload Image</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="content_row">
+
+          <div class="col-md-6">
+            <div class="content_box full_height">
+              <h3>Address</h3>
+              <ng-template [ngIf]="!editMode">
+                <p *ngIf="companyDetails?.company?.country">
+                  {{companyDetails?.company?.country | getname: countries:'alpha-3':'name'}}, <br/>
+                  {{companyDetails?.company?.address1 + ' ' + companyDetails?.company?.address2}} <br/>
+                  {{companyDetails?.company?.city + ', ' + companyDetails?.company?.zipcode}} <br/>
+                </p>
+              </ng-template>
+
+
+              <div *ngIf="editMode" class="content_input_grp">
+                <div class="content_input content_input_select">
+                  <select formControlName="comp_country" name="" id="">
+                    <option value="">Country</option>
+                    <option *ngFor="let country of countries" value="{{country['alpha-3']}}">{{country['name']}}</option>
+                  </select>
+                  <i class="fal fa-angle-down"></i>
+                </div>
+                <div class="content_input">
+                  <input formControlName="comp_street" type="text" value="Street">
+                </div>
+                <div class="content_input">
+                  <input formControlName="comp_street2" type="text" value="Street">
+                </div>
+                <div class="content_input">
+                  <input formControlName="comp_pincode" type="text" value="Postal Code">
+                </div>
+                <div class="content_input">
+                  <input formControlName="comp_city" type="text" value="City">
+                </div>
+              </div>
+
+
+              <span class="content_icon">
+                <i class="fal fa-map-marker"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="content_box">
+              <h3>Telephone</h3>
+              <p class="no_margin" *ngIf="!editMode">{{companyDetails?.company?.phone1}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input formControlName="comp_telephone" type="text" >
+              </div>
+              <span class="content_icon">
+                <i class="fal fa-phone"></i>
+              </span>
+            </div>
+            <div class="content_box no_margin">
+              <h3>Number Of Employees</h3>
+              <p class="no_margin" *ngIf="!editMode">{{companyDetails?.companyProfile?.employee}}</p>
+              <div *ngIf="editMode" class="content_input">
+                <input formControlName="comp_employees" type="text" >
+              </div>
+              <span class="content_icon">
+                <i class="fal fa-users"></i>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="content_row" *ngIf="companyDetails?.company">
+          <div *ngIf="companyDetails?.company?.facebook != ''" class="col-md-3">
+            <div class="content_box sm_box">
+              <span *ngIf="editMode"><i class="fal fa-times"></i></span>
+              <a href="{{companyDetails?.company?.facebook}}" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="companyDetails?.company?.googleplus != ''" class="col-md-3">
+            <div class="content_box sm_box">
+              <span *ngIf="editMode"><i class="fal fa-times"></i></span>
+              <a href="{{companyDetails?.company?.googleplus}}" target="_blank">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="companyDetails?.company?.linkedin != ''" class="col-md-3">
+            <div class="content_box sm_box">
+              <span *ngIf="editMode"><i class="fal fa-times"></i></span>
+              <a href="{{companyDetails?.company?.linkedin}}" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="companyDetails?.company?.twitter != ''" class="col-md-3">
+            <div class="content_box sm_box">
+              <span *ngIf="editMode"><i class="fal fa-times"></i></span>
+              <a href="{{companyDetails?.company?.twitter}}" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+
+          <div class="col-md-3" *ngIf="editMode">
+            <div class="content_box sm_box">
+              <a href="">
+                <i class="fal fa-plus"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="editMode" class="save_btn_wrap col-md-12">
+          <button type="submit" (click)="saveCompanyInfo()" class="save_btn">Save Changes</button>
+        </div>
+    </form>
+
+
+
+  </div>
+</section>

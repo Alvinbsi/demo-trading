@@ -1,0 +1,59 @@
+<div *ngIf="!isGold;else goldUpgraded" class="verification_lvl_wrap">
+    <form [formGroup]="goldFormRegister" class="verify_lvl_frm verify__frm" action="">
+        <h3>Upgrade Gold Level</h3>
+
+        <div class="form_input personal">
+            <label for="">1.Download 'Proof of sources of fund's form*</label>
+           
+           <button type="button" class="btn funds_btn"><i class="fal fa-arrow-to-bottom proof_icon"></i>Proof of sources of funds</button> 
+        </div>
+
+        
+          <div class="form_input personal">
+                <label for="">2.Upload 'Proof of sources of fund's form*</label>
+                <button (click)="fsFileUpload()" type="button" class="btn funds_btn"><i class="fal fa-arrow-from-bottom proof_icon"></i>Proof of sources of funds</button>    
+                <p class="file_name">{{fileName}}</p>
+            </div>
+
+          
+
+         <div class="form-input form_space">
+      <label class="formlabel">3.Upload further documents supporting sources of funds*</label>
+      <div class="input-group">
+        <i class="fas fa-angle-down material_drpdwn"></i>
+              <select formControlName="supportDocType" id="docType" type="text" class="form-control" name="country" placeholder="Select Country" >
+              <option value="" disabled selected>Select support document Type</option>
+              <option value="POFS1" >Custody statements of investments</option>
+              <option value="POFS2" >Certificate of real estate ownership</option>
+              <option value="POFS3" >Bank account statement</option>
+
+              </select>
+     </div>
+     <span class="falseclass" *ngIf="goldFormRegister.get('supportDocType').hasError('required') && goldFormRegister.get('supportDocType').touched">Please select support document type</span>
+    </div>
+   
+           
+          <button (click)="fsSupportUpload()"  type="button" class="btn funds_btn"><i class="fal fa-arrow-from-bottom proof_icon"></i>Support documents</button> 
+          <p class="file_name">{{fileSupportName}}</p>
+
+       <div class="form-group btn_grp">
+    <button [disabled]="goldFormRegister.invalid || disableButton" type="submit" (click)="goldFormSubmit()" class="btn btn-info upgrade">Apply for Gold Level</button>
+</div>
+    
+    </form>
+
+    
+</div>
+
+
+<ng-template #goldUpgraded>
+        <div class="verification_lvl_wrap">
+              <h3>Confirmation</h3>
+          
+              <div class="legal_info1">
+                <p class="legal_p1">Thank you for your registration.we will review your details and contact you within the next 24 hours.</p>
+                   
+              </div>
+        
+           </div>
+          </ng-template>

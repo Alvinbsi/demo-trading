@@ -1,0 +1,34 @@
+<header>
+    <a (click)="toggleAdminNav()" class="menu_btn" href="javascript:void(0)">
+      <i class="fas fa-bars" [ngClass]="{'fas':true,'fa-bars': _ms.slideMenuToggle, 'fa-arrow-left': !_ms.slideMenuToggle }"  ></i>
+    </a>
+    <div class="d-flex flex-row justify-content-between">
+      <div class="header_content d-flex flex-row align-items-center">
+        <h2>Stock Market Administration - Dashboard <span>Statistics and More</span></h2>
+        <!-- <a class="dashbord_help" href="javascript:void(0)">Help?</a> -->
+      </div>
+      <div class="header_actions d-flex flex-row align-items-center">
+        <!-- <form class="admin_srch_form">
+            <mat-form-field>
+              <input matInput placeholder="Search" value="">
+            </mat-form-field>
+            <button><i class="fas fa-search"></i></button>
+        </form> -->
+        <div class="admin_user_dd">
+          <a href="javascript:void(0)" [matMenuTriggerFor]="userMenu">
+            <span>
+              <img src="assets/images/avatar.png" alt="">
+            </span>
+            Admin
+            <i class="fas fa-arrow-down"></i>
+          </a>
+          <mat-menu #userMenu="matMenu" [overlapTrigger]="false" class="user_menu_dd">
+            <!-- <a href="javascript:void(0)">Profile</a>
+            <a href="javascript:void(0)">Settings</a> -->
+            <a (click)="loggingOut()" href="javascript:void(0)">Log Out</a>
+          </mat-menu>
+        </div>
+
+      </div>
+    </div>
+  </header>

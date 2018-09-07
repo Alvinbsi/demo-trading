@@ -1,0 +1,9 @@
+<ul class="sub_menu submenu_lvl{{sbLvl}}">
+  <li *ngFor="let sbmenu of subMenu">
+    <a (click)="menuAction(sbmenu)" href="javascript:void(0)" title="{{sbmenu.title}}">
+      <span>{{sbmenu.title}}</span>
+      <small *ngIf="sbmenu.submenu.length > 0"><i [class.open]="!(sbmenu.subMenuCollapse)" class="fas fa-plus"></i></small>
+    </a>
+    <hybse-admin-subnav *ngIf="sbmenu.submenu.length > 0 && !(sbmenu.subMenuCollapse)" [subMenu]="sbmenu.submenu" [sbLvl]="sbLvl"></hybse-admin-subnav>
+  </li>
+</ul>

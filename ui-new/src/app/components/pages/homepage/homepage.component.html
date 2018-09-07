@@ -1,0 +1,722 @@
+<section class="header_banner">
+    <div class="banner_section">
+        <ul id="bannerSlider" class="owl-carousel" >
+            <li>
+                <div class="banner_img" style="background-image: url('assets/images/banner_1.jpg')">
+                    <div class="banner_content">
+                        <div class="banner_content_title">
+                            <h2>Hybrid Stock Exchange</h2>
+                            <h3>The future of the global market</h3>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+
+                            <div class="switch_demo button">
+                                <!-- <button routerLink="/registration" type="Submit">Start Demo Trading now</button> -->
+                            </div>
+
+                            <div class="watch_video button">
+                                <!-- <button routerLink="/learning-center" type="Submit">Watch Video</button> -->
+                                <button type="Submit" data-toggle="modal" data-target="#videoModal">Watch Video </button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </li>         
+
+
+            <!-- <li>
+                <div class="banner_img" style="background-image: url('assets/images/banner_1.jpg')">
+                    <div class="banner_content">
+                        <div class="banner_content_title">
+                            <h2>Hybrid Stock Exchange 2</h2>
+                            <h3>The future of the global market</h3>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+
+                            <div class="switch_demo button">
+                                <button routerLink="/registration" type="Submit">Start Demo Trading now </button>
+                            </div>
+
+                            <div class="watch_video button">
+                                <button type="Submit" data-toggle="modal" data-target="#videoModal">Watch Video</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- <li>
+                <div class="banner_img" style="background-image: url('assets/images/banner_1.jpg')">
+                    <div class="banner_content">
+                        <div class="banner_content_title">
+                            <h2>Hybrid Stock Exchange 3</h2>
+                            <h3>The future of the global market</h3>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+
+                            <div class="switch_demo button">
+                                <button routerLink="/registration" type="Submit">Start Demo Trading now </button>
+                            </div>
+
+                            <div class="watch_video button">
+                                <button type="Submit" data-toggle="modal" data-target="#videoModal">Watch Video</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li> -->
+
+
+        </ul>
+    </div>
+</section>
+
+
+
+<section class="company_sec">
+        <div class="company_sect_details">
+            <div class="wrapper_117x">                                
+                 <div id="home_platin_ticker" class="mailid home_platin_ticker">
+                     <ul>
+
+                        <ng-template ngFor let-stock [ngForOf]="stockList" let-i="index">
+                                <li *ngIf="stock.stockName" class="d-flex row">
+                                        <strong class="arrow arrow_down">
+                                                 <i class="fal" [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger , 'fa-minus' : nuetralInteger }" ></i> 
+
+                                        </strong>
+                                    <div  class="ticker_info">                              
+                                        <a href="javascript:void(0)">{{stock.stockName == '' ? ' ' : stock.stockName}} <span>New</span></a>
+                                        <a href="javascript:void(0)">{{stock.price == '' ? ' ' : stock.price}} ( {{getGainLossPercent(stock)}} )</a>
+                                    </div>                                  
+                                 </li> 
+                                 </ng-template>
+                  </ul>
+                 </div>
+              
+            
+            </div>
+        </div>
+</section>
+
+<section class="company_sec_white">
+        <div class="company_sect_details">
+            <div class="wrapper_117x">                                
+                 <div id="home_platin_ticker_white" class="mailid home_platin_ticker_white">
+                     <ul>
+
+                        <ng-template ngFor let-stock [ngForOf]="stockList" let-i="index">
+                                <li *ngIf="stock.stockName" class="d-flex row">
+                                        <strong class="arrow arrow_down">
+                                                <i class="fal ticker_color " [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger , 'fa-minus' : nuetralInteger }" ></i> 
+                                                <!-- <i class="fal ticker_color " [n gClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger }" ></i> -->
+                                        </strong>
+                                    <div  class="ticker_info_new">                              
+                                        <a class="ticker_color" href="javascript:void(0)">{{stock.stockName == '' ? ' ' : stock.stockName}}</a>
+                                        <a class="ticker_color" href="javascript:void(0)">{{stock.price == '' ? ' ' : stock.price}} ( {{getGainLossPercent(stock)}} )</a>
+                                    </div>                                  
+                                 </li> 
+                                 </ng-template>
+                  </ul>
+                 </div>                          
+            </div>
+        </div>
+</section>
+
+
+
+<!-- <section class="company_sec_white">
+        <div class="company_section_details">
+                <div class="wrapper_117x">
+                <ul class="d-flex row">
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_up">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                      <div class="mailid">
+                          
+                          <ul>
+                              <li><a href="javascript:void(0)">Company A</a></li>
+                              <li><a href="javascript:void(0)">2.07 (-11.91%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+        
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_up">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                      <div class="mailid">
+                          
+                          <ul>
+                                <li><a href="javascript:void(0)">Company B</a></li>
+                                <li><a href="javascript:void(0)">39.54 (+19.71%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+        
+                  <li class="col-md-2 d-flex flex-row">
+                      <strong class="arrow arrow_up">
+                        <i class="fal fa-arrow-circle-right"></i>
+                      </strong>
+                      <div class="mailid">
+                          
+                          <ul>
+                                <li><a href="javascript:void(0)">Company C</a></li>
+                                <li><a href="javascript:void(0)">0.28 (+7.69%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_up">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                        <div class="mailid">
+                            
+                            <ul>
+                                    <li><a href="javascript:void(0)">Company D</a></li>
+                                    <li><a href="javascript:void(0)">13.12 (-1.28%)</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="col-md-2 d-flex flex-row">
+                            <strong class="arrow arrow_up">
+                                <i class="fal fa-arrow-circle-right"></i>
+                            </strong>
+                            <div class="mailid">
+                                
+                                <ul>
+                                        <li><a href="javascript:void(0)">Company E</a></li>
+                                        <li><a href="javascript:void(0)">0.28 (0.00%)</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    <li class="col-md-2 drop_down_lists">
+                        <div class="dropdown submenu_dds" >
+                            <a id="subMenuDropDown" class="submenu_links" data-toggle="dropdown" href="#!">
+                                <i class="fal fa-ellipsis-h black_ecp"></i>
+                            </a>
+                            <div class="dropdown-menu history_menu">
+                                <div>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="male" checked> Top</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Flop</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Stock Exchange</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Otc Market</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Pirate Market</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>   
+        
+                </ul>
+                </div>
+            </div>
+            
+</section>  -->
+
+
+
+
+
+
+<!-- <section class="company_sec">
+        <div class="company_sect_details">
+                <div class="wrapper_117x">
+                <ul class="d-flex row">
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_down">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                      <div id="home_platin_ticker" class="mailid">
+                          
+                          <ul>
+                              <li><a href="javascript:void(0)">Company A <span>New</span></a></li>
+                              <li><a href="javascript:void(0)">2.07 (-11.91%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+        
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_up">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                      <div id="home_platin_ticker" class="mailid">
+                          
+                          <ul>
+                                <li><a href="javascript:void(0)">Company B <span>New</span></a></li>
+                                <li><a href="javascript:void(0)">39.54 (+19.71%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+        
+                  <li class="col-md-2 d-flex flex-row">
+                      <strong class="arrow arrow_up">
+                            <i class="fal fa-arrow-circle-right"></i>
+                      </strong>
+                      <div class="mailid">
+                          
+                          <ul>
+                                <li><a href="javascript:void(0)">Company C <span>New</span></a></li>
+                                <li><a href="javascript:void(0)">0.28 (+7.69%)</a></li>
+                          </ul>
+                      </div>
+                  </li>
+
+                  <li class="col-md-2 d-flex flex-row">
+                        <strong class="arrow arrow_down">
+                            <i class="fal fa-arrow-circle-right"></i>
+                        </strong>
+                        <div class="mailid">
+                            
+                            <ul>
+                                    <li><a href="javascript:void(0)">Company D <span>New</span></a></li>
+                                    <li><a href="javascript:void(0)">13.12 (-1.28%)</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="col-md-2 d-flex flex-row">
+                            <strong class="arrow">
+                                <i class="fal fa-arrow-circle-right"></i>
+                            </strong>
+                            <div class="mailid">
+                                
+                                <ul>
+                                        <li><a href="javascript:void(0)">Company E <span>New</span></a></li>
+                                        <li><a href="javascript:void(0)">0.28 (0.00%)</a></li>
+                                </ul>
+                            </div>
+                        </li> -->
+
+                    <!-- <li class="col-md-2 drop_down_lists">
+                        <div class="dropdown submenu_dds" >
+                            <a id="subMenuDropDown" class="submenu_links" data-toggle="dropdown" href="#!">
+                                <i class="fal fa-ellipsis-h"></i>
+                            </a>
+                            <div class="dropdown-menu history_menu">
+                                <div>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="male" checked> Top</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Flop</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Stock Exchange</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Otc Market</a>
+                                    <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Pirate Market</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>    -->
+        
+                <!-- </ul>
+                </div>
+            </div>
+            
+</section> -->
+
+
+<!-- <section class="hybse_platin_section">
+        <div class="plating_wrap">
+            <div id="home_platin_ticker" class="home_platin_ticker">
+                <ul>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                    <li>ETC Diamond 101(HBOTC - 1) <strong>PRICE:2.07 &#8364;</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section> -->
+
+
+<section class="top_flop_sec">
+    <div class="wrapper_117x">
+
+
+       <div class="row"> 
+      <div class="top_flop_bg col-md-8">
+        <div class="top_flop_table row justify-content-between">
+          <h2>Companies</h2>          
+        </div>
+
+        <div class="hybse_table top_list_table">
+          <table id="marketTable" >
+            <thead>
+              <tr>
+                <th>Name <i (click) = "sortAlphabet(0)" [ngClass]="{'fa-caret-down': sortAlphabetical,'fa-caret-up':!sortAlphabetical }" class="fal fa-caret-down"></i></th>
+                <th>Current Price </th>
+                <!-- <i (click) = "sortNumberTmp(0)" [ngClass]="{'fa-caret-down': sortprice,'fa-caret-up':!sortprice }" class="fal fa-caret-down"></i> -->
+                <!-- <i (click) = "sortNumericGlp()" [ngClass]="{'fa-caret-down': sortglp,'fa-caret-up':!sortglp }" class="fal fa-caret-down"></i> -->
+                <th>Discount </th>
+                <th>View</th>
+                <!-- <th>Favourites</th> -->
+                
+              </tr>
+            </thead>
+            <tbody *ngFor="let stock of stockList" i="index" >
+                    <tr *ngIf="stock.stockName" [ngClass]="{'even': i % 2 ==0 }" >
+                            <td>{{stock.stockName == '' ? ' ' : stock.stockName}}</td>
+                            <td>{{stock.priceCurrent == '' ? ' ' : stock.priceCurrent}}</td>
+                            <td [ngClass]="{ 'positiveInteger':positiveInteger ,'negativeInteger': !positiveInteger , 'nuetralInteger': nuetralInteger }" > <i class="fal" [ngClass]="{'fa-arrow-up': positiveInteger,'fa-arrow-down':!positiveInteger , 'fa-minus' : nuetralInteger }" ></i> {{getGainLossPercent(stock)}}</td>
+
+                            <td>
+                                <i routerLink="/login" class="fal fa-eye"></i>
+                            </td>
+                            <!-- <td class="fav_plus">
+                                <i routerLink="/login" class="fal fa-plus-circle"></i>
+                            </td> -->
+                            
+                           </tr>
+            </tbody>
+
+                    <!-- <tbody>
+              <tr>
+                <td>Company A</td>
+                <td>2.07</td>
+                <td>
+                    <span>-9.81</span>
+                    <small><i class="fal fa-arrow-right"></i></small>
+                </td>
+                <td>
+                    <i class="fal fa-eye"></i>
+                </td>
+                <td class="fav_plus">
+                    <i class="fal fa-plus-circle"></i>
+                </td>
+                
+               </tr>
+              <tr>
+                  <td>Company B</td>
+                  <td>39.54</td>
+                  <td>
+                    <span>-9.81</span>
+                    <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                  </td>
+                  <td>
+                      <i class="fal fa-eye"></i>
+                    </td>
+                  <td class="fav_plus">
+                      <i class="fal fa-plus-circle"></i>
+                    </td>
+                  
+              </tr>
+              <tr>
+                  <td>Company C</td>
+                  <td>0.28</td>
+                  <td>
+                    <span>-9.81</span>
+                    <small class="change_up"><i class="fal fa-arrow-right"></i></small>
+                  </td>
+                  <td>
+                      <i class="fal fa-eye"></i>
+                    </td>
+                  <td class="fav_plus">
+                      <i class="fal fa-plus-circle"></i>
+                    </td>
+                  
+              </tr>
+              <tr>
+                  <td>Company D</td>
+                  <td>13.12</td>
+                  <td>
+                    <span>-9.81</span>
+                    <small class="change_up">
+                        <i class="fal fa-arrow-right"></i>
+                    </small>
+                  </td>
+                  <td>
+                      <i class="fal fa-eye"></i>
+                    </td>
+                  <td class="fav_plus">
+                      <i class="fal fa-plus-circle"></i>
+                    </td>
+                  
+              </tr>
+              <tr>
+                  <td>Company E</td>
+                  <td>+0.12</td>
+                  <td>
+                    <span>-9.81</span>
+                    <small>
+                        <i class="fal fa-arrow-right"></i>
+                    </small>
+                  </td>
+                  <td>
+                      <i class="fal fa-eye"></i>
+                    </td>
+                  <td class="fav_plus">
+                      <i class="fal fa-plus-circle"></i>
+                    </td>
+                  
+              </tr>
+              
+            </tbody> -->
+          </table>
+        </div>
+        
+
+      </div>
+
+      <div class="col-md-4">
+        <h2>Login</h2>   
+        <ul class="top_flop_login">
+
+                <li class="">
+
+                    <div class="top_login_sec password_sec">
+
+                        <form [formGroup]="loginForm" novalidate action=""  class="top_login_form_sec change_password">
+                                <div class="form-group">    
+                            <div class="login_input">
+                                <i class="fal fa-user landing_usr"></i>
+                                <input formControlName="email" type="email" id="" name="" placeholder="Your email">
+                                <span class="falseclass" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched"> Please enter Your Email</span>
+                                <span class="falseclass false_alert" *ngIf="loginForm.controls['email'].hasError('emailInvalid')&& loginForm.controls['email'].touched "> Please Enter a valid email address</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="login_input">
+                                <i class="fal fa-lock"></i>
+                                <input formControlName="password" type="password" id="" name="" placeholder="Your Password">  
+                                <span class="falseclass" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Please enter your password</span>                                                 
+                            </div>
+                            </div>
+                           
+                          
+                            <input type="hidden" formControlName="captchField">
+                            <div id="html_element"></div>
+            
+
+                            <div *ngIf="Mesg != ''" class="alert login_error_msg" [ngClass]="{ 'alert-success':responseSuccess ,'alert-danger': !responseSuccess }" >
+                                    {{ Mesg}}
+                                </div>
+                
+                                <hybse-apploader *ngIf="showLoader"></hybse-apploader>
+                       
+                            
+                            <div class="change_pwd button d-flex flex-row justify-content-center">
+                                 
+                                <button (click)="loginFormSubmit()" [disabled]="!loginForm.valid || disableButton" type="Submit">Sign in</button>
+                              
+                            </div>
+                            <p>
+                                <a routerLink="/forgotPassword">Forgot password?</a> 
+                            </p>
+                            <p class="top_register">Don't have an account? <a routerLink="/registration" class="top_flop_register" href="javascript:void(0)">Register now!</a></p>
+                        
+                        </form>
+                        
+                    </div>
+                </li>
+        </ul>    
+      </div>
+    </div>
+
+      
+    </div>
+  </section>
+
+  <section class="newsroom_sec">
+        <div class="wrapper_117x">
+     
+                <ul class="hybse_newss">
+                        <li class="news_secc">
+                          <div class="col-md-12 identity_sec d-flex justify-content-between align-items-center">
+                              <h2>HYBSE Newsroom</h2>
+                              
+                                 
+                            </div>
+                      
+                                    
+                        </li>
+                       </ul>
+              
+              
+                       <ul class="news_selector">
+                          <li class="upgrade_silver d-flex flex-row">
+                            <span class="col-md-2">18.12.2017</span>
+                            <p class="col-md-8">HYBSE orem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                            <!-- <a class="col-md-2" href="javascript:void(0)"><i class="fal fa-plus"></i></a> -->
+                          </li>
+              
+                        <li class="upgrade_silver d-flex flex-row">
+                                <span class="col-md-2">05.12.2017</span>
+                                <p class="col-md-8">HYBSE lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+                                <!-- <a class="col-md-2" href="javascript:void(0)"><i class="fal fa-plus"></i></a> -->
+                              </li>
+              
+                              <li class="upgrade_silver d-flex flex-row">
+                                    <span class="col-md-2">04.11.2017</span>
+                                    <p class="col-md-8">HYBSE orem ipsum dolor sit amet elit</p>
+                                    <!-- <a class="col-md-2" href="javascript:void(0)"><i class="fal fa-plus"></i></a> -->
+                              </li>
+              
+                                  <li class="upgrade_silver d-flex flex-row">
+                                        <span class="col-md-2">31.09.2017</span>
+                                        <p class="col-md-8">HYBSE lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+                                        <!-- <a class="col-md-2" href="javascript:void(0)"><i class="fal fa-plus"></i></a> -->
+                                      </li>
+              
+                                      <li class="upgrade_silver d-flex flex-row">
+                                            <span class="col-md-2">03.08.2017</span>
+                                            <p class="col-md-8">HYBSE News lorem ipsum</p>
+                                            <!-- <a class="col-md-2" href="javascript:void(0)"><i class="fal fa-plus"></i></a> -->
+                                          </li>
+              
+                        </ul>
+                            <div class="view_all_news button d-flex flex-row">
+                                <button routerLink="/news" type="Submit">View all news</button>
+                                <div class="next_prev">
+                                    <!-- <a href=""><i class="fal fa-arrow-circle-down"></i></a> -->
+                                    <!-- <a href=""><i class="fal fa-arrow-circle-up"></i></a> -->
+                                </div>
+                            </div>
+                        </div>
+   </section> 
+
+
+   <!-- <section class="hybse_intraday_sec">
+        <div class="wrapper_117x">     
+          <div class="row"> 
+          <div class="intraday_bg col-md-8">
+            <div class="intraday_dark d-flex justify-content-between align-items-start">
+              <h2>HYBSE Intraday</h2>
+              <div class="time_date button d-flex flex-row">
+                    <button type="Submit">{{ showTime }} CET</button>
+              </div>       
+            </div>
+            <div class="intra_chart_sec" id="intraday_chart"></div>
+        </div>    
+          <div class="col-md-4">
+            <h2 class="hour_bottom">HYBSE 24hr</h2>   
+            <ul class="hybse_hour">
+                    <li class="d-flex flex-row world_row">
+                      <div class="col-md-8 hybse_world_top">
+                      <p class="">2.565,235,800 (DIM/EUR)</p>
+                      <p class="">3.565,235,800 (DIM/USD)</p>
+                      <p class="vol">24hr Volume</p>
+                      </div>
+                      <div class="col-md-4 world_btn">
+                      <a class="" href="#" title="world"></a>
+                      </div>
+                    </li>
+                  <li class="d-flex flex-row">                          
+                        <div class="col-md-8 hybse_world_top">
+                                <p class="">2.565,800 (DIM/EUR)</p>
+                                <p class="">3.235,800 (DIM/USD)</p>
+                                <p class="vol">24hr Share Volume</p>
+                                </div>
+                                <div class="col-md-4 volume_btn">
+                                <a class="" href="#" title="world"></a>
+                                </div>
+                        </li>
+                        <li class="d-flex flex-row hybse_world_top">
+                              <p class="col-md-8">24hr Trades:234543</p>
+                              <a class="col-md-4" href="">Listed Companies: 50</a>
+                            </li>
+                  </ul>
+          </div>
+        </div>             
+        </div>
+      </section>     -->
+
+<section class="guided_tour_section">
+    <div class="guided_tour">
+        <div class="wrapper_10x">
+
+            <ul class="trip_lists row justify-content-center">
+                <li class="col-md-6">
+                    <div class="trip_detail_sec">
+
+                        <h4>User Account</h4>
+                        <strong>
+                            <h1 class="User_icon"><a href="#" title="User Account"></a></h1>
+                        </strong>
+
+                        <ul class="trip_features">
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account info lorem ipsum 1
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register issuer account info two
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account Info lorem ipsum 3
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register issuer account info four
+                            </li>
+                        </ul>
+                        <div class="user_register button d-flex flex-row justify-content-center">
+                            <button routerLink="/userregister" type="Submit">Register now</button>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="col-md-6">
+                    <div class="trip_detail_sec">
+
+                        <h4>Issuer Account</h4>
+                        <strong>
+                            <h1 class="issuer_icon"><a href="#" title="issuer Account"></a></h1>
+                        </strong>
+
+                        <ul class="trip_features">
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account info lorem ipsum 1
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account info 2
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account Info lorem ipsum 3
+                            </li>
+                            <li>
+                                <i class="fal fa-check" style="color: #1d1d1b;"></i>   Register listing account info 4
+                            </li>
+                        </ul>
+                        <div class="user_register button d-flex flex-row justify-content-center">
+                            <button routerLink="/issuer" type="Submit">Register now</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section> 
+
+
+<div class="modal fade" id="videoModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Hybse Trailer</h4> -->
+        </div>
+        <div class="modal-body">
+            <iframe width="765" height="500" src="https://www.youtube.com/embed/H1u1JRqpg-k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="modal-footer">
+            <p routerLink="/learning-center" class="hybse_videos" data-dismiss="modal">HYBSE Video tutorial<i routerLink="/learning-center" class="fal fa-video video_btn" data-dismiss="modal"></i></p>
+          <button type="button" class="btn btn-info modal_btn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

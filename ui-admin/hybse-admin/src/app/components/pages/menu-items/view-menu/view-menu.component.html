@@ -1,0 +1,142 @@
+<section class="admin_menu_pagesec admin_inner_block">
+    <div class="d-flex menu_sec_wrap">
+      <div class="col-md-6">
+          <mat-card>
+            <div class="d-flex justify-content-between">
+              <h2 class="col-md-6">Menu Items</h2>
+              <div class="col-md-6 menu_type_lists">
+                  <mat-form-field>
+                    <mat-select (change)="getMenuItemById()" [(ngModel)]="menuNameId" placeholder="Menu Type*">
+                      <mat-option value="{{menu.id}}" *ngFor="let menu of menuNameList;let i = index;">{{menu.menuName}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+            </div>
+            <hybse-admin-loader *ngIf="showMILoader"></hybse-admin-loader>
+            <div class="menu_listings" *ngIf="allMenuList.length > 0">
+              <hybse-admin-loader *ngIf="showLoader"></hybse-admin-loader>
+              <ul>
+                <li *ngFor="let menu of allMenuList; let i = index">
+                  <h5>
+                    {{menu.ordering}}. {{menu.menuTitle}}
+                    <strong class="menu_item_action">
+                      <a (click)="editMenuItem(menu,i)" href="javascript:void(0)" class="edit_mi">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <a (click)="confirmDelete(menu.id,i)" href="javascript:void(0)" class="delete_mi">
+                        <i class="far fa-trash-alt"></i>
+                      </a>
+                    </strong>
+                  </h5>
+                  <ul>
+                    <ng-template [ngIf]="menu.subMenu.length > 0">
+                        <li *ngFor="let submenu of menu.subMenu;let si = index;">
+                            <h5>
+                              {{menu.ordering}}. {{submenu.menuTitle}}
+                              <strong class="menu_item_action">
+                                <a (click)="editMenuItem(submenu,i,si)" href="javascript:void(0)" class="edit_mi">
+                                  <i class="fas fa-edit"></i>
+                                </a>
+                                <a (click)="confirmDelete(submenu.id,i,si)" href="javascript:void(0)" class="delete_mi">
+                                  <i class="far fa-trash-alt"></i>
+                                </a>
+                              </strong>
+                            </h5>
+                        </li>
+                    </ng-template>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="no_results_found" *ngIf="allMenuList.length == 0">
+              <h5>No Menu Items Found</h5>
+            </div>
+          </mat-card>
+      </div>
+
+      <div class="col-md-6">
+          <mat-card>
+              <h2>ADD/ EDIT MENU ITEM</h2>
+              <form [formGroup]="createMenuItemForm" #formDirective="ngForm" (ngSubmit)="submitCreateMenuItem(formDirective)" novalidate class="add_menuitem_form admin_form">
+                <div *ngIf="formResponseMsg != ''" class="alert alert-dismissible fade show" [ngClass]="{'alert-success': alertStatusMessage,'alert-danger': !alertStatusMessage}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong>{{formResponseMsg}}</strong>
+                </div>
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <mat-select formControlName="menu_item_menuname" placeholder="Menu Type*">
+                      <mat-option>Type</mat-option>
+                      <mat-option value="{{menu.id}}" *ngFor="let menu of menuNameList;let i = index;">{{menu.menuName}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <mat-select formControlName="menu_item_root" placeholder="Root Menu">
+                      <mat-option>Root</mat-option>
+                      <mat-option value="{{item.id}}" *ngFor="let item of allMenuList">{{item.menuTitle}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                    <input matInput formControlName="menu_item_title" placeholder="Title*">
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                    <p class="radio_label">Page Url</p>
+                    <mat-radio-group formControlName="menu_item_urls">
+                      <mat-radio-button checked value="1">Pages</mat-radio-button>
+                      <mat-radio-button value="0">Custom Url</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="form_input_field" *ngIf="createMenuItemForm.get('menu_item_urls').value == 1">
+                  <mat-form-field>
+                    <mat-select formControlName="menu_item_page" placeholder="Page*">
+                      <mat-option>Pages</mat-option>
+                      <mat-option value="{{page.alias}}" *ngFor="let page of pageList;let i = index;">{{page.title}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field" *ngIf="createMenuItemForm.get('menu_item_urls').value == 0">
+                  <mat-form-field>
+                    <input matInput formControlName="menu_item_page" placeholder="Custom Url*">
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field">
+                  <mat-form-field>
+                      <input matInput type="number" formControlName="menu_item_order" placeholder="Menu Order*">
+                  </mat-form-field>
+                </div>
+
+                <div class="form_input_field radio">
+                    <p class="radio_label">Is Active</p>
+                    <mat-radio-group formControlName="menu_item_enabled">
+                      <mat-radio-button checked value="1">Yes</mat-radio-button>
+                      <mat-radio-button value="0">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="form_button_field">
+                  <input type="hidden" formControlName="menu_item_id">
+                  <button mat-raised-button [disabled]="!createMenuItemForm.valid" class="form_btn_submit" color="primary">Submit</button>
+                  <button mat-raised-button (click)="cancelMenuItem()" type="reset" class="form_btn_cancel" color="warn">Cancel</button>
+                </div>
+
+              </form>
+          </mat-card>
+      </div>
+
+    </div>
+
+  </section>

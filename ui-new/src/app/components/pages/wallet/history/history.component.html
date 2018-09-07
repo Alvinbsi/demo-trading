@@ -1,0 +1,225 @@
+<section class="wallet_history_sec">
+  <div class="history_wrapper">
+    <div class="hybse_bg">
+      <div class="wallet_history row justify-content-between">
+        <h2>Deposits and withdrawal history</h2>
+        <!-- <ul class="d-flex">
+
+          <li><h5>24H</h5></li>
+          <li><h5>1M</h5></li>
+          <li><h5 class="active">1Y</h5></li>
+          <li><h5>ALL</h5></li>
+          <li class="drop_down_list">
+            <div class="d-flex">
+              <div class="dropdown submenu_dd" >
+                <a id="subMenuDropDown" class="submenu_link" data-toggle="dropdown" href="#!">
+                  <i class="fal fa-ellipsis-h"></i>
+                </a>
+                <div class="dropdown-menu history_menu">
+                <form>
+                  <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="male" checked> Type AAA</a>
+                  <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Type AAB</a>
+                  <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> Type AAC</a>
+                  <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> DIM EUR</a>
+                  <a class="dropdown-item history_item" href="#"><input type="radio" name="gender" value="female"> DIM USDT</a>
+                </form>
+                </div>
+              </div>
+             </div>
+          </li>
+        </ul> -->
+      
+        
+      </div>
+
+      <!-- <nav class="card_navbar_sec">
+        <ul>
+            <li><a href="javascript:void(0)">Deposit History</a></li>
+            <li class="withdraw_history"><a href="javascript:void(0)">Withdrawal History</a></li>
+        </ul>
+      </nav> -->
+
+      <ul class="nav nav-tabs card_navbar_sec  temp_tab " role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#depositHistory" role="tab" data-toggle="tab">Deposit History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#withdrawalHistory" role="tab" data-toggle="tab">Withdrawal History</a>
+        </li>
+      </ul>
+
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="depositHistory">
+            <div class="hybse_table comp_list_table Trade_history">
+                    <div class="scrollit">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Pair</th>
+                      <th>Trascation Id</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let deposit of depositHistory;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                   
+                        <td>{{deposit.pair}}</td>
+                        <td>{{deposit.txnId}}</td>
+                        <td>{{deposit.quantity}}</td>
+                        <td>{{deposit.status}}</td>
+                      </tr>           
+
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              <div class="export_history">
+                <!-- <p><i class="fal fa-arrow-down"></i> Export complete deposit history</p> -->
+              </div>  
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="withdrawalHistory">
+            <div class="hybse_table comp_list_table Trade_history">
+                    <div class="scrollit">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Pair</th>
+                      <th>Trascation Id</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let withdraw of withdrawalHistory;let i = index" [ngClass]="{'even': (i+1)%2 == 0}">
+                      <td>{{withdraw.pair}}</td>
+                      <td>{{withdraw.txnId}}</td>
+                      <td>{{withdraw.quantity}}</td>
+                      <td>{{withdraw.status}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              <div class="export_history">
+                <!-- <p><i class="fal fa-arrow-down"></i> Export complete withdrawal history</p> -->
+              </div> 
+        </div>         
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <div class="hybse_table">
+        <table>
+          <thead>
+            <tr>
+              <th>Pair</th>
+              <th>Transcation Id</th>
+              <th>Amount</th>
+              <th>Status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><i class="fal fa-check"></i> &nbsp;Status AAA</td>
+              <td>Share AAA</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+             
+           
+
+            </tr>
+            <tr class="even">
+              <td><i class="fal fa-check"></i> &nbsp;Status AAB</td>
+              <td>Share AAB</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr>
+              <td><i class="fal fa-check"></i> &nbsp;Status AAC</td>
+              <td>Share AAC</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr class="even">
+              <td><i class="fal fa-check"></i> &nbsp;Status AAD</td>
+              <td>Share AAD</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr>
+              <td><i class="fal fa-check"></i> &nbsp;Status AAE</td>
+              <td>Share AAE</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr class="even">
+              <td><i class="fal fa-times"></i> &nbsp;Status AAF</td>
+              <td>Share AAF</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr>
+              <td><i class="fal fa-check"></i> &nbsp;Status AAG</td>
+              <td>Share AAG</td>
+              <td>0,00000000</td>
+              <td>0,00000000</td>
+
+            </tr>
+            <tr class="even">
+                <td><i class="fal fa-times"></i> &nbsp;Status AAH</td>
+                <td>Share AAH</td>
+                <td>0,00000000</td>
+                <td>0,00000000</td>
+
+              </tr>
+              <tr>
+                  <td><i class="fal fa-check"></i> &nbsp;Status AAI</td>
+                  <td>Share AAI</td>
+                  <td>0,00000000</td>
+                  <td>0,00000000</td>
+
+              </tr>
+              <tr class="even">
+                  <td><i class="fal fa-check"></i> &nbsp;Status AAJ</td>
+                  <td>Share AAJ</td>
+                  <td>0,00000000</td>
+                  <td>0,00000000</td>
+
+              </tr>  
+          </tbody>
+        </table>
+      </div> -->
+
+    
+
+
+    </div>
+  </div>
+</section>
